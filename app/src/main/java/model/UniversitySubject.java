@@ -44,4 +44,37 @@ public class UniversitySubject implements UniversitySubjectIf
     public int getEctsPoints() {
         return ectsPoints;
     }
+
+    /**
+     * We consider UniversitySubject to be the same when they have the same name (name is not case-sensitive).
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if( this == obj )
+        {
+            return true;
+        }
+
+        if( !( obj instanceof UniversitySubject ) )
+        {
+            return false;
+        }
+
+        UniversitySubject comparedUniversitySubject = (UniversitySubject) obj;
+        if( comparedUniversitySubject.getName().equalsIgnoreCase( this.getName() ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 13 * getName().hashCode();
+    }
 }

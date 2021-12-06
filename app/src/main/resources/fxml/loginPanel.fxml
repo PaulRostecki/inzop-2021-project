@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="panel.LoginPanel">
+
+    <center>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10">
+                    <Label id="loginLabel" text="Login: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label id="passwordLabel" text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+                    <TextField fx:id="loginField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" alignment="CENTER">
+                        <Hyperlink id="logInTextLabel" fx:id="logInHyperLink" text="Log In"/>
+                    </HBox>
+                </GridPane>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
+

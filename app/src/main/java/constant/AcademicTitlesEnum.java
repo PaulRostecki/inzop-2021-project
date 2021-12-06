@@ -1,4 +1,4 @@
-package constants;
+package constant;
 
 /**
  * Constants for academic titles supported in our programme.

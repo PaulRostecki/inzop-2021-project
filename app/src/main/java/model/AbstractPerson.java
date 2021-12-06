@@ -94,4 +94,37 @@ public abstract class AbstractPerson implements PersonIf
     {
         return email;
     }
+
+    /**
+     * We consider Student/Lecturer to be the same when they have the same PESEL.
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( this == obj )
+        {
+            return true;
+        }
+
+        if( !( obj instanceof PersonIf ) )
+        {
+            return false;
+        }
+
+        PersonIf comparedPerson = (PersonIf) obj;
+        if( comparedPerson.getPESEL().equals( this.getPESEL() ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 43 * getPESEL().hashCode();
+    }
 }
