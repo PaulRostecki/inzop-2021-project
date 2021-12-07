@@ -1,6 +1,6 @@
 package model;
 
-import constants.AcademicTitlesEnum;
+import constant.AcademicTitlesEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

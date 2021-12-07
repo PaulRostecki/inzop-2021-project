@@ -1,4 +1,4 @@
-package constants;
+package constant;
 
 /**
  * Constants for mark values supported in our programme.

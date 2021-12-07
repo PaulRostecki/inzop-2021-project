@@ -1,0 +1,19 @@
+#logInTextLabel
+{
+    -fx-text-fill: blue;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+    -fx-underline: false;
+}
+
+#loginLabel, #passwordLabel
+{
+    -fx-font-weight: bold;
+}
+
+#logInTextLabel:hover
+{
+    -fx-underline: true;
+    -fx-font-style: italic;
+}

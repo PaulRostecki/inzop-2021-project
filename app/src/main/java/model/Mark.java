@@ -1,6 +1,6 @@
 package model;
 
-import constants.MarkValuesEnum;
+import constant.MarkValuesEnum;
 
 /**
  * Implementation for Mark.
@@ -48,5 +48,38 @@ public class Mark implements MarkIf
     public double getMarkValue()
     {
         return markValue.getMarkValue();
+    }
+
+    /**
+     * We consider Marks to be equal when they belong to the same Student AND they are from the same UniversitySubject.
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if( this == obj )
+        {
+            return true;
+        }
+        if( !(obj instanceof Mark) )
+        {
+            return false;
+        }
+
+        Mark comparedMark = (Mark) obj;
+        if( ( comparedMark.getStudentId() == this.getStudentId() ) &&
+                ( comparedMark.getUniversitySubjectId() == this.getUniversitySubjectId() ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 7 * getStudentId() + 11 * getUniversitySubjectId();
     }
 }
