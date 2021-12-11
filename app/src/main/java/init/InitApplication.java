@@ -8,18 +8,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import util.AlertUtils;
+import panel.PanelIf;
+import factory.AlertFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-public class InitApplication extends Application
+/**
+ * Application initializer.
+ *
+ * @author created: Michał Musiałowicz on 06.12.2021
+ * @author last changed:
+ */
+public class InitApplication extends Application implements PanelIf
 {
-    private static final Double LOGIN_PANEL_HEIGHT = 275D;
-
-    private static final Double LOGIN_PANEL_WIDTH = 500D;
-
     private final Logger LOGGER = LogManager.getLogger( InitApplication.class );
 
     public static void main ( String[] args )
@@ -37,6 +40,7 @@ public class InitApplication extends Application
 
     private Stage createLoginPanel( Stage loginPanel )
     {
+        LOGGER.info( "Creating new panel." );
         Parent root = null;
         URL urlToFXML = null;
         URL urlToCSS = null;
@@ -47,21 +51,21 @@ public class InitApplication extends Application
             urlToCSS = getClass().getResource( PathsConstants.LOGIN_PANEL_CSS_PATH );
             root = FXMLLoader.load(  urlToFXML );
             Objects.requireNonNull( root );
-            LOGGER.info( "LoginPanel loaded." );
+            LOGGER.info( "Login Panel loaded." );
         }
         catch ( IOException | NullPointerException e )
         {
-            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing LoginPanel." );
-            AlertUtils.popUpErrorAlert( e );
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Login Panel." );
+            AlertFactory.popUpErrorAlert( e );
             System.exit( 1 );
         }
 
-        LOGGER.info( "Creating new panel." );
         loginPanel.setTitle( "Login Panel" );
         loginPanel.setResizable( false );
 
-        Scene loginScene = new Scene( root, LOGIN_PANEL_WIDTH, LOGIN_PANEL_HEIGHT );
+        Scene loginScene = new Scene( root );
         setStyleForLoginPanel( loginScene, urlToCSS );
+        setIcon( loginPanel );
 
         loginPanel.setScene( loginScene );
         return loginPanel;
@@ -72,5 +76,4 @@ public class InitApplication extends Application
         loginScene.getStylesheets().clear();
         loginScene.getStylesheets().add( css.toExternalForm() );
     }
-
 }
