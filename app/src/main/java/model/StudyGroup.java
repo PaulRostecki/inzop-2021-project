@@ -1,5 +1,6 @@
 package model;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -23,15 +24,19 @@ public class StudyGroup implements StudyGroupIf
 
     private final List< Student > students;
 
-    private final LocalDateTime date;
+    private final DayOfWeek day;
 
-    public StudyGroup( int aGroupId, int aLecturerId, int aUniversitySubjectId, List<Student> aStudents, LocalDateTime aDate )
+    private final String startTime;
+
+    public StudyGroup( int aGroupId, int aLecturerId, int aUniversitySubjectId, List<Student> aStudents, DayOfWeek aDay,
+                       String aStartTime )
     {
         groupId = aGroupId;
         lecturerId = aLecturerId;
         universitySubjectId = aUniversitySubjectId;
         students = aStudents;
-        date = aDate;
+        day = aDay;
+        startTime = aStartTime;
     }
 
     @Override
@@ -59,15 +64,15 @@ public class StudyGroup implements StudyGroupIf
     }
 
     @Override
-    public LocalDateTime getDateAsDate()
+    public DayOfWeek getDay()
     {
-        return date;
+        return day;
     }
 
     @Override
-    public String getDateAsString()
+    public String getStartTime()
     {
-        return date.format( dateTimeFormatter );
+        return startTime;
     }
 
     /**
@@ -89,7 +94,8 @@ public class StudyGroup implements StudyGroupIf
 
         StudyGroup comparedStudyGroup = (StudyGroup) obj;
         if( ( comparedStudyGroup.getLecturerId() == this.getLecturerId() ) &&
-                ( comparedStudyGroup.getDateAsDate() == this.getDateAsDate() ) )
+                ( comparedStudyGroup.getStartTime().equals( this.getStartTime() ) ) &&
+                     ( comparedStudyGroup.getDay() == this.getDay() ) )
         {
             return true;
         }
@@ -102,6 +108,6 @@ public class StudyGroup implements StudyGroupIf
     @Override
     public int hashCode()
     {
-        return 17 * getLecturerId()  + 31 * date.hashCode();
+        return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
     }
 }

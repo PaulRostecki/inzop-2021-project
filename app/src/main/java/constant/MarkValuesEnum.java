@@ -8,26 +8,26 @@ package constant;
  */
 public enum MarkValuesEnum
 {
-    TWO( 2.0 ),
+    TWO( 2.0F ),
 
-    THREE( 3.0 ),
+    THREE( 3.0F ),
 
-    THREE_PLUS( 3.5 ),
+    THREE_PLUS( 3.5F ),
 
-    FOUR( 4.0 ),
+    FOUR( 4.0F ),
 
-    FOUR_PLUS( 4.5 ),
+    FOUR_PLUS( 4.5F ),
 
-    FIVE( 5.0 );
+    FIVE( 5.0F );
 
-    private final double markValue;
+    private final float markValue;
 
-    MarkValuesEnum( double aMarkValue )
+    MarkValuesEnum( float aMarkValue )
     {
         markValue = aMarkValue;
     }
 
-    public double getMarkValue()
+    public float getMarkValue()
     {
         return markValue;
     }

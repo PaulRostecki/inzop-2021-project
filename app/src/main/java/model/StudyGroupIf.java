@@ -1,5 +1,6 @@
 package model;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface StudyGroupIf
 
     List< Student > getStudents();
 
-    LocalDateTime getDateAsDate();
+    DayOfWeek getDay();
 
-    String getDateAsString();
+    String getStartTime();
 }
