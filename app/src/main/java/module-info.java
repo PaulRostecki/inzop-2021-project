@@ -16,7 +16,6 @@ module USOS
 
     opens constant;
 
-    opens util;
     opens factory;
 
 }
