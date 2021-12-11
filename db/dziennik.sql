@@ -30,7 +30,7 @@ CREATE TABLE Studenci
 	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY,
 	imie VARCHAR(30) NOT NULL,
 	nazwisko VARCHAR(30) NOT NULL,
-	pesel BIGINT CONSTRAINT ck_student_pesel CHECK (pesel between 10000000000 AND 99999999999),
+	pesel VARCHAR(11) CONSTRAINT ck_student_pesel CHECK (pesel LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	adres VARCHAR(50),
 	data_ur DATE CONSTRAINT ck_student_data_ur CHECK (data_ur between '19000101' AND '20210101'),
 	nr_tel INT CONSTRAINT ck_student_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
@@ -43,13 +43,12 @@ CREATE TABLE Prowadzacy
 	id_prowadzacego INT CONSTRAINT pk_prowadzacy PRIMARY KEY,
 	imie VARCHAR(30) NOT NULL,
 	nazwisko VARCHAR(30) NOT NULL,
-	pesel BIGINT CONSTRAINT ck_prowadzacy_pesel CHECK (pesel between 10000000000 AND 99999999999),
+	pesel VARCHAR(11) CONSTRAINT ck_prowadzacy_pesel CHECK (pesel LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	adres VARCHAR(50),
 	data_ur DATE CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
 	nr_tel VARCHAR(9) CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
 	tytul VARCHAR(50),
-	dyzur_dzien VARCHAR(30),
-	dyzur_godzina TIME,
+	dyzur VARCHAR(150),
 	mail VARCHAR(50)
 );
 
@@ -63,8 +62,8 @@ CREATE TABLE Przedmioty (
 CREATE TABLE Oceny (
 	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu),
 	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
-	id_prowadz¹cego INT REFERENCES Prowadzacy(id_prowadzacego),
-	wartosc FLOAT CONSTRAINT ck_wartos CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5))
+	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
+	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5))
 );
 
 CREATE TABLE Grupy (
