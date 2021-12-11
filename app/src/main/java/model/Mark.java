@@ -45,7 +45,7 @@ public class Mark implements MarkIf
     }
 
     @Override
-    public double getMarkValue()
+    public float getMarkValue()
     {
         return markValue.getMarkValue();
     }

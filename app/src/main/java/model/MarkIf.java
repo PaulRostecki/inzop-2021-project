@@ -14,5 +14,5 @@ public interface MarkIf
 
     int getUniversitySubjectId();
 
-    double getMarkValue();
+    float getMarkValue();
 }
