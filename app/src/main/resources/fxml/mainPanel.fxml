@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="panel.MainPanel" fx:id="mainPanelPane" >
+    <top>
+        <MenuBar>
+            <Menu text="Listy">
+                <MenuItem text="Studenci" onAction="#showStudentsOnList"/>
+                <MenuItem text="Wykładowcy" onAction="#showLecturersOnList"/>
+                <MenuItem text="Grupy zajęciowe" onAction="#showStudyGroupsOnList"/>
+                <MenuItem text="Przedmioty" onAction="#showUniversitySubjectsOnList"/>
+            </Menu>
+        </MenuBar>
+    </top>
+</BorderPane>

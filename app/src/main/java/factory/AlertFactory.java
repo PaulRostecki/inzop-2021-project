@@ -1,13 +1,19 @@
-package util;
+package factory;
 
 import javafx.scene.control.Alert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class AlertUtils
+/**
+ * Factory for various Alert Types.
+ *
+ * @author created: Michał Musiałowicz on 11.12.2021
+ * @author last changed:
+ */
+public class AlertFactory
 {
-    private static final Logger LOGGER = LogManager.getLogger( AlertUtils.class );
+    private static final Logger LOGGER = LogManager.getLogger( AlertFactory.class );
 
 
     public static void popUpErrorAlert( Throwable e )

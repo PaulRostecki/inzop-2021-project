@@ -3,22 +3,22 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="panel.LoginPanel">
+            fx:controller="panel.LoginPanel" prefHeight="275" prefWidth="500">
 
     <center>
         <VBox alignment="CENTER">
             <HBox alignment="CENTER">
                 <GridPane hgap="10" vgap="10">
-                    <Label id="loginLabel" text="Login: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <Label id="passwordLabel" text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label id="loginLabel" text="E-mail: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label id="passwordLabel" text="Hasło: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
                     <TextField fx:id="loginField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" alignment="CENTER">
-                        <Hyperlink id="logInTextLabel" fx:id="logInHyperLink" text="Log In"/>
+                        <Hyperlink id="logInTextLabel" fx:id="loginHyperlink" text="Zaloguj się" onAction="#logIn"/>
                     </HBox>
                 </GridPane>
             </HBox>

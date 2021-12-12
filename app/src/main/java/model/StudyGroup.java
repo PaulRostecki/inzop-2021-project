@@ -1,10 +1,8 @@
 package model;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Implementation for StudyGroup.
