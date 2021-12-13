@@ -10,10 +10,6 @@ import model.StudyGroup;
 import model.UniversitySubject;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * TableView Factory for model.
  *
@@ -50,7 +46,8 @@ public class TableViewFactory
         tableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         tableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
 
-        final List< TableColumn< Student, String > > listOfColumns = Stream.of(
+        final TableColumn< Student, String > parentColumn = new TableColumn<>( "Studenci" );
+        parentColumn.getColumns().addAll(
                 new TableColumn< Student, String >( "Numer albumu "),
                 new TableColumn< Student, String >( "Imie" ),
                 new TableColumn< Student, String >( "Nazwisko" ),
@@ -58,10 +55,9 @@ public class TableViewFactory
                 new TableColumn< Student, String >( "Adres" ),
                 new TableColumn< Student, String >( "Data urodzenia" ),
                 new TableColumn< Student, String >( "Numer telefonu" ),
-                new TableColumn< Student, String >( "Adres e-mail" ) )
-                        .collect( Collectors.toList() );
+                new TableColumn< Student, String >( "Adres e-mail" ) );
 
-        tableView.getColumns().addAll( listOfColumns );
+        tableView.getColumns().add( parentColumn );
         return tableView;
     }
 
@@ -71,18 +67,18 @@ public class TableViewFactory
         tableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         tableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
 
-        final List< TableColumn< Lecturer, String > > listOfColumns = Stream.of(
-                        new TableColumn< Lecturer, String >( "Imie"),
-                        new TableColumn< Lecturer, String >( "Nazwisko" ),
-                        new TableColumn< Lecturer, String >( "Tytul" ),
-                        new TableColumn< Lecturer, String >( "PESEL" ),
-                        new TableColumn< Lecturer, String >( "Adres" ),
-                        new TableColumn< Lecturer, String >( "Data urodzenia" ),
-                        new TableColumn< Lecturer, String >( "Numer telefonu" ),
-                        new TableColumn< Lecturer, String >( "Adres e-mail" ) )
-                .collect( Collectors.toList() );
+        final TableColumn< Lecturer, String > parentColumn = new TableColumn<>( "Wykładowcy" );
+        parentColumn.getColumns().addAll(
+                new TableColumn< Lecturer, String >( "Imie"),
+                new TableColumn< Lecturer, String >( "Nazwisko" ),
+                new TableColumn< Lecturer, String >( "Tytul" ),
+                new TableColumn< Lecturer, String >( "PESEL" ),
+                new TableColumn< Lecturer, String >( "Adres" ),
+                new TableColumn< Lecturer, String >( "Data urodzenia" ),
+                new TableColumn< Lecturer, String >( "Numer telefonu" ),
+                new TableColumn< Lecturer, String >( "Adres e-mail" ) );
 
-        tableView.getColumns().addAll( listOfColumns );
+        tableView.getColumns().add( parentColumn );
         return tableView;
     }
 
@@ -92,16 +88,16 @@ public class TableViewFactory
         tableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         tableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
 
-        final List< TableColumn< StudyGroup, String > > listOfColumns = Stream.of(
-                        new TableColumn< StudyGroup, String >( "Przedmiot" ),
-                        new TableColumn< StudyGroup, String >( "Dzień zajęć" ),
-                        new TableColumn< StudyGroup, String >( "Godzina rozpoczęcia zajęć" ),
-                        new TableColumn< StudyGroup, String >( "Imie prowadzącego" ),
-                        new TableColumn< StudyGroup, String >( "Nazwisko prowadzącego" ),
-                        new TableColumn< StudyGroup, String >( "Liczba studentów" ) )
-                .collect( Collectors.toList() );
+        final TableColumn< StudyGroup, String > parentColumn = new TableColumn<>( "Grupy zajęciowe" );
+        parentColumn.getColumns().addAll(
+                new TableColumn< StudyGroup, String >( "Przedmiot" ),
+                new TableColumn< StudyGroup, String >( "Dzień zajęć" ),
+                new TableColumn< StudyGroup, String >( "Godzina rozpoczęcia zajęć" ),
+                new TableColumn< StudyGroup, String >( "Imie prowadzącego" ),
+                new TableColumn< StudyGroup, String >( "Nazwisko prowadzącego" ),
+                new TableColumn< StudyGroup, String >( "Liczba studentów" ) );
 
-        tableView.getColumns().addAll( listOfColumns );
+        tableView.getColumns().add( parentColumn );
         return tableView;
     }
 
@@ -111,13 +107,13 @@ public class TableViewFactory
         tableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         tableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
 
-        final List< TableColumn< UniversitySubject, String > > listOfColumns = Stream.of(
-                        new TableColumn< UniversitySubject, String >( "Nazwa przedmiotu"),
-                        new TableColumn< UniversitySubject, String >( "Opis przedmiotu" ),
-                        new TableColumn< UniversitySubject, String >( "Punkty ECTS" ) )
-                .collect( Collectors.toList() );
+        final TableColumn< UniversitySubject, String > parentColumn = new TableColumn<>( "Przedmioty" );
+        parentColumn.getColumns().addAll(
+                new TableColumn< UniversitySubject, String >( "Nazwa przedmiotu"),
+                new TableColumn< UniversitySubject, String >( "Opis przedmiotu" ),
+                new TableColumn< UniversitySubject, String >( "Punkty ECTS" ) );
 
-        tableView.getColumns().addAll( listOfColumns );
+        tableView.getColumns().add( parentColumn );
         return tableView;
     }
 }
