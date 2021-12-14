@@ -62,7 +62,7 @@ public class UniversitySubject implements UniversitySubjectIf
         }
 
         UniversitySubject comparedUniversitySubject = (UniversitySubject) obj;
-        if( comparedUniversitySubject.getName().equalsIgnoreCase( this.getName() ) )
+        if( comparedUniversitySubject.getName().toLowerCase().equals(this.getName().toLowerCase() ) )
         {
             return true;
         }
@@ -75,6 +75,6 @@ public class UniversitySubject implements UniversitySubjectIf
     @Override
     public int hashCode()
     {
-        return 13 * getName().hashCode();
+        return 13 * getName().toLowerCase().hashCode();
     }
 }
