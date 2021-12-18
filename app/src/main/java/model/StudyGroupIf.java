@@ -22,4 +22,14 @@ public interface StudyGroupIf
     DayOfWeek getDay();
 
     String getStartTime();
+
+    String getNumberOfStudents();
+
+    String getLecturerLastName();
+
+    String getLecturerFirstName();
+
+    String getDayInPolish();
+
+    String getUniversitySubjectName();
 }

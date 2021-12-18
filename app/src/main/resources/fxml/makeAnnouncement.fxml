@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="panel.AnnouncementPanel"
+            prefHeight="400" prefWidth="600">
+    <center>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Tytuł: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="announcementTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Treść: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <TextArea fx:id="announcementDescriptionTextArea" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" alignment="CENTER">
+                        <Button text="Wyślij" onAction="#makeAnnouncement" />
+                    </HBox>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

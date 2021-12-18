@@ -94,6 +94,7 @@ CREATE TABLE Prowadzacy_grupa
 CREATE TABLE Komunikaty
 (
     id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
+    tytul VARCHAR(50),
     tresc VARCHAR(250)
 );
 

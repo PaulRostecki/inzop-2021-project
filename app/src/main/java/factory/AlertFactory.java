@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import panel.PanelIf;
 
 /**
  * Factory for various Alert Types.
@@ -11,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * @author created: Michał Musiałowicz on 11.12.2021
  * @author last changed:
  */
-public class AlertFactory
+public class AlertFactory implements PanelIf
 {
     private static final Logger LOGGER = LogManager.getLogger( AlertFactory.class );
 
@@ -44,5 +45,21 @@ public class AlertFactory
     public static void popUpInfoAlert( String aTitle, String aHeader )
     {
         popUpInfoAlert( aTitle, aHeader, StringUtils.EMPTY );
+    }
+
+    public static void popUpConfirmationAlert( String aTitle, String aHeader, String aContent )
+    {
+        LOGGER.info( "Popping up confirmation alert." );
+        Alert alert = new Alert( Alert.AlertType.CONFIRMATION );
+
+        alert.setTitle( aTitle );
+        alert.setHeaderText( aHeader );
+        alert.setContentText( aContent );
+        alert.showAndWait();
+    }
+
+    public static void popUpConfirmationAlert( String aTitle, String aHeader )
+    {
+        popUpConfirmationAlert( aTitle, aHeader, StringUtils.EMPTY );
     }
 }

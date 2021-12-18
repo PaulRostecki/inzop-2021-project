@@ -11,4 +11,12 @@ public interface AnnouncementIf
     int getLecturerId();
 
     String getDetails();
+
+    String getTitle();
+
+    String getLecturerFirstName();
+
+    String getLecturerLastName();
+
+    String getLecturerTitle();
 }

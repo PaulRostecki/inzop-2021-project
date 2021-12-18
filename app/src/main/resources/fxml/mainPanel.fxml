@@ -11,10 +11,31 @@
     <top>
         <MenuBar>
             <Menu text="Listy">
-                <MenuItem text="Studenci" onAction="#showStudentsOnList"/>
-                <MenuItem text="Wykładowcy" onAction="#showLecturersOnList"/>
-                <MenuItem text="Grupy zajęciowe" onAction="#showStudyGroupsOnList"/>
-                <MenuItem text="Przedmioty" onAction="#showUniversitySubjectsOnList"/>
+                <MenuItem text="Studenci" onAction="#showStudentsOnTableView"/>
+                <MenuItem text="Wykładowcy" onAction="#showLecturersOnTableView"/>
+                <MenuItem text="Grupy zajęciowe" onAction="#showStudyGroupsOnTableView"/>
+                <MenuItem text="Przedmioty" onAction="#showUniversitySubjectsOnTableView"/>
+            </Menu>
+            <Menu text="Komunikaty">
+                <MenuItem text="Wyświetl komunikaty" onAction="#showAnnouncementsOnTableView"/>
+                <MenuItem fx:id="sendAnnouncementMenuItem" text="Nadaj komunikat" onAction="#sendAnnouncement" />
+            </Menu>
+            <Menu text="Administracja">
+                <Menu text="Dodaj">
+                    <MenuItem text="Studenta"/>
+                    <MenuItem text="Prowadzącego"/>
+                    <MenuItem text="Przedmiot"/>
+                    <MenuItem text="Grupę zajęciową"/>
+                </Menu>
+                <Menu text="Usuń">
+                    <MenuItem text="Studenta"/>
+                    <MenuItem text="Prowadzącego"/>
+                    <MenuItem text="Przedmiot"/>
+                    <MenuItem text="Grupę zajęciową"/>
+                </Menu>
+            </Menu>
+            <Menu text="Akcje">
+                <MenuItem text="Zobacz swoje oceny"/>
             </Menu>
         </MenuBar>
     </top>

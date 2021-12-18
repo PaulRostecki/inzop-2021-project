@@ -43,22 +43,26 @@ public class LoginPanel implements PanelIf
 
     public LoginPanel()
     {
+
     }
 
     @FXML
     private void logIn()
     {
+        // for Miguel:
         // we need to check if provided e-mail belongs to one of the users, if so - we need to check if the password
-        // matches. If it does - we allow user to log in, and in every other case we pop up an appropriate alert.
-
+        // matches. If it does - we allow user to log in (create
+        // main panel and show it), and in every other case we pop up an appropriate alert.
+        // see CacheProvider and AlertFactory classes.
+        LOGGER.info( "Logged to USOS as " ); // add user string
         Stage mainPanel = createMainPanel();
         mainPanel.show();
+        getCurrentStage( loginField ).hide();
     }
 
     private Stage createMainPanel()
     {
-        LOGGER.info( "Creating new panel." );
-
+        LOGGER.info( "Creating Main Panel." );
         final Stage newPanel = new Stage();
         Parent root = null;
         URL urlToFXML = null;
@@ -79,12 +83,14 @@ public class LoginPanel implements PanelIf
             System.exit( 1 );
         }
 
-        newPanel.setTitle( "Main Panel" );
+        newPanel.setTitle( "USOS v2" );
         newPanel.setResizable( true );
         newPanel.setMaximized( true );
+        newPanel.setMinHeight( 500 );
+        newPanel.setMinWidth( 1000 );
 
         final Scene scene = new Scene( root );
-//        setStyleForLoginPanel( loginScene, urlToCSS );
+//        setStyleForLoginPanel( scene, urlToCSS );
         setIcon( newPanel );
 
         newPanel.setScene( scene );
