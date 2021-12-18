@@ -1,6 +1,7 @@
 package panel;
 
 import constant.PathsConstants;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -17,5 +18,10 @@ public interface PanelIf
         String urlToIcon = getClass().getResource( PathsConstants.ICON_PATH ).toString();
         Image image = new Image( urlToIcon );
         panel.getIcons().add( image );
+    }
+
+    default Stage getCurrentStage( Node node )
+    {
+        return (Stage) node.getScene().getWindow();
     }
 }

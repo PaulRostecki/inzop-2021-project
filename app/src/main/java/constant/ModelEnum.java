@@ -16,5 +16,11 @@ public enum ModelEnum
 
     UNIVERSITY_SUBJECT,
 
-    MARK;
+    MARK,
+
+    ANNOUNCEMENT,
+
+    TIMETABLE,
+
+    ACCOUNT
 }

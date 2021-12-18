@@ -1,7 +1,11 @@
 package model;
 
+import cache.CacheProvider;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.time.DayOfWeek;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -12,7 +16,7 @@ import java.util.List;
  */
 public class StudyGroup implements StudyGroupIf
 {
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy HH:mm:ss" );
+    private static final Logger LOGGER = LogManager.getLogger( StudyGroup.class );
 
     private final int groupId;
 
@@ -107,5 +111,50 @@ public class StudyGroup implements StudyGroupIf
     public int hashCode()
     {
         return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
+    }
+
+    @Override
+    public String getUniversitySubjectName()
+    {
+        return CacheProvider.getCacheProvider().getUniversitySubjects().get( universitySubjectId ).getName();
+    }
+
+    @Override
+    public String getDayInPolish()
+    {
+        switch ( day )
+        {
+            case MONDAY:
+                return "Poniedziałek";
+            case TUESDAY:
+                return "Wtorek";
+            case WEDNESDAY:
+                return "Środa";
+            case THURSDAY:
+                return "Czwartek";
+            case FRIDAY:
+                return "Piątek";
+            default:
+                LOGGER.warn( "Wrong day selected for Study Group." );
+                return StringUtils.EMPTY;
+        }
+    }
+
+    @Override
+    public String getLecturerFirstName()
+    {
+        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getFirstName();
+    }
+
+    @Override
+    public String getLecturerLastName()
+    {
+        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getLastName();
+    }
+
+    @Override
+    public String getNumberOfStudents()
+    {
+        return String.valueOf( students.size() );
     }
 }

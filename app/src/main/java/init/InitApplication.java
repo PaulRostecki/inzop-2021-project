@@ -60,7 +60,7 @@ public class InitApplication extends Application implements PanelIf
             System.exit( 1 );
         }
 
-        loginPanel.setTitle( "Login Panel" );
+        loginPanel.setTitle( "Zaloguj się" );
         loginPanel.setResizable( false );
 
         Scene loginScene = new Scene( root );

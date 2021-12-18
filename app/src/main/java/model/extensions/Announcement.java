@@ -1,5 +1,7 @@
 package model.extensions;
 
+import cache.CacheProvider;
+
 /**
  * Implementation for Announcement.
  *
@@ -12,10 +14,13 @@ public class Announcement implements AnnouncementIf
 
     private final String details;
 
-    public Announcement ( int aLecturerId, String aDetails )
+    private final String title;
+
+    public Announcement ( int aLecturerId, String aTitle, String aDetails )
     {
         lecturerId = aLecturerId;
         details = aDetails;
+        title = aTitle;
     }
 
     @Override
@@ -28,5 +33,29 @@ public class Announcement implements AnnouncementIf
     public String getDetails()
     {
         return details;
+    }
+
+    @Override
+    public String getTitle()
+    {
+        return title;
+    }
+
+    @Override
+    public String getLecturerFirstName()
+    {
+        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getFirstName();
+    }
+
+    @Override
+    public String getLecturerLastName()
+    {
+        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getLastName();
+    }
+
+    @Override
+    public String getLecturerTitle()
+    {
+        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getAcademicTitle();
     }
 }

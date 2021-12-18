@@ -11,6 +11,12 @@ module USOS
     opens panel to javafx.fxml;
     exports panel;
 
+    opens model to java.base;
+    exports model;
+
+    opens model.extensions to java.base;
+    exports model.extensions;
+
     opens init to javafx.fxml, javafx.graphics;
     exports init;
 
