@@ -4,7 +4,7 @@ package model;
  * Implementation for UniversitySubject.
  *
  * @author created: Michał Musiałowicz on 04.12.2021
- * @author last changed:
+ * @author last changed: Mikołaj Mumot on 19.12.2021
  */
 public class UniversitySubject implements UniversitySubjectIf
 {
