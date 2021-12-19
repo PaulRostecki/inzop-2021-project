@@ -4,7 +4,7 @@ package model;
  * Implementation for UniversitySubject.
  *
  * @author created: Michał Musiałowicz on 04.12.2021
- * @author last changed:
+ * @author last changed: Mikołaj Mumot on 19.12.2021
  */
 public class UniversitySubject implements UniversitySubjectIf
 {
@@ -62,7 +62,7 @@ public class UniversitySubject implements UniversitySubjectIf
         }
 
         UniversitySubject comparedUniversitySubject = (UniversitySubject) obj;
-        if( comparedUniversitySubject.getName().equalsIgnoreCase( this.getName() ) )
+        if( comparedUniversitySubject.getName().toLowerCase().equals(this.getName().toLowerCase() ) )
         {
             return true;
         }
@@ -75,6 +75,6 @@ public class UniversitySubject implements UniversitySubjectIf
     @Override
     public int hashCode()
     {
-        return 13 * getName().hashCode();
+        return 13 * getName().toLowerCase().hashCode();
     }
 }
