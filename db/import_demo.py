@@ -20,7 +20,7 @@ def parse_csvs():
     oceny = pd.read_csv("../proj/dane_demo/oceny.csv")
     grupy = pd.read_csv("../proj/dane_demo/grupy.csv")
 
-    # have to convert date formats from %d.%m.%Y to %m-%d-%Y
+    # have to convert dates from %d.%m.%Y to %m-%d-%Y
     studenci['data_ur'] = pd.to_datetime(studenci['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
     prowadzacy['data_ur'] = pd.to_datetime(prowadzacy['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
 
