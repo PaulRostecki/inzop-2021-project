@@ -1,4 +1,4 @@
-nr albumu,imię,nazwisko,pesel,adres,data urodzenia,nr telefonu,mail
+nr_albumu,imie,nazwisko,pesel,adres,data_ur,nr_tel,mail
 464900,Szymon,Bartanowicz,01211727579,Ul. Składowa 23 61-614 Poznań,17.01.2001,617553107,szybar@st.amu.edu.pl
 464901,Michał,Ciesiółka,01211955259,Ul. Dworcowa 5 61-614 Poznań,19.01.2001,688597425,miccie@st.amu.edu.pl
 464902,Wiktor,Duda,01302522915,Ul. Naramowicka 4 61-614 Poznań,25.10.2001,611412200,wikdud@st.amu.edu.pl
