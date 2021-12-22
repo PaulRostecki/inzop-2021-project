@@ -2,6 +2,8 @@
 
 # pip install psycopg2
 import pandas as pd
+import configparser
+from sqlalchemy.engine.url import URL
 from sqlalchemy import create_engine
 
 
@@ -20,7 +22,7 @@ def parse_csvs():
     oceny = pd.read_csv("../proj/dane_demo/oceny.csv")
     grupy = pd.read_csv("../proj/dane_demo/grupy.csv")
 
-    # have to convert date formtas from %d.%m.%Y to %m-%d-%Y
+    # have to convert date formats from %d.%m.%Y to %m-%d-%Y
     studenci['data_ur'] = pd.to_datetime(studenci['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
     prowadzacy['data_ur'] = pd.to_datetime(prowadzacy['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
 
@@ -36,7 +38,17 @@ def import_data(engine, dfs):
 
 
 if __name__ == '__main__':
-    engine = create_engine('postgresql://postgres:root@localhost:5432/postgres')
+    config = configparser.ConfigParser()
+    config.read('dbconfig.ini')
+    connect_url = URL.create(
+        drivername=config['PostgreSQL']['driver'],
+        username=config['PostgreSQL']['user'],
+        password=config['PostgreSQL']['pass'],
+        host=config['PostgreSQL']['host'],
+        port=config['PostgreSQL']['port'],
+        database=config['PostgreSQL']['db'])
+
+    engine = create_engine(connect_url)
     conn = engine.raw_connection()
 
     create_tables(conn)
