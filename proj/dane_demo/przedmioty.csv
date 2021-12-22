@@ -1,6 +1,6 @@
-id przedmiotu,nazwa,opis,ects
+id_przedmiotu,nazwa,opis,ects
 1,Analiza matematyczna,Celem przedmiotu jest zapoznanie studentów z metodami analizy matematycznej w zakresie ciągów i szeregów liczbowych,6
-2,Matematyka dyskretna,Celem przedmiotu jest zapoznanie studentów z metodami kombinatoryki, teorii grafów i teorii liczb do rozwiązywania problemów o charakterze informatycznym,6
-3,Inżynieria oprogramowania,Celem przedmiotu jest zapoznanie studentów z podstawowymi pojęciami, problemami i rozwiązaniami z zakresu inżynierii oprogramowania,6
-4,Pracownia programowania,Celem przedmiotu jest zapoznanie studentów z procesem pracy nad złożonym serwisem internetowym. W ramach przedmiotu studenci wykonują samodzielnie różne podmoduły projektu, które ostatecznie integrują w jeden złożony serwis,3
-5,Sieci komputerowe,Celem przedmiotu jest omówienie oraz analiza wa�niejszych protokołów sieciowych, nauczenie podstaw programowania sieciowego w oparciu o interfejs gniazd, dostarczenie wiedzy niezbędnej dla administrowania sieciami,6
+2,Matematyka dyskretna,Celem przedmiotu jest zapoznanie studentów z metodami kombinatoryki teorii grafów i teorii liczb do rozwiązywania problemów o charakterze informatycznym,6
+3,Inżynieria oprogramowania,Celem przedmiotu jest zapoznanie studentów z podstawowymi pojęciami problemami i rozwiązaniami z zakresu inżynierii oprogramowania,6
+4,Pracownia programowania,Celem przedmiotu jest zapoznanie studentów z procesem pracy nad złożonym serwisem internetowym. W ramach przedmiotu studenci wykonują samodzielnie różne podmoduły projektu które ostatecznie integrują w jeden złożony serwis,3
+5,Sieci komputerowe,Celem przedmiotu jest omówienie oraz analiza wa�niejszych protokołów sieciowych nauczenie podstaw programowania sieciowego w oparciu o interfejs gniazd dostarczenie wiedzy niezbędnej dla administrowania sieciami,6
