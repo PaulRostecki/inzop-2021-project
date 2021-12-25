@@ -1,4 +1,4 @@
-package model;
+package model.model;
 
 /**
  * Interface for {@link UniversitySubject}.

@@ -1,7 +1,10 @@
-package model;
+package model.model;
 
-import constant.AcademicTitlesEnum;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +15,34 @@ import java.util.List;
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed:
  */
+
+@Entity
+@Table( name = "prowadzacy" )
 public class Lecturer extends AbstractPerson implements LecturerIf
 {
-    private final int id;
+    @Id
+    @Column( name = "id_prowadzacego" )
+    private int id;
 
-    private final AcademicTitlesEnum academicTitle;
+    @Column( name = "tytul" )
+    private String academicTitle;
 
-    private final String duty;
+    @Column( name = "dyzur" )
+    private String duty;
 
-    private final List< StudyGroup > studyGroups;
+    @Transient
+    private List< StudyGroup > studyGroups;
+
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public Lecturer()
+    {
+        super();
+    }
 
     public Lecturer( String aFirstName, String aLastName, String aPESEL, String aAddress, LocalDate aDateOfBirth,
-                    String aPhoneNumber, String aEmail, AcademicTitlesEnum aAcademicTitle, String aDuty, Integer aId )
+                    String aPhoneNumber, String aEmail, String aAcademicTitle, String aDuty, Integer aId )
     {
         super( aFirstName, aLastName, aPESEL, aAddress, aDateOfBirth, aPhoneNumber, aEmail );
         academicTitle = aAcademicTitle;
@@ -41,7 +60,7 @@ public class Lecturer extends AbstractPerson implements LecturerIf
     @Override
     public String getAcademicTitle()
     {
-        return academicTitle.getTitle();
+        return academicTitle;
     }
 
     @Override
@@ -51,14 +70,8 @@ public class Lecturer extends AbstractPerson implements LecturerIf
     }
 
     @Override
-    public List< StudyGroup > getStudyGroups()
+    public void setId( int aId )
     {
-        return studyGroups;
-    }
-
-    @Override
-    public Integer getStudyGroupsCount()
-    {
-        return studyGroups.size();
+        id = aId;
     }
 }

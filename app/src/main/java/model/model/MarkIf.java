@@ -1,4 +1,4 @@
-package model;
+package model.model;
 
 /**
  * Interface for {@link Mark}.
@@ -8,11 +8,7 @@ package model;
  */
 public interface MarkIf
 {
-    int getStudentId();
-
     int getLecturerId();
-
-    int getUniversitySubjectId();
 
     float getMarkValue();
 }

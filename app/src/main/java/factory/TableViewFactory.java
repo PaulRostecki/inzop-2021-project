@@ -6,10 +6,10 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Lecturer;
-import model.Student;
-import model.StudyGroup;
-import model.UniversitySubject;
+import model.model.Lecturer;
+import model.model.Student;
+import model.model.StudyGroup;
+import model.model.UniversitySubject;
 import model.extensions.Announcement;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -115,7 +115,6 @@ public class TableViewFactory
 
     private TableView< StudyGroup > createTableViewForStudyGroups()
     {
-
         LOGGER.info( "Creating TableView for Study Groups." );
         final TableView< StudyGroup > tableView = new TableView<>();
         configureTableView( tableView );
@@ -131,7 +130,7 @@ public class TableViewFactory
         columns [ 5 ] = new TableColumn<>( "Liczba studentów" );
 
         columns [ 0 ].setCellValueFactory( new PropertyValueFactory<>( "universitySubjectName" ) );
-        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "dayInPolish" ) );
+        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "dayString" ) );
         columns [ 2 ].setCellValueFactory( new PropertyValueFactory<>( "startTime" ) );
         columns [ 3 ].setCellValueFactory( new PropertyValueFactory<>( "lecturerFirstName" ) );
         columns [ 4 ].setCellValueFactory( new PropertyValueFactory<>( "lecturerLastName" ) );

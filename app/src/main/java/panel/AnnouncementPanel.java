@@ -14,6 +14,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ * Panel for sending Announcements.
+ *
+ * @author created: Michał Musiałowicz on 11.12.2021
+ * @author last changed:
+ */
 public class AnnouncementPanel implements PanelIf
 {
     private final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
@@ -43,7 +50,7 @@ public class AnnouncementPanel implements PanelIf
         descriptionValueProperty = announcementDescriptionTextArea.textProperty();
 
         Platform.runLater( this::initData );
-        Platform.runLater( () -> setIcon( announcementPanelStage ) );
+        Platform.runLater( () -> PanelIf.setIcon( announcementPanelStage ) );
     }
 
     private void initData()
@@ -58,8 +65,8 @@ public class AnnouncementPanel implements PanelIf
         if( !Objects.equals( titleValueProperty.getValue(), StringUtils.EMPTY ) &&
                 !Objects.equals( descriptionValueProperty.getValue(), StringUtils.EMPTY ) )
         {
-            Announcement newAnnouncement = new Announcement( lecturerId, titleValueProperty.getValue(),
-                    descriptionValueProperty.getValue() );
+            Announcement newAnnouncement = new Announcement( cacheProvider.getAnnouncements().size() + 1, lecturerId,
+                    titleValueProperty.getValue(), descriptionValueProperty.getValue() );
             cacheProvider.getAnnouncements().add( newAnnouncement );
 
             announcementPanelStage.hide();

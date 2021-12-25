@@ -1,6 +1,8 @@
 package model.extensions;
 
-import model.StudyGroup;
+import cache.CacheProvider;
+import model.model.Student;
+import model.model.StudyGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +35,11 @@ public class TimeTable implements TimeTableIf
     public List< StudyGroup > getStudyGroups()
     {
         return studyGroups;
+    }
+
+    @Override
+    public Student getStudent()
+    {
+        return CacheProvider.getCacheProvider().getStudents().get( studentId );
     }
 }

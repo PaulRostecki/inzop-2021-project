@@ -1,6 +1,7 @@
 package model;
 
 import constant.AcademicTitlesEnum;
+import model.model.Lecturer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -25,15 +26,15 @@ class LecturerTest {
     static void setUp() {
         lecturerOne = new Lecturer( "Jan", "Kowalski", "12345678910",
                 "Mickiewicza 10 Poznan",  LocalDate.of(1996, 10, 16),
-                "555444999", "Jankowalski@gmail.com", AcademicTitlesEnum.MASTER,
+                "555444999", "Jankowalski@gmail.com", AcademicTitlesEnum.MASTER.getTitle(),
                 "Sroda 13:00", 23 ); //basic lecturer (1)
         lecturerTwo = new Lecturer("Adam", "Nowak", "10987654321",
                 "Chrobrego 20 Poznan",  LocalDate.of(1992, 12, 13),
-                "555777999",  "adamnowak@gmail.com",  AcademicTitlesEnum.DOCTOR,
+                "555777999",  "adamnowak@gmail.com",  AcademicTitlesEnum.DOCTOR.getTitle(),
                 "Wtorek 12:00",  25 ); //completely different lecturer (2)
         lecturerThree = new Lecturer( "Adam","Nowak", "12345678910",
                 "Chrobrego 20 Poznan",  LocalDate.of(1992, 12, 13),
-                "555777999",  "adamnowak@gmail.com",  AcademicTitlesEnum.DOCTOR,
+                "555777999",  "adamnowak@gmail.com",  AcademicTitlesEnum.DOCTOR.getTitle(),
                 "Wtorek 12:00",  25 ); //lecturer with PESEL of l.(1), and rem. values of l.(2)
 
         setOne = new HashSet<>();

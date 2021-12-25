@@ -1,5 +1,7 @@
-package model;
+package model.model;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,23 +11,31 @@ import java.time.format.DateTimeFormatter;
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed:
  */
+@MappedSuperclass
 public abstract class AbstractPerson implements PersonIf
 {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy" );
 
-    private final String firstName;
+    @Column( name = "imie" )
+    private String firstName;
 
-    private final String lastName;
+    @Column( name = "nazwisko" )
+    private String lastName;
 
-    private final String PESEL;
+    @Column( name = "pesel" )
+    private String PESEL;
 
-    private final String address;
+    @Column( name = "adres" )
+    private String address;
 
-    private final LocalDate dateOfBirth;
+    @Column( name = "data_ur" )
+    private LocalDate dateOfBirth;
 
-    private final String phoneNumber;
+    @Column( name = "nr_tel" )
+    private String phoneNumber;
 
-    private final String email;
+    @Column( name = "mail" )
+    private String email;
 
 
     public AbstractPerson( String aFirstName, String aLastName, String aPESEL, String aAddress, LocalDate aDateOfBirth,
@@ -38,6 +48,14 @@ public abstract class AbstractPerson implements PersonIf
         dateOfBirth = aDateOfBirth;
         phoneNumber = aPhoneNumber;
         email = aEmail;
+    }
+
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public AbstractPerson()
+    {
+
     }
 
     @Override
@@ -93,6 +111,11 @@ public abstract class AbstractPerson implements PersonIf
     public String getEmail()
     {
         return email;
+    }
+
+    public LocalDate getDateOfBirth()
+    {
+        return dateOfBirth;
     }
 
     /**

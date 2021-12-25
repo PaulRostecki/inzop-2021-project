@@ -1,24 +1,16 @@
 package panel;
 
-import constant.PathsConstants;
+import factory.PanelFactory;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import factory.AlertFactory;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
 
 /**
- * Login Panel.
+ * Panel for logging in.
  *
  * @author created: Michał Musiałowicz on 11.12.2021
  * @author last changed:
@@ -62,40 +54,6 @@ public class LoginPanel implements PanelIf
 
     private Stage createMainPanel()
     {
-        LOGGER.info( "Creating Main Panel." );
-        final Stage newPanel = new Stage();
-        Parent root = null;
-        URL urlToFXML = null;
-        URL urlToCSS = null;
-
-        try
-        {
-            urlToFXML = getClass().getResource( PathsConstants.MAIN_PANEL_FXML_PATH );
-            urlToCSS = getClass().getResource( PathsConstants.MAIN_PANEL_CSS_PATH );
-            root = FXMLLoader.load(  urlToFXML );
-            Objects.requireNonNull( root );
-            LOGGER.info( "Main Panel loaded." );
-        }
-        catch ( IOException | NullPointerException e )
-        {
-            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Main Panel." );
-            AlertFactory.popUpErrorAlert( e );
-            System.exit( 1 );
-        }
-
-        newPanel.setTitle( "USOS v2" );
-        newPanel.setResizable( true );
-        newPanel.setMaximized( true );
-        newPanel.setMinHeight( 500 );
-        newPanel.setMinWidth( 1000 );
-
-        final Scene scene = new Scene( root );
-//        setStyleForLoginPanel( scene, urlToCSS );
-        setIcon( newPanel );
-
-        newPanel.setScene( scene );
-        return newPanel;
+        return PanelFactory.createMainPanel();
     }
-
-
 }

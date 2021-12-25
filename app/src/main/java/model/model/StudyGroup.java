@@ -1,11 +1,17 @@
-package model;
+package model.model;
 
 import cache.CacheProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,24 +20,44 @@ import java.util.List;
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed:
  */
+@Entity
+@Table( name = "grupy" )
 public class StudyGroup implements StudyGroupIf
 {
     private static final Logger LOGGER = LogManager.getLogger( StudyGroup.class );
 
-    private final int groupId;
+    @Id
+    @Column( name = "id_grupy" )
+    private int groupId;
 
-    private final int lecturerId;
+    @Column( name = "id_prowadzacego" )
+    private int lecturerId;
 
-    private final int universitySubjectId;
+    @Column( name = "id_przedmiotu" )
+    private int universitySubjectId;
 
-    private final List< Student > students;
+    @Transient
+    private List< Student > students;
 
-    private final DayOfWeek day;
+    @Transient
+    private DayOfWeek day;
 
-    private final String startTime;
+    @Column( name = "dzien_zajec" )
+    private String dayString;
+
+    @Column( name = "godzina_zajec" )
+    private String startTime;
+
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public StudyGroup()
+    {
+        students = new ArrayList<>();
+    }
 
     public StudyGroup( int aGroupId, int aLecturerId, int aUniversitySubjectId, List<Student> aStudents, DayOfWeek aDay,
-                       String aStartTime )
+                      String aStartTime )
     {
         groupId = aGroupId;
         lecturerId = aLecturerId;
@@ -60,7 +86,7 @@ public class StudyGroup implements StudyGroupIf
     }
 
     @Override
-    public List<Student> getStudents()
+    public List< Student > getStudents()
     {
         return students;
     }
@@ -75,42 +101,6 @@ public class StudyGroup implements StudyGroupIf
     public String getStartTime()
     {
         return startTime;
-    }
-
-    /**
-     * We consider StudyGroups to be the same when they are scheduled at the same date
-     * and are lectured by the same lecturer.
-     */
-    @Override
-    public boolean equals( Object obj )
-    {
-        if( this == obj )
-        {
-            return true;
-        }
-
-        if( !( obj instanceof StudyGroup ) )
-        {
-            return false;
-        }
-
-        StudyGroup comparedStudyGroup = (StudyGroup) obj;
-        if( ( comparedStudyGroup.getLecturerId() == this.getLecturerId() ) &&
-                ( comparedStudyGroup.getStartTime().equals( this.getStartTime() ) ) &&
-                     ( comparedStudyGroup.getDay() == this.getDay() ) )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
     }
 
     @Override
@@ -156,5 +146,47 @@ public class StudyGroup implements StudyGroupIf
     public String getNumberOfStudents()
     {
         return String.valueOf( students.size() );
+    }
+
+    @Override
+    public boolean addStudentToTheGroup( Student aStudent )
+    {
+        return students.add( aStudent );
+    }
+
+    /**
+     * We consider StudyGroups to be the same when they are scheduled at the same date
+     * and are lectured by the same lecturer.
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if( this == obj )
+        {
+            return true;
+        }
+
+        if( !( obj instanceof StudyGroup ) )
+        {
+            return false;
+        }
+
+        StudyGroup comparedStudyGroup = (StudyGroup) obj;
+        if( ( comparedStudyGroup.getLecturerId() == this.getLecturerId() ) &&
+                ( comparedStudyGroup.getStartTime().equals( this.getStartTime() ) ) &&
+                ( comparedStudyGroup.getDay() == this.getDay() ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
     }
 }

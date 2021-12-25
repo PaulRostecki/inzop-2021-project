@@ -10,6 +10,8 @@ public interface AnnouncementIf
 {
     int getLecturerId();
 
+    int getId();
+
     String getDetails();
 
     String getTitle();
@@ -19,4 +21,12 @@ public interface AnnouncementIf
     String getLecturerLastName();
 
     String getLecturerTitle();
+
+    void setId( int aId );
+
+    void setLecturerId( int aLecturerId );
+
+    void setDetails( String aDetails );
+
+    void setTitle( String aTitle );
 }

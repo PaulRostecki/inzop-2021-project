@@ -2,25 +2,49 @@ package model.extensions;
 
 import cache.CacheProvider;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Implementation for Announcement.
  *
  * @author created: Michał Musiałowicz on 12.12.2021
  * @author last changed:
  */
+
+@Entity
+@Table( name = "komunikaty" )
 public class Announcement implements AnnouncementIf
 {
-    private final int lecturerId;
+    @Id
+    @Column( name = "id_komunikatu" )
+    private int id;
 
-    private final String details;
+    @Column( name = "id_prowadzacego" )
+    private int lecturerId;
 
-    private final String title;
+    @Column( name = "tresc" )
+    private String details;
 
-    public Announcement ( int aLecturerId, String aTitle, String aDetails )
+    @Column( name = "tytul" )
+    private String title;
+
+    public Announcement( int aId, int aLecturerId, String aTitle, String aDetails )
     {
+        id = aId;
         lecturerId = aLecturerId;
         details = aDetails;
         title = aTitle;
+    }
+
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public Announcement()
+    {
+
     }
 
     @Override
@@ -42,6 +66,36 @@ public class Announcement implements AnnouncementIf
     }
 
     @Override
+    public int getId()
+    {
+        return id;
+    }
+
+    @Override
+    public void setId( int aId )
+    {
+        id = aId;
+    }
+
+    @Override
+    public void setLecturerId( int aLecturerId )
+    {
+        lecturerId = aLecturerId;
+    }
+
+    @Override
+    public void setDetails( String aDetails )
+    {
+        details = aDetails;
+    }
+
+    @Override
+    public void setTitle( String aTitle )
+    {
+        title = aTitle;
+    }
+
+    @Override
     public String getLecturerFirstName()
     {
         return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getFirstName();
@@ -58,4 +112,6 @@ public class Announcement implements AnnouncementIf
     {
         return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getAcademicTitle();
     }
+
+
 }

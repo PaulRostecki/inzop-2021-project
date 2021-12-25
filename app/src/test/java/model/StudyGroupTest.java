@@ -1,5 +1,7 @@
 package model;
 
+import model.model.Student;
+import model.model.StudyGroup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,5 @@
 package model.extensions;
 
-import constant.PermissionTypeEnum;
-
 /**
  * Interface for {@link Account}
  *
@@ -14,5 +12,11 @@ public interface AccountIf
 
     String getPassword();
 
-    PermissionTypeEnum getPermission();
+    String getPermission();
+
+    void setEmail( String aEmail );
+
+    void setPassword( String aPassword );
+
+    void setPermission( String aPermission );
 }
