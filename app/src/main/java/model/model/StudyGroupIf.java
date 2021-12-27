@@ -1,4 +1,4 @@
-package model;
+package model.model;
 
 import java.time.DayOfWeek;
 import java.util.List;
@@ -32,4 +32,6 @@ public interface StudyGroupIf
     String getDayInPolish();
 
     String getUniversitySubjectName();
+
+    boolean addStudentToTheGroup( Student aStudent );
 }

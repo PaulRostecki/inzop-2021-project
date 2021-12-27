@@ -1,6 +1,9 @@
 package model.extensions;
 
-import constant.PermissionTypeEnum;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Implementation for Account.
@@ -8,21 +11,35 @@ import constant.PermissionTypeEnum;
  * @author created: Michał Musiałowicz on 12.12.2021
  * @author last changed:
  */
+
+@Entity
+@Table( name = "konto_uzytkownika" )
 public class Account implements AccountIf
 {
-    private final String email;
+    @Id
+    @Column( name = "email" )
+    private String email;
 
-    private final String password;
+    @Column( name = "haslo" )
+    private String password;
 
-    private final PermissionTypeEnum permission;
+    @Column( name = "typ_uprawnien" )
+    private String permission;
 
-    public Account( String aEmail, String aPassword, PermissionTypeEnum aPermission )
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public Account()
+    {
+
+    }
+
+    public Account( String aEmail, String aPassword, String aPermission )
     {
         email = aEmail;
         password = aPassword;
         permission = aPermission;
     }
-
 
     @Override
     public String getEmail()
@@ -31,7 +48,7 @@ public class Account implements AccountIf
     }
 
     @Override
-    public PermissionTypeEnum getPermission()
+    public String getPermission()
     {
         return permission;
     }
@@ -40,5 +57,23 @@ public class Account implements AccountIf
     public String getPassword()
     {
         return password;
+    }
+
+    @Override
+    public void setEmail( String aEmail )
+    {
+        email = aEmail;
+    }
+
+    @Override
+    public void setPassword( String aPassword )
+    {
+        password = aPassword;
+    }
+
+    @Override
+    public void setPermission( String aPermission )
+    {
+        permission = aPermission;
     }
 }

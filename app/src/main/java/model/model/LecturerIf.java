@@ -1,6 +1,4 @@
-package model;
-
-import java.util.List;
+package model.model;
 
 /**
  * Interface for Lecturer.
@@ -16,7 +14,6 @@ public interface LecturerIf extends PersonIf
 
     String getDuty();
 
-    List< StudyGroup > getStudyGroups();
+    void setId( int aId );
 
-    Integer getStudyGroupsCount();
 }

@@ -13,9 +13,9 @@ import javafx.stage.Stage;
  */
 public interface PanelIf
 {
-    default void setIcon( Stage panel )
+    static void setIcon( Stage panel)
     {
-        String urlToIcon = getClass().getResource( PathsConstants.ICON_PATH ).toString();
+        String urlToIcon = PanelIf.class.getResource( PathsConstants.ICON_PATH ).toString();
         Image image = new Image( urlToIcon );
         panel.getIcons().add( image );
     }

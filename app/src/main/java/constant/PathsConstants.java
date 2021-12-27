@@ -3,7 +3,7 @@ package constant;
 import java.io.File;
 
 /**
- * Constants for all paths for resources directory.
+ * Constants for all paths in resources directory.
  *
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed:
@@ -24,6 +24,7 @@ public final class PathsConstants
     private static final String ICON_FILE_NAME = "travel-journal.png";
     private static final String ANNOUNCEMENT_PANEL_FXML_FILE_NAME = "makeAnnouncement.fxml";
     private static final String ANNOUNCEMENT_PANEL_CSS_FILE_NAME = "makeAnnouncementStyle.css";
+    private static final String HIBERNATE_CONF_FILE_NAME = "persistence.xml";
 
 
     /**
@@ -43,4 +44,6 @@ public final class PathsConstants
             ANNOUNCEMENT_PANEL_CSS_FILE_NAME ).replace( "\\", "/" );
     public static final String ICON_PATH = ( SEP + "icons" + SEP +
             ICON_FILE_NAME ).replace( "\\", "/" );
+    public static final String HIBERNATE_CONF_PATH = ( SEP + "META-INF" + SEP +
+            HIBERNATE_CONF_FILE_NAME ).replace( "\\", "/" );
 }

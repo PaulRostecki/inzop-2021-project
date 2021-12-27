@@ -1,4 +1,10 @@
-package model;
+package model.model;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Implementation for UniversitySubject.
@@ -6,17 +12,33 @@ package model;
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed: Mikołaj Mumot on 19.12.2021
  */
+
+@Entity
+@Table( name = "przedmioty" )
 public class UniversitySubject implements UniversitySubjectIf
 {
-    private final int id;
+    @Id
+    @Column( name = "id_przedmiotu" )
+    private int id;
 
-    private final String name;
+    @Column( name = "nazwa" )
+    private String name;
 
-    private final String description;
+    @Column( name = "opis" )
+    private String description;
 
-    private final int ectsPoints;
+    @Column( name = "ects" )
+    private int ectsPoints;
 
-    public UniversitySubject( int aId, String aName, String aDescription, int aEctsPoints )
+    /**
+     * Default no-arg constructor for Hibernate ORM.
+     */
+    public UniversitySubject()
+    {
+
+    }
+
+    public UniversitySubject(int aId, String aName, String aDescription, int aEctsPoints )
     {
        id = aId;
        name = aName;

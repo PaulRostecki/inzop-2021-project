@@ -1,6 +1,7 @@
 package model;
 
 import constant.MarkValuesEnum;
+import model.model.Mark;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,17 +23,17 @@ class MarkTest {
 
     @BeforeAll
     static void setUp(){
-        markOne = new Mark(464444, 23, 1, MarkValuesEnum.FOUR);
+        markOne = new Mark(464444, 23, 1, MarkValuesEnum.FOUR.getMarkValue());
         //basic mark (1)
-        markTwo = new Mark(464555, 25, 2, MarkValuesEnum.FIVE);
+        markTwo = new Mark(464555, 25, 2, MarkValuesEnum.FIVE.getMarkValue());
         //completely different mark (2)
 
-        markThree = new Mark(464444, 25, 1, MarkValuesEnum.TWO);
+        markThree = new Mark(464444, 25, 1, MarkValuesEnum.TWO.getMarkValue());
         //mark with student id & subject id of (1), rem. fields of (2)
 
-        markFour = new Mark(464442, 23, 1, MarkValuesEnum.FOUR);
+        markFour = new Mark(464442, 23, 1, MarkValuesEnum.FOUR.getMarkValue());
         //m.(1) but with different student id
-        markFive = new Mark(464444, 23, 5, MarkValuesEnum.FOUR);
+        markFive = new Mark(464444, 23, 5, MarkValuesEnum.FOUR.getMarkValue());
         //m.(1) but with different subject id
 
 

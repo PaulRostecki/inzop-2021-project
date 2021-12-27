@@ -2,29 +2,29 @@ package panel;
 
 import cache.CacheProvider;
 import constant.ModelEnum;
-import constant.PathsConstants;
-import factory.AlertFactory;
+import factory.PanelFactory;
 import factory.TableViewFactory;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Lecturer;
-import model.Student;
-import model.StudyGroup;
-import model.UniversitySubject;
 import model.extensions.Announcement;
+import model.model.Lecturer;
+import model.model.Student;
+import model.model.StudyGroup;
+import model.model.UniversitySubject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 
+
+/**
+ * Panel for main functionalities of USOS.
+ *
+ * @author created: Michał Musiałowicz on 30.12.2021
+ * @author last changed:
+ */
 public class MainPanel implements PanelIf
 {
     private static final Logger LOGGER = LogManager.getLogger( MainPanel.class );
@@ -38,7 +38,6 @@ public class MainPanel implements PanelIf
 
     public MainPanel()
     {
-
     }
 
     public void initialize()
@@ -105,7 +104,7 @@ public class MainPanel implements PanelIf
     @FXML
     private void sendAnnouncement()
     {
-        Stage announcementPanel = createAnnouncementPanel();
+        Stage announcementPanel = PanelFactory.createAnnouncementPanel();
         ArrayList< Object > paramObjets = new ArrayList<>();
         // add lecturer id.
         paramObjets.add( 1 );
@@ -113,39 +112,4 @@ public class MainPanel implements PanelIf
         announcementPanel.setUserData( paramObjets );
         announcementPanel.show();
     }
-
-    private Stage createAnnouncementPanel()
-    {
-        LOGGER.info( "Creating Announcement Panel." );
-        final Stage newPanel = new Stage();
-        Parent root = null;
-        URL urlToFXML = null;
-        URL urlToCSS = null;
-
-        try
-        {
-            urlToFXML = getClass().getResource( PathsConstants.ANNOUNCEMENT_PANEL_FXML_PATH );
-            urlToCSS = getClass().getResource( PathsConstants.ANNOUNCEMENT_PANEL_CSS_PATH );
-            root = FXMLLoader.load(  urlToFXML );
-            Objects.requireNonNull( root );
-            LOGGER.info( "Announcement Panel loaded." );
-        }
-        catch ( IOException | NullPointerException e )
-        {
-            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Announcement Panel." );
-            AlertFactory.popUpErrorAlert( e );
-            System.exit( 1 );
-        }
-
-        newPanel.setTitle( "Nadaj komunikat" );
-        newPanel.setResizable( false );
-
-        final Scene scene = new Scene( root );
-//        setStyleForLoginPanel( scene, urlToCSS );
-        setIcon( newPanel );
-
-        newPanel.setScene( scene );
-        return newPanel;
-    }
-
 }
