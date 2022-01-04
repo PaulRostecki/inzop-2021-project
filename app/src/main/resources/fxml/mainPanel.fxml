@@ -35,7 +35,7 @@
                 </Menu>
             </Menu>
             <Menu text="Akcje">
-                <MenuItem text="Zobacz swoje oceny"/>
+                <MenuItem text="Zobacz swoje oceny" onAction="#showStudentMarksOnTableView"/>
             </Menu>
         </MenuBar>
     </top>

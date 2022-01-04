@@ -189,4 +189,9 @@ public class StudyGroup implements StudyGroupIf
     {
         return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
     }
+
+    public String getDayString()
+    {
+        return dayString;
+    }
 }
