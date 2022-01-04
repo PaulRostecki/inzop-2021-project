@@ -1,5 +1,6 @@
 package model.model;
 
+import cache.CacheProvider;
 import model.orm.MarkId;
 
 import javax.persistence.Column;
@@ -66,6 +67,11 @@ public class Mark implements MarkIf
     public void setMarkId( MarkId aMarkId )
     {
         markId = aMarkId;
+    }
+
+    public String getUniversitySubjectName()
+    {
+        return CacheProvider.getCacheProvider().getUniversitySubjects().get( markId.getUniversitySubjectId() ).getName();
     }
 
     /**

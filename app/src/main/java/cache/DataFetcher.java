@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author created: Michał Musiałowicz on 28.12.2021
  * @author last changed:
  */
-public final class DataFetcher
+public class DataFetcher
 {
     private static final Logger LOGGER = LogManager.getLogger( DataFetcher.class );
 
@@ -149,6 +149,7 @@ public final class DataFetcher
         {
             Query fetchAccountsQuery = aEntityManager.createQuery( "SELECT x FROM Account x" );
             List< Account > accounts = fetchAccountsQuery.getResultList();
+            accounts.forEach( acc -> acc.setPermission( acc.getPermission() ) ); // set PermissionTypeEnum
             accounts.stream().filter( validEmailPredicate ).forEach( acc -> cacheProvider.getAccounts().put( acc.getEmail(), acc ) );
         }
         catch ( Exception e )
@@ -197,7 +198,7 @@ public final class DataFetcher
                         .contains( acc.getEmail() )
                     )
                     ||
-                    acc.getPermission().equals( PermissionTypeEnum.MODERATOR.getValue() );
+                    acc.getPermissionType() == PermissionTypeEnum.MODERATOR;
 
     /**
      * Consumer function which adds Student to Study Group based on relation between them.
