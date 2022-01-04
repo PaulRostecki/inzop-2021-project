@@ -210,56 +210,12 @@ header {
   }
   h1,
   h2 {
-    // position: relative;
-    // padding-left: 45px;
     font-size: 3em;
     padding-bottom: 4vh;
-    // width: fit-content;
   }
   h2 {
     font-size: 2.3em;
   }
-  // h1::before,
-  // h2::before {
-  //   position: absolute;
-  //   content: " ";
-  //   background: url(../svg/document-website/Vector-left.svg) no-repeat;
-  //   background-size: contain;
-  // }
-  // h1::after,
-  // h2::after {
-  //   position: absolute;
-  //   content: " ";
-  //   background: url(../svg/document-website/Vector-right.svg) no-repeat,
-  //     url(../svg/document-website/mdi_slash-forward.svg) no-repeat;
-  //   background-size: contain, 100%;
-  // }
-  // h1::before {
-  //   width: 40px;
-  //   height: 40px;
-  //   top: 15px;
-  //   left: 0;
-  // }
-  // h2::before {
-  //   width: 30px;
-  //   height: 30px;
-  //   top: 15px;
-  //   left: 0;
-  // }
-  // h1::after {
-  //   width: 80px;
-  //   height: 40px;
-  //   top: 15px;
-  //   right: -85px;
-  //   background-position: top 0 left 35px, top -14px left -28px;
-  // }
-  // h2::after {
-  //   width: 50px;
-  //   height: 30px;
-  //   top: 15px;
-  //   right: -60px;
-  //   background-position: top 0 left 19px, top -14px left -14px;
-  // }
 }
 
 .git,

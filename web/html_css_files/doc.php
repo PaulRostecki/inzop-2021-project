@@ -69,7 +69,7 @@
                 <h1>
                     < Dokumentacja />
                 </h1>
-                <div class="sub-container">
+                <article class="sub-container">
                     <h2>
                         < O projekcie />
                     </h2>
@@ -77,12 +77,13 @@
                         intuicyjnej aplikacji, przypominającą znane nam już dotychczas
                         dzienniki elektroniczne, stosowane w szkołach (np. MobiDziennik)
                         oraz uniwerstytetach (np. USOS).</p>
-                </div>
+                </article>
 
-                <div class="sub-container">
+                <article class="sub-container">
                     <h2>
                         < Zastosowany model projektu />
                     </h2>
+                    <article></article>
                     <p>Zastosowany przez nas model projektowy - <b>RUP (Rational Unified Process)</b> jest metodyką
                         zakładającą iteracyjny proces tworzenia oprogramowania. Metodyka ta wprowadza reguły oraz
                         dobre praktyki dla wszystkich faz wytwarzania oprogramowania.<br>
@@ -91,9 +92,9 @@
                         to na uzyskanie szybkiej informacji zwrotnej i upewnieniu się, że zespół realizujący projekt dobrze
                         zrozumiał wymagania i oczekiwania klienta. Szybkie wykrycie ewentualnych problemów lub
                         nieporozumień, pozwala szybko wprowadzić odpowiednie modyfikacje.</p>
-                </div>
+                </article>
 
-                <div class="sub-container">
+                <article class="sub-container">
                     <h2>
                         < Zastosowane technologie />
                     </h2>
@@ -188,9 +189,9 @@
                         projektantów.</p>
                     <a class="zastosowanie" href="#">Wiecej</a>
 
-                </div>
+                </article>
 
-                <div class="sub-container">
+                <article class="sub-container">
                     <h2>
                         < Twórcy projektu />
                     </h2>
@@ -209,7 +210,7 @@
                         <li class="item">Maksymilian Łasecki - System Tester (manual testing), Course Developer<a href="http://" class="git"></a><a href="http://" class="linkedin"></a></li>
                         <li class="item">Mikołaj Mumot - Test Manager, System Tester (automatic testing)<a href="http://" class="git"></a><a href="http://" class="linkedin"></a></li>
                     </ul>
-                </div>
+                </article>
             </section>
         </main>
         <footer>
