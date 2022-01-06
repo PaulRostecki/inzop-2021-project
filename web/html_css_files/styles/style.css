@@ -145,7 +145,7 @@ nav .item:last-child {
   right: -8vw;
   background: url(../svg/main-website/SVG-pic-main.svg), url(../svg/main-website/Ellipse-background-1.svg), url(../svg/main-website/Ellipse-background-3.svg), url(../svg/main-website/Ellipse-background-2.svg);
   background-repeat: no-repeat;
-  background-position: right 0 bottom 0, right -5% bottom 0, right 15% bottom 5%, right 25% bottom 0;
+  background-position: right 0 bottom 0, right -5% bottom 0, right 15% bottom 5%, right 25% bottom 0;
   background-size: 60%, 33%, 32%, 30%;
   z-index: -2;
 }
@@ -211,7 +211,7 @@ nav .item:last-child {
   margin: 20px;
 }
 
-.functions li:before {
+.functions li::before {
   content: " ";
   background: url(../svg/main-website/gridicons_checkmark.svg) no-repeat;
   background-size: contain;
@@ -282,7 +282,7 @@ nav .item:last-child {
   font-size: 0.85em;
 }
 
-.creators .item2 li:before {
+.creators .item2 li::before {
   content: " ";
   background: url(../svg/main-website/ic_baseline-arrow-right.svg) no-repeat;
   background-size: contain;
@@ -409,8 +409,7 @@ footer h1::before {
     background-color: #747474;
     border-radius: 8px;
   }
-  nav .navbar-toggler-icon::after,
-  nav .navbar-toggler-icon::before {
+  nav .navbar-toggler-icon::before, nav .navbar-toggler-icon::after {
     content: " ";
     position: absolute;
     width: 35px;
@@ -421,18 +420,18 @@ footer h1::before {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
   }
-  nav .navbar-toggler-icon::after {
-    -webkit-transform: translateY(-12px);
-            transform: translateY(-12px);
-  }
   nav .navbar-toggler-icon::before {
     -webkit-transform: translateY(12px);
             transform: translateY(12px);
   }
+  nav .navbar-toggler-icon::after {
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+  }
   nav .navbar-toggler-icon.none {
     height: 0;
   }
-  nav .navbar-toggler-icon.aft:after {
+  nav .navbar-toggler-icon.aft::after {
     -webkit-transform: rotate(-135deg);
             transform: rotate(-135deg);
     background-color: #3fb1b5;
@@ -494,7 +493,7 @@ footer h1::before {
     margin-top: 3vh;
     font-size: 1.3em;
   }
-  .front-page:before {
+  .front-page::before {
     background: url(../img/mobilki.png) no-repeat;
     width: 100vw;
     height: 100%;
@@ -526,7 +525,7 @@ footer h1::before {
     padding-left: 55px;
     margin: 20px 0;
   }
-  .functions li:before {
+  .functions li::before {
     bottom: auto;
     top: 0;
   }
@@ -542,7 +541,7 @@ footer h1::before {
   .creators .item2 li {
     padding-left: 25px;
   }
-  .creators .item2 li:before {
+  .creators .item2 li::before {
     bottom: -9px;
     left: -29px;
   }
@@ -569,11 +568,11 @@ footer h1::before {
   .front-page h2 {
     font-size: 2rem;
   }
-  .front-page h2:before {
+  .front-page h2::before {
     width: 140px;
     height: 35px;
   }
-  .front-page:before {
+  .front-page::before {
     right: -15px;
   }
 }

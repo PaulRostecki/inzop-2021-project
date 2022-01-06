@@ -53,16 +53,16 @@ header {
     font-size: 1.7em;
     grid-column: 1;
     padding-left: 68px;
-  }
-  h1::before {
-    content: " ";
-    position: absolute;
-    background: url(../svg/document-website/map_university.svg) no-repeat;
-    background-size: contain;
-    width: 65px;
-    height: 65px;
-    bottom: -6px;
-    left: 0;
+    &::before {
+      content: " ";
+      position: absolute;
+      background: url(../svg/document-website/map_university.svg) no-repeat;
+      background-size: contain;
+      width: 65px;
+      height: 65px;
+      bottom: -6px;
+      left: 0;
+    }
   }
 }
 
@@ -73,6 +73,7 @@ header {
   width: 350px;
   background: rgb(246, 246, 246);
   padding-top: 150px;
+
   .item,
   .sub-item {
     display: block;
@@ -81,20 +82,21 @@ header {
     padding-left: 0;
     margin-left: 50px;
     font-size: 1.2rem;
+
+    &::before {
+      content: " ";
+      background: url(../svg/document-website/Vector-right.svg) no-repeat;
+      background-size: contain;
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      top: 21px;
+      left: -30px;
+      filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg)
+        brightness(70%) contrast(119%);
+    }
   }
-  .item::before,
-  .sub-item::before {
-    content: " ";
-    background: url(../svg/document-website/Vector-right.svg) no-repeat;
-    background-size: contain;
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    top: 21px;
-    left: -30px;
-    filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg)
-      brightness(70%) contrast(119%);
-  }
+
   .sub-menu {
     margin-left: 30px;
     list-style: none;
@@ -125,26 +127,24 @@ header {
     height: 3px;
     background-color: rgb(116, 116, 116);
     border-radius: 8px;
-  }
 
-  .navbar-toggler-icon::after,
-  .navbar-toggler-icon::before {
-    content: " ";
-    position: absolute;
-    width: 40px;
-    height: 3px;
-    background-color: rgb(116, 116, 116);
-    border-radius: 8px;
-    right: 0;
-    transition: all 0.3s;
-  }
-
-  .navbar-toggler-icon::after {
-    transform: translateY(-12px);
-  }
-
-  .navbar-toggler-icon::before {
-    transform: translateY(12px);
+    &::before,
+    &::after {
+      content: " ";
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background-color: rgb(116, 116, 116);
+      border-radius: 8px;
+      right: 0;
+      transition: all 0.3s;
+    }
+    &::before {
+      transform: translateY(12px);
+    }
+    &::after {
+      transform: translateY(-12px);
+    }
   }
 
   .navbar-toggler-icon.none {
@@ -203,9 +203,9 @@ header {
       width: fit-content;
       padding-top: 1vh;
       margin-bottom: 2vh;
-    }
-    .zastosowanie:hover {
-      color: #3fb1b5;
+      &:hover {
+        color: #3fb1b5;
+      }
     }
   }
   h1,
@@ -224,16 +224,19 @@ header {
   width: 30px;
   height: 30px;
   display: inline-block;
-}
 
-.git::before,
-.linkedin::before {
-  position: absolute;
-  content: " ";
-  width: 30px;
-  height: 30px;
-  bottom: -6px;
-  left: 0;
+  &::before {
+    position: absolute;
+    content: " ";
+    width: 30px;
+    height: 30px;
+    bottom: -6px;
+    left: 0;
+  }
+  &:hover::before {
+    filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg)
+      brightness(70%) contrast(119%);
+  }
 }
 
 .git::before {
@@ -247,28 +250,22 @@ header {
   background-size: contain;
 }
 
-.git:hover::before,
-.linkedin:hover::before {
-  filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg)
-    brightness(70%) contrast(119%);
-}
-
 footer {
   h1 {
     width: fit-content;
     margin: 0 auto;
     font-size: 2em;
     padding-left: 35px;
-  }
-  h1::before {
-    content: " ";
-    position: absolute;
-    background: url(../svg/document-website/map_university.svg) no-repeat;
-    background-size: contain;
-    width: 65px;
-    height: 65px;
-    bottom: -6px;
-    left: -35px;
+    &::before {
+      content: " ";
+      position: absolute;
+      background: url(../svg/document-website/map_university.svg) no-repeat;
+      background-size: contain;
+      width: 65px;
+      height: 65px;
+      bottom: -6px;
+      left: -35px;
+    }
   }
 }
 
@@ -339,12 +336,12 @@ footer {
       margin-left: 53px;
       padding-left: 53px;
       font-size: 1.5em;
-    }
-    h1::before {
-      width: 50px;
-      height: 50px;
-      bottom: -8px;
-      left: 0;
+      &::before {
+        width: 50px;
+        height: 50px;
+        bottom: -8px;
+        left: 0;
+      }
     }
   }
 
@@ -353,24 +350,24 @@ footer {
     margin-left: 10px;
     width: 25px;
     height: 25px;
+
+    &::before {
+      width: 25px;
+      height: 25px;
+      bottom: -7px;
+    }
   }
 
-  .git::before,
-  .linkedin::before {
-    width: 25px;
-    height: 25px;
-    bottom: -7px;
-  }
   footer {
     h1 {
       font-size: 2em;
       padding-left: 58px;
-    }
-    h1::before {
-      width: 55px;
-      height: 55px;
-      bottom: -6px;
-      left: 0px;
+      &::before {
+        width: 55px;
+        height: 55px;
+        bottom: -6px;
+        left: 0px;
+      }
     }
   }
 }

@@ -142,8 +142,7 @@ header h1::before {
   border-radius: 8px;
 }
 
-.navbar-toggler .navbar-toggler-icon::after,
-.navbar-toggler .navbar-toggler-icon::before {
+.navbar-toggler .navbar-toggler-icon::before, .navbar-toggler .navbar-toggler-icon::after {
   content: " ";
   position: absolute;
   width: 40px;
@@ -155,14 +154,14 @@ header h1::before {
   transition: all 0.3s;
 }
 
-.navbar-toggler .navbar-toggler-icon::after {
-  -webkit-transform: translateY(-12px);
-          transform: translateY(-12px);
-}
-
 .navbar-toggler .navbar-toggler-icon::before {
   -webkit-transform: translateY(12px);
           transform: translateY(12px);
+}
+
+.navbar-toggler .navbar-toggler-icon::after {
+  -webkit-transform: translateY(-12px);
+          transform: translateY(-12px);
 }
 
 .navbar-toggler .navbar-toggler-icon.none {
@@ -267,6 +266,12 @@ header h1::before {
   left: 0;
 }
 
+.git:hover::before,
+.linkedin:hover::before {
+  -webkit-filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg) brightness(70%) contrast(119%);
+          filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg) brightness(70%) contrast(119%);
+}
+
 .git::before {
   background: url(../svg/document-website/akar-icons_github-fill.svg) no-repeat;
   background-size: contain;
@@ -275,12 +280,6 @@ header h1::before {
 .linkedin::before {
   background: url(../svg/document-website/akar-icons_linkedin-fill.svg) no-repeat;
   background-size: contain;
-}
-
-.git:hover::before,
-.linkedin:hover::before {
-  -webkit-filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg) brightness(70%) contrast(119%);
-          filter: invert(100%) sepia(50%) saturate(1300%) hue-rotate(500deg) brightness(70%) contrast(119%);
 }
 
 footer h1 {
