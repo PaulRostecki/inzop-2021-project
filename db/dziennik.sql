@@ -15,6 +15,8 @@ GO
 
 ----------------- DROP ------------------------
 
+DROP TABLE IF EXISTS Komunikaty;
+DROP TABLE IF EXISTS Konto_użytkownika;
 DROP TABLE IF EXISTS Prowadzacy_grupa;
 DROP TABLE IF EXISTS Student_grupa;
 DROP TABLE IF EXISTS Oceny;
@@ -89,6 +91,20 @@ CREATE TABLE Prowadzacy_grupa
 	CONSTRAINT pk_prowadzacy_grupa PRIMARY KEY(id_prowadzacego, id_grupy)
 );
 
+CREATE TABLE Komunikaty
+(
+    id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
+    tytul VARCHAR(50),
+    tresc VARCHAR(250)
+);
+
+CREATE TABLE Konto_użytkownika
+(
+    student_email VARCHAR(50),
+    haslo VARCHAR(30),
+    typ_uprawnien VARCHAR(10) CONSTRAINT ck_typ_uprawnien CHECK (typ_uprawnien IN ('student', 'lecturer', 'moderator'))
+);
+
 
 --SELECT * FROM Studenci
 --SELECT * FROM Prowadzacy
@@ -97,3 +113,5 @@ CREATE TABLE Prowadzacy_grupa
 --SELECT * FROM Grupy
 --SELECT * FROM Student_grupa
 --SELECT * FROM Prowadzacy_grupa
+--SELECT * FROM Komunikaty
+--SELECT * FROM Konto_użytkownika
