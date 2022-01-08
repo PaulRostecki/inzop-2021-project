@@ -1,6 +1,5 @@
 package init;
 
-import cache.CacheProvider;
 import cache.DataService;
 import factory.PanelFactory;
 import javafx.application.Application;
@@ -21,11 +20,8 @@ public class AppInitializer extends Application implements PanelIf
 
     private final DataService dataService = DataService.getDataService();
 
-    private static final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
-
     public static void main ( String[] args )
     {
-        System.out.println("xxx");
         launch( args );
     }
 

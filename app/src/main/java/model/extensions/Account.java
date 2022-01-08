@@ -96,6 +96,7 @@ public class Account implements AccountIf
         }
         else
         {
+            LOGGER.error( "Wrong permissions type for Account: " + aPermission + "." );
             permissionType = null;
         }
     }

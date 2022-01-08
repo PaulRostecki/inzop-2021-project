@@ -36,6 +36,8 @@
             </Menu>
             <Menu text="Akcje">
                 <MenuItem text="Zobacz swoje oceny" onAction="#showStudentMarksOnTableView"/>
+                <MenuItem text="Zobacz swoją średnią" onAction="#showStudentAverageMarks"/>
+                <MenuItem text="Wystaw oceny" onAction="#evaluateStudents"/>
             </Menu>
         </MenuBar>
     </top>

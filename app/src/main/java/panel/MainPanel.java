@@ -16,7 +16,6 @@ import model.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -125,15 +124,47 @@ public class MainPanel implements PanelIf
     }
 
     @FXML
+    private void showStudentAverageMarks()
+    {
+        Student student = getStudentFromAccount();
+        if( student == null )
+        {
+            AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie jest powiązane z żadnym studentem." );
+            return;
+        }
+        Stage averageMarksPanel = PanelFactory.createAverageMarksPanel();
+        averageMarksPanel.setUserData( student );
+        averageMarksPanel.show();
+    }
+
+    @FXML
     private void sendAnnouncement()
     {
-        Stage announcementPanel = PanelFactory.createAnnouncementPanel();
-        ArrayList< Object > paramObjets = new ArrayList<>();
-        // add lecturer id.
-        paramObjets.add( 1 );
+        Lecturer lecturer = getLecturerFromAccount();
+        if( lecturer == null )
+        {
+            AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie jest powiązane z żadnym wykładowcą." );
+            return;
+        }
 
-        announcementPanel.setUserData( paramObjets );
+        Stage announcementPanel = PanelFactory.createAnnouncementPanel();
+        announcementPanel.setUserData( lecturer );
         announcementPanel.show();
+    }
+
+    @FXML
+    private void evaluateStudents()
+    {
+        Lecturer lecturer = getLecturerFromAccount();
+        if( lecturer == null )
+        {
+            AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie jest powiązane z żadnym wykładowcą." );
+            return;
+        }
+
+        Stage evaluateStudentsPanel = PanelFactory.createEvaluateStudentsPanel();
+        evaluateStudentsPanel.setUserData( lecturer );
+        evaluateStudentsPanel.show();
     }
 
 
@@ -146,6 +177,14 @@ public class MainPanel implements PanelIf
     {
         return cacheProvider.getStudents().values().stream()
                 .filter( student -> student.getEmail().equals( loggedAccount.getEmail() ) )
+                .findAny()
+                .orElse( null );
+    }
+
+    private Lecturer getLecturerFromAccount()
+    {
+        return cacheProvider.getLecturers().values().stream()
+                .filter( lecturer -> lecturer.getEmail().equals( loggedAccount.getEmail() ) )
                 .findAny()
                 .orElse( null );
     }
