@@ -133,6 +133,74 @@ public class PanelFactory implements PanelIf
         return newPanel;
     }
 
+    public static Stage createEvaluateStudentsPanel()
+    {
+        LOGGER.info( "Creating Evaluate Students Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.EVALUATE_STUDENTS_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.EVALUATE_STUDENTS_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Evaluate Students Panel loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Evaluate Students Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Wystaw oceny" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
+        setStyleForLoginPanel( scene, urlToCSS );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
+    public static Stage createAverageMarksPanel()
+    {
+        LOGGER.info( "Creating Average Marks Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.AVERAGE_MARKS_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.AVERAGE_MARKS_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Evaluate Average Marks loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Average Marks Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Średnia ocen" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
+        setStyleForLoginPanel( scene, urlToCSS );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
     private static void setStyleForLoginPanel( Scene aScene, URL css )
     {
         aScene.getStylesheets().clear();
