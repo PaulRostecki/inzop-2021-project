@@ -1,11 +1,14 @@
 package factory;
 
+import cache.CacheProvider;
 import constant.ModelEnum;
+import converter.USOSFloatStringConverter;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import model.extensions.Announcement;
 import model.model.*;
 import org.apache.commons.lang3.StringUtils;
@@ -189,7 +192,7 @@ public class TableViewFactory
         return tableView;
     }
 
-    public TableView< Mark > createTableViewForMarks( Student aStudent )
+    public TableView< Mark > createTableViewForStudentMarks( Student aStudent )
     {
         LOGGER.info( "Creating TableView for Marks for " + aStudent.getIndexNumber() + "." );
         final TableView< Mark > tableView = new TableView<>();
@@ -209,11 +212,45 @@ public class TableViewFactory
         return tableView;
     }
 
+    public TableView< Mark > createTableViewForStudyGroupMarks( StudyGroup aStudyGroup )
+    {
+        LOGGER.info( "Creating TableView for Marks for " + aStudyGroup.getUniversitySubjectName()
+                + " (gr." + aStudyGroup.getGroupId() + ")." );
+        final TableView< Mark > tableView = new TableView<>();
+        configureTableView( tableView );
+
+        final TableColumn< Mark, String > parentColumn = new TableColumn<>( "Wykaz ocen studentów" );
+
+        final TableColumn< Mark, String > studentColumn = new TableColumn<>( "Student");;
+        final TableColumn< Mark, Float > markValueColumn = new TableColumn<>( "Ocena" );
+
+        studentColumn.setCellValueFactory( new PropertyValueFactory<>( "studentFullName" ) );
+        markValueColumn.setCellValueFactory( new PropertyValueFactory<>( "markValue" ) );
+
+        configureMarksEditingForTableView( tableView, markValueColumn );
+        parentColumn.getColumns().addAll( studentColumn, markValueColumn );
+        tableView.getColumns().add( parentColumn );
+        return tableView;
+    }
+
     private void configureTableView( TableView< ? > aTableView )
     {
         LOGGER.info( "Configuring TableView properties." );
         aTableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         aTableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
         aTableView.getSelectionModel().setSelectionMode( SelectionMode.SINGLE );
+    }
+
+    private void configureMarksEditingForTableView( TableView< Mark > aTableView, TableColumn< Mark, Float > aMarkValueColumn )
+    {
+        aTableView.setEditable( true );
+        aMarkValueColumn.setCellFactory( TextFieldTableCell.forTableColumn( new USOSFloatStringConverter() ) );
+        aMarkValueColumn.setOnEditCommit( cell -> {
+            Mark mark = cell.getTableView().getItems().get( cell.getTablePosition().getRow() );
+            CacheProvider.getCacheProvider().getMarks().remove( mark );
+            mark.setMarkValue( cell.getNewValue() );
+            CacheProvider.getCacheProvider().getMarks().add( mark );
+        } );
+        LOGGER.info( "Editing Mark's Value Column Cell is now enabled." );
     }
 }

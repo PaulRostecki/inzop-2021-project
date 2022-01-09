@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <SplitPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="panel.EvaluateStudentsPanel"
            prefHeight="400.0" prefWidth="600.0">
     <BorderPane fx:id="leftSidePane">
@@ -21,5 +22,26 @@
             </VBox>
         </top>
     </BorderPane>
-    <BorderPane fx:id="rightSidePane"/>
+    <BorderPane fx:id="rightSidePane">
+        <top>
+            <VBox alignment="CENTER">
+                <HBox alignment="CENTER">
+                    <Label id="studentsFromStudyGroupLabel" text="Lista studentów wybranej grupy"/>
+                    <padding>
+                        <Insets bottom="20"/>
+                    </padding>
+                </HBox>
+            </VBox>
+        </top>
+        <bottom>
+            <VBox alignment="CENTER">
+                <HBox alignment="CENTER">
+                    <Button text="click"/>
+                    <padding>
+                        <Insets top="20"/>
+                    </padding>
+                </HBox>
+            </VBox>
+        </bottom>
+    </BorderPane>
 </SplitPane>

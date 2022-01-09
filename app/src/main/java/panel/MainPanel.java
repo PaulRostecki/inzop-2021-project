@@ -114,7 +114,7 @@ public class MainPanel implements PanelIf
             AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie jest powiązane z żadnym studentem." );
             return;
         }
-        final TableView< Mark > tableView = tableViewFactory.createTableViewForMarks( student );
+        final TableView< Mark > tableView = tableViewFactory.createTableViewForStudentMarks( student );
         List< Mark > studentMarks = cacheProvider.getMarks().stream()
                 .filter( mark -> mark.getMarkId().getStudentId() == Integer.parseInt( student.getIndexNumber() ) )
                 .collect( Collectors.toList() );

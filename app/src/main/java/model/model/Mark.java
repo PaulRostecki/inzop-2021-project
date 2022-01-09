@@ -25,7 +25,7 @@ public class Mark implements MarkIf
     private int lecturerId;
 
     @Column( name = "wartosc" )
-    private float markValue;
+    private Float markValue;
 
     /**
      * Default no-arg constructor for Hibernate ORM.
@@ -35,14 +35,14 @@ public class Mark implements MarkIf
 
     }
 
-    public Mark( int aStudentId, int aLecturerId, int aUniversitySubjectId, float aMarkValue )
+    public Mark( int aStudentId, int aLecturerId, int aUniversitySubjectId, Float aMarkValue )
     {
         lecturerId = aLecturerId;
         markValue = aMarkValue;
         markId = new MarkId( aStudentId, aUniversitySubjectId );
     }
 
-    public Mark( int aLecturerId, float aMarkValue )
+    public Mark( int aLecturerId, Float aMarkValue )
     {
        lecturerId = aLecturerId;
        markValue = aMarkValue;
@@ -55,7 +55,7 @@ public class Mark implements MarkIf
     }
 
     @Override
-    public float getMarkValue()
+    public Float getMarkValue()
     {
         return markValue;
     }
@@ -69,9 +69,19 @@ public class Mark implements MarkIf
         markId = aMarkId;
     }
 
+    public void setMarkValue( Float aMarkValue )
+    {
+        markValue = aMarkValue;
+    }
+
     public String getUniversitySubjectName()
     {
         return CacheProvider.getCacheProvider().getUniversitySubjects().get( markId.getUniversitySubjectId() ).getName();
+    }
+
+    public String getStudentFullName()
+    {
+        return CacheProvider.getCacheProvider().getStudents().get( markId.getStudentId() ).getFullName();
     }
 
     /**
