@@ -21,12 +21,15 @@ def parse_csvs():
     przedmioty = pd.read_csv("../proj/dane_demo/przedmioty.csv")
     oceny = pd.read_csv("../proj/dane_demo/oceny.csv")
     grupy = pd.read_csv("../proj/dane_demo/grupy.csv")
+    student_grupa = pd.read_csv("../proj/dane_demo/student_grupa.csv")
+    komunikaty = pd.read_csv("../proj/dane_demo/komunikaty.csv")
+    konto_uzytkownika = pd.read_csv("../proj/dane_demo/konto_użytkownika.csv")
 
     # have to convert date formats from %d.%m.%Y to %m-%d-%Y
     studenci['data_ur'] = pd.to_datetime(studenci['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
     prowadzacy['data_ur'] = pd.to_datetime(prowadzacy['data_ur'], format='%d.%m.%Y').dt.strftime('%m-%d-%Y')
 
-    return [studenci, prowadzacy, przedmioty, oceny, grupy]
+    return [studenci, prowadzacy, przedmioty, oceny, grupy, student_grupa, komunikaty, konto_uzytkownika]
 
 
 def import_data(engine, dfs):
@@ -35,6 +38,9 @@ def import_data(engine, dfs):
     dfs[2].to_sql('przedmioty', engine, if_exists='append', index=False)
     dfs[3].to_sql('oceny', engine, if_exists='append', index=False)
     dfs[4].to_sql('grupy', engine, if_exists='append', index=False)
+    dfs[5].to_sql('student_grupa', engine, if_exists='append', index=False)
+    dfs[6].to_sql('komunikaty', engine, if_exists='append', index=False)
+    dfs[7].to_sql('konto_użytkownika', engine, if_exists='append', index=False)
 
 
 if __name__ == '__main__':
