@@ -1,6 +1,7 @@
 package factory;
 
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +27,7 @@ public class AlertFactory implements PanelIf
         alert.setTitle( "Error." );
         alert.setHeaderText( e.getClass().getCanonicalName() );
         alert.setContentText( e.getMessage() );
+        setIconForAlert( alert );
         alert.showAndWait();
     }
 
@@ -38,6 +40,7 @@ public class AlertFactory implements PanelIf
         alert.setTitle( aTitle );
         alert.setHeaderText( aHeader );
         alert.setContentText( aContent );
+        setIconForAlert( alert );
         alert.showAndWait();
     }
 
@@ -55,11 +58,17 @@ public class AlertFactory implements PanelIf
         alert.setTitle( aTitle );
         alert.setHeaderText( aHeader );
         alert.setContentText( aContent );
+        setIconForAlert( alert );
         alert.showAndWait();
     }
 
     public static void popUpConfirmationAlert( String aTitle, String aHeader )
     {
         popUpConfirmationAlert( aTitle, aHeader, StringUtils.EMPTY );
+    }
+
+    private static void setIconForAlert( Alert aAlert )
+    {
+        PanelIf.setIcon( (Stage) aAlert.getDialogPane().getScene().getWindow() );
     }
 }

@@ -33,15 +33,5 @@
                 </HBox>
             </VBox>
         </top>
-        <bottom>
-            <VBox alignment="CENTER">
-                <HBox alignment="CENTER">
-                    <Button text="click"/>
-                    <padding>
-                        <Insets top="20"/>
-                    </padding>
-                </HBox>
-            </VBox>
-        </bottom>
     </BorderPane>
 </SplitPane>

@@ -1,5 +1,7 @@
 package cache;
 
+import model.extensions.Announcement;
+import model.model.Mark;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +21,8 @@ public final class DataService
 
     private final DataFetcher dataFetcher;
 
+    private final DataRegistrar dataRegistrar;
+
     private EntityManager entityManager;
 
     private static DataService dataService;
@@ -27,6 +31,7 @@ public final class DataService
     {
         LOGGER.info( "Initializing Data Service." );
         dataFetcher = new DataFetcher();
+        dataRegistrar = new DataRegistrar();
         createEntityManager();
     }
 
@@ -101,5 +106,20 @@ public final class DataService
     private void fetchStudentGroupRelations()
     {
         dataFetcher.fetchStudentGroupRelations( entityManager );
+    }
+
+    public void addNewMarkToDatabase( Mark aMark )
+    {
+        dataRegistrar.addNewMark( entityManager, aMark );
+    }
+
+    public void updateMarkInDatabase( Mark aMark )
+    {
+        dataRegistrar.updateMark( entityManager, aMark );
+    }
+
+    public void addNewAnnouncementToDatabase( Announcement aAnnouncement )
+    {
+        dataRegistrar.addNewAnnouncement( entityManager, aAnnouncement );
     }
 }

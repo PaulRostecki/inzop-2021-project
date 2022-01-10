@@ -1,6 +1,7 @@
 package panel;
 
 import cache.CacheProvider;
+import cache.DataService;
 import factory.TableViewFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,6 +34,8 @@ public class EvaluateStudentsPanel implements PanelIf
     private BorderPane rightSidePane;
 
     private Lecturer lecturer;
+
+    private DataService dataService = DataService.getDataService();
 
     private static final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
 
@@ -116,12 +119,14 @@ public class EvaluateStudentsPanel implements PanelIf
                         studyGroup.getUniversitySubjectId(), null ) );
             }
         }
+        undefinedStudyGroupMarks.forEach( newMark -> dataService.addNewMarkToDatabase( newMark ) );
         studyGroupsMarksTableView.getItems().addAll( undefinedStudyGroupMarks );
     }
 
     /**
      * Additional validation for client side to check whether Student doesn't have two marks for one StudyGroup.
      */
+    @Deprecated( forRemoval = true )
     private Set< Mark > deleteDuplicates( Set< Mark > studyGroupMarks )
     {
         Set< Mark > noDuplicateMarks = new HashSet<>( studyGroupMarks );

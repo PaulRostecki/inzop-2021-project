@@ -7,8 +7,12 @@ import factory.PanelFactory;
 import factory.TableViewFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 import model.extensions.Account;
 import model.extensions.Announcement;
@@ -102,6 +106,7 @@ public class MainPanel implements PanelIf
                 (TableView< Announcement >) tableViewFactory.createTableView( ModelEnum.ANNOUNCEMENT );
         cacheProvider.getAnnouncements().forEach( announcement -> tableView.getItems().add( announcement ) );
         tableView.refresh();
+        addListenerForDoubleClickOnCell( tableView );
         mainPanelPane.setCenter( tableView );
     }
 
@@ -167,6 +172,44 @@ public class MainPanel implements PanelIf
         evaluateStudentsPanel.show();
     }
 
+    private void addListenerForDoubleClickOnCell( TableView< Announcement > tableView )
+    {
+        tableView.setOnMouseClicked( click -> {
+            if ( click.getClickCount() == 2 )
+            {
+                Announcement announcement = tableView.getSelectionModel().getSelectedItem();
+                openAnnouncement( announcement );
+            }
+        });
+    }
+
+    private void openAnnouncement( Announcement aAnnouncement )
+    {
+        Stage showAnnouncementPanel = new Stage();
+        showAnnouncementPanel.setTitle( aAnnouncement.getTitle() );
+
+        TextFlow textFlow = new TextFlow();
+        Text authorText = new Text( "Od: " + aAnnouncement.getLecturerTitle() + " "
+                + aAnnouncement.getLecturerFirstName() + " " + aAnnouncement.getLecturerLastName() + "\n\n\n" );
+        Text titleText = new Text( aAnnouncement.getTitle() + "\n\n\n" );
+        Text contentText = new Text( aAnnouncement.getDetails() );
+
+        authorText.setUnderline( true );
+        authorText.setFont( Font.font( "Helvetica", FontPosture.ITALIC, 10 ) );
+        titleText.setFont( Font.font( "Helvetica", FontPosture.ITALIC, 25 ) );
+        contentText.setFont( Font.font( "Helvetica", FontPosture.ITALIC, 15 ) );
+
+        VBox vBox = new VBox( textFlow );
+        vBox.setAlignment( Pos.CENTER );
+
+        textFlow.getChildren().addAll( authorText, titleText, contentText );
+        textFlow.setTextAlignment( TextAlignment.CENTER );
+
+        Scene scene = new Scene( vBox, 400, 400 );
+        PanelIf.setIcon( showAnnouncementPanel );
+        showAnnouncementPanel.setScene( scene );
+        showAnnouncementPanel.show();
+    }
 
     private void initLoggedAccount()
     {
