@@ -21,10 +21,16 @@ public class USOSFloatStringConverter extends FloatStringConverter
     {
         try
         {
+            if( aMarkValue == null )
+            {
+                return null;
+            }
+
             if( ModelUtil.acceptedFloatMarks.contains( aMarkValue ) )
             {
                 return super.toString( aMarkValue );
             }
+
             LOGGER.warn( "Incorrect mark value : " + aMarkValue );
             popUpInfoAlert();
             return null;
@@ -41,10 +47,16 @@ public class USOSFloatStringConverter extends FloatStringConverter
     {
         try
         {
+            if( aMarkValue == null )
+            {
+                return null;
+            }
+
             if( ModelUtil.acceptedStringMarks.contains( aMarkValue ) )
             {
                 return super.fromString( aMarkValue );
             }
+
             LOGGER.warn( "Incorrect mark value : " + aMarkValue );
             popUpInfoAlert();
             return null;

@@ -89,7 +89,7 @@ public class EvaluateStudentsPanel implements PanelIf
 
         studyGroupsMarksTableView.getItems().addAll( hashedStudyGroupMarks );
         addStudentsWithoutMarksToTableView( aStudyGroup, studentsIDFromStudyGroup, hashedStudyGroupMarks, studyGroupsMarksTableView);
-        rightSidePane.setCenter(studyGroupsMarksTableView);
+        rightSidePane.setCenter( studyGroupsMarksTableView );
     }
 
     /**
