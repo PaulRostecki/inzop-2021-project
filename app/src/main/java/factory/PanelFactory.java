@@ -181,7 +181,7 @@ public class PanelFactory implements PanelIf
             urlToCSS = AppInitializer.class.getResource( PathsConstants.AVERAGE_MARKS_PANEL_CSS_PATH );
             root = FXMLLoader.load(  urlToFXML );
             Objects.requireNonNull( root );
-            LOGGER.info( "Evaluate Average Marks loaded." );
+            LOGGER.info( "Average Marks Panel loaded." );
         }
         catch ( IOException | NullPointerException e )
         {

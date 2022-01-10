@@ -91,6 +91,7 @@ public class AverageMarksPanel implements PanelIf
     {
         List< Mark > marks = cacheProvider.getMarks().stream()
                 .filter( mark -> mark.getMarkId().getStudentId() == Integer.parseInt( student.getIndexNumber() ) )
+                .filter( mark -> mark.getMarkValue() != 0.0F )
                 .collect( Collectors.toList() );
         if( marks.isEmpty() )
         {

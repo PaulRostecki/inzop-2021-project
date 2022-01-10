@@ -10,5 +10,5 @@ public interface MarkIf
 {
     int getLecturerId();
 
-    float getMarkValue();
+    Float getMarkValue();
 }
