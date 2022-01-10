@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS Przedmioty;
 
 CREATE TABLE Studenci
 (
-	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY CHECK (nr_albumu SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	imie VARCHAR(30) NOT NULL CHECK (imie SIMILAR TO '%A-Za-z%'),
 	nazwisko VARCHAR(30) NOT NULL CHECK (nazwisko SIMILAR TO '%A-Za-z%'),
 	pesel VARCHAR(11) NOT NULL UNIQUE CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
@@ -51,7 +51,7 @@ CREATE TABLE Prowadzacy
 	adres VARCHAR(50) NOT NULL,
 	data_ur DATE NOT NULL CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
 	nr_tel INT UNIQUE CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
-	tytul VARCHAR(50) CHECK (tytul IN ('dr.', 'dr.hab.','prof.','mgr.')),
+	tytul VARCHAR(50) NOT NULL,
 	dyzur VARCHAR(150) NOT NULL,
 	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
@@ -67,7 +67,7 @@ CREATE TABLE Oceny (
 	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu),
 	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
 	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
-	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2,2.5, 3, 3.5, 4, 4.5, 5))
+	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5))
 );
 
 CREATE TABLE Grupy (
