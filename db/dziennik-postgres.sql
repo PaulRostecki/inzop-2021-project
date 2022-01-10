@@ -67,7 +67,8 @@ CREATE TABLE Oceny (
 	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu),
 	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
 	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
-	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5))
+	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5)),
+	CONSTRAINT pk_student_ocena PRIMARY KEY (nr_albumu_studenta,id_przedmiotu)
 );
 
 CREATE TABLE Grupy (
