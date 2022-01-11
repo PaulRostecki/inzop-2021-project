@@ -6,11 +6,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.model.Lecturer;
-import model.model.Student;
-import model.model.StudyGroup;
-import model.model.UniversitySubject;
 import model.extensions.Announcement;
+import model.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -147,7 +144,7 @@ public class TableViewFactory
         final TableView< UniversitySubject > tableView = new TableView<>();
         configureTableView( tableView );
 
-        final TableColumn< UniversitySubject, String > parentColumn = new TableColumn<>( "Grupy zajęciowe" );
+        final TableColumn< UniversitySubject, String > parentColumn = new TableColumn<>( "Przedmioty" );
         final TableColumn< UniversitySubject, String >[] columns = new TableColumn[ 3 ];
 
         columns [ 0 ] = new TableColumn<>( "Nazwa przedmiotu");
@@ -188,6 +185,26 @@ public class TableViewFactory
         lecturerColumn.getColumns().addAll( columns[ 0 ], columns[ 1 ], columns[ 2 ] );
 
         parentColumn.getColumns().addAll( lecturerColumn, columns[ 3 ] );
+        tableView.getColumns().add( parentColumn );
+        return tableView;
+    }
+
+    public TableView< Mark > createTableViewForMarks( Student aStudent )
+    {
+        LOGGER.info( "Creating TableView for Marks for " + aStudent.getIndexNumber() + "." );
+        final TableView< Mark > tableView = new TableView<>();
+        configureTableView( tableView );
+
+        final TableColumn< Mark, String > parentColumn = new TableColumn<>( "Oceny: " + aStudent.getFullName() );
+        final TableColumn< Mark, String >[] columns = new TableColumn[ 2 ];
+
+        columns [ 0 ] = new TableColumn<>( "Przedmiot");
+        columns [ 1 ] = new TableColumn<>( "Ocena" );
+
+        columns [ 0 ].setCellValueFactory( new PropertyValueFactory<>( "universitySubjectName" ) );
+        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "markValue" ) );
+
+        parentColumn.getColumns().addAll( columns );
         tableView.getColumns().add( parentColumn );
         return tableView;
     }

@@ -39,6 +39,7 @@ public class StudyGroup implements StudyGroupIf
     @Transient
     private List< Student > students;
 
+    @Deprecated
     @Transient
     private DayOfWeek day;
 
@@ -65,6 +66,7 @@ public class StudyGroup implements StudyGroupIf
         students = aStudents;
         day = aDay;
         startTime = aStartTime;
+        dayString = aDay.toString();
     }
 
     @Override
@@ -109,6 +111,17 @@ public class StudyGroup implements StudyGroupIf
         return CacheProvider.getCacheProvider().getUniversitySubjects().get( universitySubjectId ).getName();
     }
 
+    public void setDayString ( String aDayString )
+    {
+        dayString = aDayString;
+    }
+
+    public String getDayString()
+    {
+        return dayString;
+    }
+
+    @Deprecated
     @Override
     public String getDayInPolish()
     {
@@ -174,7 +187,7 @@ public class StudyGroup implements StudyGroupIf
         StudyGroup comparedStudyGroup = (StudyGroup) obj;
         if( ( comparedStudyGroup.getLecturerId() == this.getLecturerId() ) &&
                 ( comparedStudyGroup.getStartTime().equals( this.getStartTime() ) ) &&
-                ( comparedStudyGroup.getDay() == this.getDay() ) )
+                ( comparedStudyGroup.getDayString().equals( this.getDayString() ) ) )
         {
             return true;
         }
@@ -187,6 +200,13 @@ public class StudyGroup implements StudyGroupIf
     @Override
     public int hashCode()
     {
-        return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDay().hashCode();
+        return 17 * getLecturerId() + 31 * getStartTime().hashCode() + 77 * getDayString().hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        // we cut milliseconds for better readability, so we only retrieve first five chars from startTime property.
+        return getUniversitySubjectName() + " (gr." + getGroupId() + ") - " + getStartTime().substring( 0, 5 );
     }
 }

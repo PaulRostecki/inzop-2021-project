@@ -9,9 +9,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.extensions.Announcement;
+import model.model.Lecturer;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -35,7 +35,7 @@ public class AnnouncementPanel implements PanelIf
 
     private StringProperty descriptionValueProperty;
 
-    private int lecturerId;
+    private Lecturer lecturer;
 
     private Stage announcementPanelStage;
 
@@ -56,7 +56,7 @@ public class AnnouncementPanel implements PanelIf
     private void initData()
     {
         announcementPanelStage = getCurrentStage( announcementTitleTextField );
-        lecturerId = (int) ((ArrayList<Object>) announcementPanelStage.getUserData()).get( 0 );
+        lecturer = (Lecturer) announcementPanelStage.getUserData();
     }
 
     @FXML
@@ -65,7 +65,7 @@ public class AnnouncementPanel implements PanelIf
         if( !Objects.equals( titleValueProperty.getValue(), StringUtils.EMPTY ) &&
                 !Objects.equals( descriptionValueProperty.getValue(), StringUtils.EMPTY ) )
         {
-            Announcement newAnnouncement = new Announcement( cacheProvider.getAnnouncements().size() + 1, lecturerId,
+            Announcement newAnnouncement = new Announcement( cacheProvider.getAnnouncements().size() + 1, lecturer.getId(),
                     titleValueProperty.getValue(), descriptionValueProperty.getValue() );
             cacheProvider.getAnnouncements().add( newAnnouncement );
 

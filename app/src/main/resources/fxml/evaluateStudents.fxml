@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<SplitPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="panel.EvaluateStudentsPanel"
+           prefHeight="400.0" prefWidth="600.0">
+    <BorderPane fx:id="leftSidePane">
+        <top>
+            <VBox alignment="CENTER">
+                <HBox alignment="CENTER">
+                    <Label id="studyGroupsOfLecturerLabel" text="Grupy zajęciowe prowadzone przez Ciebie"/>
+                    <padding>
+                        <Insets bottom="20"/>
+                    </padding>
+                </HBox>
+            </VBox>
+        </top>
+    </BorderPane>
+    <BorderPane fx:id="rightSidePane"/>
+</SplitPane>

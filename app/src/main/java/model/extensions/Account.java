@@ -1,9 +1,10 @@
 package model.extensions;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import constant.PermissionTypeEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.persistence.*;
 
 /**
  * Implementation for Account.
@@ -13,11 +14,14 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table( name = "konto_uzytkownika" )
+@Table( name = "konto_użytkownika" )
 public class Account implements AccountIf
 {
+    @Transient
+    private static final Logger LOGGER = LogManager.getLogger( Account.class );
+
     @Id
-    @Column( name = "email" )
+    @Column( name = "student_email" )
     private String email;
 
     @Column( name = "haslo" )
@@ -25,6 +29,9 @@ public class Account implements AccountIf
 
     @Column( name = "typ_uprawnien" )
     private String permission;
+
+    @Transient
+    private PermissionTypeEnum permissionType;
 
     /**
      * Default no-arg constructor for Hibernate ORM.
@@ -75,5 +82,27 @@ public class Account implements AccountIf
     public void setPermission( String aPermission )
     {
         permission = aPermission;
+        if( aPermission.equalsIgnoreCase( "STUDENT" ) )
+        {
+            permissionType = PermissionTypeEnum.STUDENT;
+        }
+        else if( aPermission.equalsIgnoreCase( "LECTURER" ) )
+        {
+            permissionType = PermissionTypeEnum.LECTURER;
+        }
+        else if( aPermission.equalsIgnoreCase( "MODERATOR" ) )
+        {
+            permissionType = PermissionTypeEnum.MODERATOR;
+        }
+        else
+        {
+            LOGGER.error( "Wrong permissions type for Account: " + aPermission + "." );
+            permissionType = null;
+        }
+    }
+
+    public PermissionTypeEnum getPermissionType()
+    {
+        return permissionType;
     }
 }
