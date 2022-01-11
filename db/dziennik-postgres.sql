@@ -31,36 +31,36 @@ DROP TABLE IF EXISTS Przedmioty;
 
 CREATE TABLE Studenci
 (
-	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY,
-	imie VARCHAR(30) NOT NULL,
-	nazwisko VARCHAR(30) NOT NULL,
-	pesel VARCHAR(11) CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	adres VARCHAR(50),
-	data_ur DATE CONSTRAINT ck_student_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT CONSTRAINT ck_student_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
-	mail VARCHAR(50)
+	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY CHECK (nr_albumu SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	imie VARCHAR(30) NOT NULL CHECK (imie SIMILAR TO '%A-Za-z%'),
+	nazwisko VARCHAR(30) NOT NULL CHECK (nazwisko SIMILAR TO '%A-Za-z%'),
+	pesel VARCHAR(11) NOT NULL UNIQUE CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	adres VARCHAR(50) NOT NULL,
+	data_ur DATE NOT NULL CONSTRAINT ck_student_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
+	nr_tel INT UNIQUE CONSTRAINT ck_student_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
+	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
 
 
 CREATE TABLE Prowadzacy
 (
 	id_prowadzacego INT CONSTRAINT pk_prowadzacy PRIMARY KEY,
-	imie VARCHAR(30) NOT NULL,
-	nazwisko VARCHAR(30) NOT NULL,
+	imie VARCHAR(30) NOT NULL CHECK (imie SIMILAR TO '%A-Za-z%'),
+	nazwisko VARCHAR(30) NOT NULL CHECK (nazwisko SIMILAR TO '%A-Za-z%'),
 	pesel VARCHAR(11) CONSTRAINT ck_prowadzacy_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	adres VARCHAR(50),
-	data_ur DATE CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
-	tytul VARCHAR(50),
-	dyzur VARCHAR(150),
-	mail VARCHAR(50)
+	adres VARCHAR(50) NOT NULL,
+	data_ur DATE NOT NULL CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
+	nr_tel INT UNIQUE CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
+	tytul VARCHAR(50) NOT NULL,
+	dyzur VARCHAR(150) NOT NULL,
+	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
 
 CREATE TABLE Przedmioty (
 	id_przedmiotu INT PRIMARY KEY,
-	nazwa VARCHAR(50),
-	opis VARCHAR(250),
-	ects INT
+	nazwa VARCHAR(50) NOT NULL,
+	opis VARCHAR(250) NOT NULL,
+	ects INT CHECK (ects>0)
 );
 
 CREATE TABLE Oceny (
@@ -75,8 +75,9 @@ CREATE TABLE Grupy (
 	id_grupy INT PRIMARY KEY,
 	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
 	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
-	dzien_zajec VARCHAR(30),
-	godzina_zajec TIME
+	dzien_zajec VARCHAR(30) NOT NULL CHECK (dzien_zajec SIMILAR TO '%A-Za-z%'),
+	godzina_zajec TIME NOT NULL,
+	liczba_osob INT CHECK (liczba_osob<=30)
 );
 
 
@@ -108,7 +109,6 @@ CREATE TABLE Konto_użytkownika
     haslo VARCHAR(30),
     typ_uprawnien VARCHAR(10) CONSTRAINT ck_typ_uprawnien CHECK (typ_uprawnien IN ('student', 'lecturer', 'moderator'))
 );
-
 
 --SELECT * FROM Studenci
 --SELECT * FROM Prowadzacy
