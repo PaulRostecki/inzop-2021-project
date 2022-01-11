@@ -1,6 +1,7 @@
 package panel;
 
 import cache.CacheProvider;
+import cache.DataService;
 import factory.AlertFactory;
 import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
@@ -39,6 +40,8 @@ public class AnnouncementPanel implements PanelIf
 
     private Stage announcementPanelStage;
 
+    private final DataService dataService = DataService.getDataService();
+
     public AnnouncementPanel()
     {
 
@@ -68,6 +71,8 @@ public class AnnouncementPanel implements PanelIf
             Announcement newAnnouncement = new Announcement( cacheProvider.getAnnouncements().size() + 1, lecturer.getId(),
                     titleValueProperty.getValue(), descriptionValueProperty.getValue() );
             cacheProvider.getAnnouncements().add( newAnnouncement );
+            dataService.addNewAnnouncementToDatabase( newAnnouncement );
+
 
             announcementPanelStage.hide();
             AlertFactory.popUpConfirmationAlert( "Operacja się powiodła",

@@ -74,4 +74,10 @@ public class Lecturer extends AbstractPerson implements LecturerIf
     {
         id = aId;
     }
+
+    @Override
+    public String toString()
+    {
+        return getAcademicTitle() + " " + getFirstName() + " " + getLastName();
+    }
 }

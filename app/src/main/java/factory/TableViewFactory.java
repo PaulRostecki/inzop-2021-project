@@ -1,6 +1,7 @@
 package factory;
 
 import cache.CacheProvider;
+import cache.DataService;
 import constant.ModelEnum;
 import converter.USOSFloatStringConverter;
 import javafx.scene.control.Label;
@@ -24,6 +25,8 @@ import org.apache.logging.log4j.Logger;
 public class TableViewFactory
 {
     private static final Logger LOGGER = LogManager.getLogger( TableViewFactory.class );
+
+    private final DataService dataService = DataService.getDataService();
 
     public TableViewFactory()
     {
@@ -249,6 +252,7 @@ public class TableViewFactory
             Mark mark = cell.getTableView().getItems().get( cell.getTablePosition().getRow() );
             CacheProvider.getCacheProvider().getMarks().remove( mark );
             mark.setMarkValue( cell.getNewValue() );
+            dataService.updateMarkInDatabase( mark );
             CacheProvider.getCacheProvider().getMarks().add( mark );
         } );
         LOGGER.info( "Editing Mark's Value Column Cell is now enabled." );
