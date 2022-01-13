@@ -122,4 +122,9 @@ public final class DataService
     {
         dataRegistrar.addNewAnnouncement( entityManager, aAnnouncement );
     }
+
+    public void deleteModelObjectFromDatabase( Object aModelObject )
+    {
+        dataRegistrar.deleteObject( entityManager, aModelObject );
+    }
 }

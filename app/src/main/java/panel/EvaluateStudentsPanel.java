@@ -87,7 +87,7 @@ public class EvaluateStudentsPanel implements PanelIf
         Set< Mark > studyGroupMarks = cacheProvider.getMarks().stream()
                 .filter( mark -> studentsIDFromStudyGroup.contains( mark.getMarkId().getStudentId() ) )
                 .collect( Collectors.toSet() );
-        HashSet< Mark > hashedStudyGroupMarks = new HashSet<>( deleteDuplicates( studyGroupMarks ) );
+        HashSet< Mark > hashedStudyGroupMarks = new HashSet<>( studyGroupMarks );
 
 
         studyGroupsMarksTableView.getItems().addAll( hashedStudyGroupMarks );
@@ -120,21 +120,8 @@ public class EvaluateStudentsPanel implements PanelIf
             }
         }
         undefinedStudyGroupMarks.forEach( newMark -> dataService.addNewMarkToDatabase( newMark ) );
+        undefinedStudyGroupMarks.forEach( newMark -> cacheProvider.getMarks().add( newMark ) );
         studyGroupsMarksTableView.getItems().addAll( undefinedStudyGroupMarks );
     }
 
-    /**
-     * Additional validation for client side to check whether Student doesn't have two marks for one StudyGroup.
-     */
-    @Deprecated( forRemoval = true )
-    private Set< Mark > deleteDuplicates( Set< Mark > studyGroupMarks )
-    {
-        Set< Mark > noDuplicateMarks = new HashSet<>( studyGroupMarks );
-        for( Mark mark : studyGroupMarks )
-        {
-            noDuplicateMarks.removeIf( mark_ -> mark != mark_
-                    && mark.getMarkId().getStudentId() == mark_.getMarkId().getStudentId() );
-        }
-        return noDuplicateMarks;
-    }
 }

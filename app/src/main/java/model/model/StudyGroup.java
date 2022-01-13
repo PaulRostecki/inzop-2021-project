@@ -1,18 +1,16 @@
 package model.model;
 
-import cache.CacheProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static cache.CacheProvider.getCacheProvider;
 
 /**
  * Implementation for StudyGroup.
@@ -108,7 +106,19 @@ public class StudyGroup implements StudyGroupIf
     @Override
     public String getUniversitySubjectName()
     {
-        return CacheProvider.getCacheProvider().getUniversitySubjects().get( universitySubjectId ).getName();
+        try
+        {
+            Optional< UniversitySubject > universitySubject = Optional.of( getCacheProvider().getUniversitySubjects().get( universitySubjectId ) );
+            if ( universitySubject.isPresent() )
+            {
+                return universitySubject.get().getName();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
 
     public void setDayString ( String aDayString )
@@ -146,15 +156,38 @@ public class StudyGroup implements StudyGroupIf
     @Override
     public String getLecturerFirstName()
     {
-        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getFirstName();
+        try
+        {
+            Optional< Lecturer > lecturer = Optional.of( getCacheProvider().getLecturers().get( lecturerId ) );
+            if ( lecturer.isPresent() )
+            {
+                return lecturer.get().getFirstName();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
 
     @Override
     public String getLecturerLastName()
     {
-        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getLastName();
+        try
+        {
+            Optional< Lecturer > lecturer = Optional.of( getCacheProvider().getLecturers().get( lecturerId ) );
+            if ( lecturer.isPresent() )
+            {
+                return lecturer.get().getLastName();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
-
     @Override
     public String getNumberOfStudents()
     {

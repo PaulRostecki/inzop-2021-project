@@ -39,4 +39,10 @@ public class Student extends AbstractPerson
     {
         return indexNumber;
     }
+
+    @Override
+    public String toString()
+    {
+        return getFullName() + " (" + getPESEL() + ")";
+    }
 }
