@@ -99,4 +99,10 @@ public class UniversitySubject implements UniversitySubjectIf
     {
         return 13 * getName().toLowerCase().hashCode();
     }
+
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
 }

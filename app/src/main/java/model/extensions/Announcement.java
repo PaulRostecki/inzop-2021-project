@@ -1,11 +1,15 @@
 package model.extensions;
 
-import cache.CacheProvider;
+import model.model.Lecturer;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Optional;
+
+import static cache.CacheProvider.getCacheProvider;
 
 /**
  * Implementation for Announcement.
@@ -98,20 +102,54 @@ public class Announcement implements AnnouncementIf
     @Override
     public String getLecturerFirstName()
     {
-        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getFirstName();
+        try
+        {
+            Optional< Lecturer > lecturer = Optional.of( getCacheProvider().getLecturers().get( lecturerId ) );
+            if ( lecturer.isPresent() )
+            {
+                return lecturer.get().getFirstName();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
 
     @Override
     public String getLecturerLastName()
     {
-        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getLastName();
+        try
+        {
+            Optional< Lecturer > lecturer = Optional.of( getCacheProvider().getLecturers().get( lecturerId ) );
+            if ( lecturer.isPresent() )
+            {
+                return lecturer.get().getLastName();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
 
     @Override
     public String getLecturerTitle()
     {
-        return CacheProvider.getCacheProvider().getLecturers().get( lecturerId ).getAcademicTitle();
+        try
+        {
+            Optional< Lecturer > lecturer = Optional.of( getCacheProvider().getLecturers().get( lecturerId ) );
+            if ( lecturer.isPresent() )
+            {
+                return lecturer.get().getAcademicTitle();
+            }
+            return StringUtils.EMPTY;
+        }
+        catch ( Exception e )
+        {
+            return StringUtils.EMPTY;
+        }
     }
-
-
 }

@@ -13,6 +13,8 @@ import model.extensions.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 /**
  * Panel for logging in.
  *
@@ -77,7 +79,7 @@ public class LoginPanel implements PanelIf
     private void initMainPanelAndAttachAccount( Account aAccount )
     {
         Stage mainPanel = createMainPanel();
-        mainPanel.setUserData( aAccount );
+        mainPanel.setUserData( List.of( aAccount, getCurrentStage( loginField ) ) );
         mainPanel.show();
         getCurrentStage( loginField ).hide();
     }

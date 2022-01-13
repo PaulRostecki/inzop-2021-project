@@ -1,11 +1,20 @@
 package factory;
 
+import cache.CacheProvider;
+import cache.DataService;
+import constant.ModelEnum;
 import constant.PathsConstants;
+import constant.PermissionTypeEnum;
 import init.AppInitializer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.extensions.Account;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panel.PanelIf;
@@ -23,6 +32,10 @@ import java.util.Objects;
 public class PanelFactory implements PanelIf
 {
     private static final Logger LOGGER = LogManager.getLogger( PanelFactory.class );
+
+    private static final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
+
+    private static final DataService dataService = DataService.getDataService();
 
     private PanelFactory()
     {
@@ -199,6 +212,54 @@ public class PanelFactory implements PanelIf
 
         newPanel.setScene( scene );
         return newPanel;
+    }
+
+    public static Stage createDeletePanel( ModelEnum aModelClass, Account aAccount )
+    {
+        if( aAccount.getPermissionType() !=  PermissionTypeEnum.MODERATOR )
+        {
+            AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie ma uprawnień moderatora." );
+            return null;
+        }
+        Stage deleteModelObjectPanel = new Stage();
+        PanelIf.setIcon( deleteModelObjectPanel );
+        deleteModelObjectPanel.setTitle( "Panel usuwania" );
+        ListView listView = new ListView();
+        listView.getSelectionModel().setSelectionMode( SelectionMode.SINGLE );
+
+        listView.setOnKeyPressed( keyEvent ->
+        {
+            if( listView.getSelectionModel().getSelectedItem() != null && keyEvent.getCode().equals( KeyCode.DELETE ) )
+            {
+                Object modelObject = listView.getSelectionModel().getSelectedItem();
+                listView.getItems().removeAll( modelObject );
+                dataService.deleteModelObjectFromDatabase( modelObject );
+                listView.refresh();
+                LOGGER.info( "Delete action called on object: " + modelObject.toString() );
+            }
+        } );
+
+        switch ( aModelClass )
+        {
+            case STUDENT:
+                listView.getItems().addAll( cacheProvider.getStudents().values() );
+                break;
+            case LECTURER:
+                listView.getItems().addAll( cacheProvider.getLecturers().values() );
+                break;
+            case STUDY_GROUP:
+                listView.getItems().addAll( cacheProvider.getStudyGroups().values() );
+                break;
+            case UNIVERSITY_SUBJECT:
+                listView.getItems().addAll( cacheProvider.getUniversitySubjects().values() );
+                break;
+        }
+        VBox vBox = new VBox();
+        vBox.getChildren().add( listView );
+
+        Scene scene = new Scene( vBox, 400, 400 );
+        deleteModelObjectPanel.setScene( scene );
+        return deleteModelObjectPanel;
     }
 
     private static void setStyleForLoginPanel( Scene aScene, URL css )

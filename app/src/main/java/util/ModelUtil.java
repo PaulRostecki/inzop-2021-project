@@ -15,6 +15,6 @@ public final class ModelUtil
 
     }
 
-    public static final List< Float > acceptedFloatMarks = List.of( 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f );
-    public static final List< String > acceptedStringMarks = List.of( "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0" );
+    public static final List< Float > acceptedFloatMarks = List.of( 2.0f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f );
+    public static final List< String > acceptedStringMarks = List.of( "2.0", "3.0", "3.5", "4.0", "4.5", "5.0" );
 }

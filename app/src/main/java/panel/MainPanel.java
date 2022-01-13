@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -35,11 +37,31 @@ public class MainPanel implements PanelIf
     private static final Logger LOGGER = LogManager.getLogger( MainPanel.class );
 
     @FXML
+    public MenuItem seeMarksAction;
+
+    @FXML
+    public MenuItem seeAverageAction;
+
+    @FXML
+    public MenuItem evaluateStudentAction;
+
+    @FXML
+    public Menu moderatorActions;
+
+    @FXML
+    public MenuItem sendAnnouncementAction;
+
+    @FXML
+    public Menu marksActions;
+
+    @FXML
     private BorderPane mainPanelPane;
 
     private final TableViewFactory tableViewFactory = new TableViewFactory();
 
     private final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
+
+    private Stage loginPanel;
 
     private Account loggedAccount;
 
@@ -50,7 +72,8 @@ public class MainPanel implements PanelIf
 
     public void initialize()
     {
-        Platform.runLater( this::initLoggedAccount );
+        Platform.runLater( this::initStageData);
+        Platform.runLater( () -> setEnabledActionsBasedOnPermissions( loggedAccount ) );
     }
 
     @FXML
@@ -172,6 +195,50 @@ public class MainPanel implements PanelIf
         evaluateStudentsPanel.show();
     }
 
+    @FXML
+    private void deleteStudents()
+    {
+        Stage deletePanel = PanelFactory.createDeletePanel( ModelEnum.STUDENT, loggedAccount );
+        if( deletePanel != null )
+        {
+            deletePanel.show();
+
+        }
+    }
+
+    @FXML
+    private void deleteLecturers()
+    {
+        Stage deletePanel = PanelFactory.createDeletePanel( ModelEnum.LECTURER, loggedAccount );
+        if( deletePanel != null )
+        {
+            deletePanel.show();
+
+        }
+    }
+
+    @FXML
+    private void deleteStudyGroups()
+    {
+        Stage deletePanel = PanelFactory.createDeletePanel( ModelEnum.STUDY_GROUP, loggedAccount );
+        if( deletePanel != null )
+        {
+            deletePanel.show();
+
+        }
+    }
+
+    @FXML
+    private void deleteUniversitySubjects()
+    {
+        Stage deletePanel = PanelFactory.createDeletePanel( ModelEnum.UNIVERSITY_SUBJECT, loggedAccount );
+        if( deletePanel != null )
+        {
+            deletePanel.show();
+
+        }
+    }
+
     private void addListenerForDoubleClickOnCell( TableView< Announcement > tableView )
     {
         tableView.setOnMouseClicked( click -> {
@@ -211,9 +278,10 @@ public class MainPanel implements PanelIf
         showAnnouncementPanel.show();
     }
 
-    private void initLoggedAccount()
+    private void initStageData()
     {
-       loggedAccount = (Account) getCurrentStage( mainPanelPane ).getUserData();
+       loggedAccount = (Account) ( (List) getCurrentStage( mainPanelPane ).getUserData() ).get( 0 );
+       loginPanel = (Stage) ( (List) getCurrentStage( mainPanelPane ).getUserData() ).get( 1 );
     }
 
     private Student getStudentFromAccount()
@@ -230,5 +298,36 @@ public class MainPanel implements PanelIf
                 .filter( lecturer -> lecturer.getEmail().equals( loggedAccount.getEmail() ) )
                 .findAny()
                 .orElse( null );
+    }
+
+    private void setEnabledActionsBasedOnPermissions( Account aAccount )
+    {
+        switch ( aAccount.getPermissionType() )
+        {
+            case LECTURER:
+                seeMarksAction.setVisible( false );
+                seeAverageAction.setVisible( false );
+                moderatorActions.setVisible( false );
+                break;
+            case STUDENT:
+                evaluateStudentAction.setVisible( false );
+                sendAnnouncementAction.setVisible( false );
+                moderatorActions.setVisible( false );
+                break;
+            case MODERATOR:
+                seeMarksAction.setVisible( false );
+                seeAverageAction.setVisible( false );
+                evaluateStudentAction.setVisible( false );
+                sendAnnouncementAction.setVisible( false );
+                marksActions.setVisible( false );
+                break;
+        }
+    }
+
+    @FXML
+    private void logout()
+    {
+        getCurrentStage( mainPanelPane ).hide();
+        loginPanel.show();
     }
 }
