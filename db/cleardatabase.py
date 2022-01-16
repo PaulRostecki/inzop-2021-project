@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 
 import psycopg2
+import configparser
 
 #to be changed possibly (maybe replaced by env vars when running Docker?)
+config = configparser.ConfigParser()
+config.read('dbconfig.ini')
+
 conn = psycopg2.connect(
-    host = '127.0.0.1',
-    port = 5432,
-    database = 'postgres',
-    user = 'postgres',
-    password = 'admin')
+    user=config['PostgreSQL']['user'],
+    password=config['PostgreSQL']['pass'],
+    host=config['PostgreSQL']['host'],
+    port=config['PostgreSQL']['port'],
+    database=config['PostgreSQL']['db'])
 
 cursor = conn.cursor()
 
