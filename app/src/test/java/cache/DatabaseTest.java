@@ -1,11 +1,15 @@
+package cache;
+
 import org.ini4j.Ini;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.*;
-import org.junit.jupiter.api.Test;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -24,7 +28,7 @@ public class DatabaseTest {
     @BeforeAll
     static void setUp() {
         try {
-            Ini ini = new Ini(new File(DatabaseTest.class.getResource("config.ini").getFile()));
+            Ini ini = new Ini(new File(DatabaseTest.class.getResource("/config.ini").getFile()));
 
             String url =
                     "jdbc:" + ini.get("PostgreSQL", "driver") + "://"

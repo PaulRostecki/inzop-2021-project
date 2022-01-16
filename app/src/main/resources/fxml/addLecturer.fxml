@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cache.DataCreator"
+            prefHeight="500.0" prefWidth="600.0">
+    <center>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Imię:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Nazwisko:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="PESEL:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Adres:" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Data urodzenia:" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                    <Label text="Numer telefonu:" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                    <Label text="Email:" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                    <Label text="Tytul naukowy:" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                    <Label text="Dyżur:" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+
+                    <TextField fx:id="firstNameTextField" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <TextField fx:id="lastNameTextField" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <TextField fx:id="peselTextField" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                    <TextField fx:id="addressTextField" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                    <DatePicker fx:id="dateOfBirthDatePicker" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                    <TextField fx:id="phoneNumberTextField" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                    <TextField fx:id="emailTextField" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                    <ComboBox fx:id="academicTitleComboBox" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                    <TextField fx:id="dutyTextField" GridPane.columnIndex="2" GridPane.rowIndex="10"/>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets bottom="50"/>
+                </padding>
+                <Button fx:id="addLecturerButton" text="Dodaj wykładowcę"/>
+            </VBox>
+        </HBox>
+    </bottom>
+</BorderPane>

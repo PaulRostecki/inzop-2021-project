@@ -68,7 +68,7 @@ public class PanelFactory implements PanelIf
         aStage.setResizable( false );
 
         Scene loginScene = new Scene( root );
-        setStyleForLoginPanel( loginScene, urlToCSS );
+        setStylesheetForPanel( loginScene, urlToCSS );
         PanelIf.setIcon( aStage );
 
         aStage.setScene( loginScene );
@@ -173,7 +173,7 @@ public class PanelFactory implements PanelIf
         newPanel.setResizable( false );
 
         final Scene scene = new Scene( root );
-        setStyleForLoginPanel( scene, urlToCSS );
+        setStylesheetForPanel( scene, urlToCSS );
         PanelIf.setIcon( newPanel );
 
         newPanel.setScene( scene );
@@ -207,7 +207,139 @@ public class PanelFactory implements PanelIf
         newPanel.setResizable( false );
 
         final Scene scene = new Scene( root );
-        setStyleForLoginPanel( scene, urlToCSS );
+        setStylesheetForPanel( scene, urlToCSS );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
+    public static Stage createAddStudentPanel()
+    {
+        LOGGER.info( "Creating Add Student Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.ADD_STUDENT_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.ADD_STUDENT_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Add Student Panel loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Add Student Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Panel dodawania studenta" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
+    public static Stage createAddLecturerPanel()
+    {
+        LOGGER.info( "Creating Add Lecturer Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.ADD_LECTURER_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.ADD_LECTURER_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Add Lecturer Panel loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Add Lecturer Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Panel dodawania wykładowcy" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
+    public static Stage createAddUniversitySubjectPanel()
+    {
+        LOGGER.info( "Creating Add University Subject Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.ADD_UNIVERSITY_SUBJECT_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.ADD_UNIVERSITY_SUBJECT_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Add University Subject Panel loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Add University Subjectt Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Panel dodawania przedmiotu" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
+        PanelIf.setIcon( newPanel );
+
+        newPanel.setScene( scene );
+        return newPanel;
+    }
+
+    public static Stage createAddStudyGroupPanel()
+    {
+        LOGGER.info( "Creating Add Study Group Panel." );
+        final Stage newPanel = new Stage();
+        Parent root = null;
+        URL urlToFXML = null;
+        URL urlToCSS = null;
+
+        try
+        {
+            urlToFXML = AppInitializer.class.getResource( PathsConstants.ADD_STUDY_GROUP_PANEL_FXML_PATH );
+            urlToCSS = AppInitializer.class.getResource( PathsConstants.ADD_STUDY_GROUP_PANEL_CSS_PATH );
+            root = FXMLLoader.load(  urlToFXML );
+            Objects.requireNonNull( root );
+            LOGGER.info( "Add Study Group Panel loaded." );
+        }
+        catch ( IOException | NullPointerException e )
+        {
+            LOGGER.fatal( e.getClass().getSimpleName() + " thrown while initializing Add Study Group Panel." );
+            AlertFactory.popUpErrorAlert( e );
+            System.exit( 1 );
+        }
+
+        newPanel.setTitle( "Panel dodawania grupy zajęciowej" );
+        newPanel.setResizable( false );
+
+        final Scene scene = new Scene( root );
         PanelIf.setIcon( newPanel );
 
         newPanel.setScene( scene );
@@ -262,7 +394,7 @@ public class PanelFactory implements PanelIf
         return deleteModelObjectPanel;
     }
 
-    private static void setStyleForLoginPanel( Scene aScene, URL css )
+    private static void setStylesheetForPanel(Scene aScene, URL css )
     {
         aScene.getStylesheets().clear();
         aScene.getStylesheets().add( css.toExternalForm() );
