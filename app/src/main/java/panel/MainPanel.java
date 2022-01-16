@@ -239,6 +239,34 @@ public class MainPanel implements PanelIf
         }
     }
 
+    @FXML
+    private void showAddStudentPanel()
+    {
+        Stage addStudentPanel = PanelFactory.createAddStudentPanel();
+        addStudentPanel.show();
+    }
+
+    @FXML
+    private void showAddLecturerPanel()
+    {
+        Stage addLecturerPanel = PanelFactory.createAddLecturerPanel();
+        addLecturerPanel.show();
+    }
+
+    @FXML
+    private void showAddUniversitySubjectPanel()
+    {
+        Stage addUniversitySubjectPanel = PanelFactory.createAddUniversitySubjectPanel();
+        addUniversitySubjectPanel.show();
+    }
+
+    @FXML
+    private void showAddStudyGroupPanel()
+    {
+        Stage addStudyGroupPanel = PanelFactory.createAddStudyGroupPanel();
+        addStudyGroupPanel.show();
+    }
+
     private void addListenerForDoubleClickOnCell( TableView< Announcement > tableView )
     {
         tableView.setOnMouseClicked( click -> {

@@ -35,4 +35,7 @@ module USOS
     opens factory;
     exports model.orm;
     opens model.orm to java.base, org.hibernate.orm.core;
+
+    opens cache to javafx.fxml, javafx.graphics;
+    exports cache;
 }

@@ -22,10 +22,10 @@
             </Menu>
             <Menu text="Administracja" fx:id="moderatorActions">
                 <Menu text="Dodaj">
-                    <MenuItem text="Studenta"/>
-                    <MenuItem text="Prowadzącego"/>
-                    <MenuItem text="Przedmiot"/>
-                    <MenuItem text="Grupę zajęciową"/>
+                    <MenuItem text="Studenta" onAction="#showAddStudentPanel"/>
+                    <MenuItem text="Prowadzącego" onAction="#showAddLecturerPanel"/>
+                    <MenuItem text="Przedmiot" onAction="#showAddUniversitySubjectPanel"/>
+                    <MenuItem text="Grupę zajęciową" onAction="#showAddStudyGroupPanel"/>
                 </Menu>
                 <Menu text="Usuń">
                     <MenuItem text="Studenta" onAction="#deleteStudents"/>
