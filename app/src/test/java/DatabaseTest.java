@@ -8,6 +8,7 @@ import java.sql.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -34,7 +35,7 @@ public class DatabaseTest {
                     ini.get("PostgreSQL", "pass"));
 
         } catch (IOException | SQLException e) {
-            e.printStackTrace();
+            fail("Nie uzyskano połączenia z bazą danych");
         }
     }
 
@@ -43,7 +44,7 @@ public class DatabaseTest {
         try {
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            fail("Nie udało się zamknąć połączenia z bazą");
         }
     }
 
