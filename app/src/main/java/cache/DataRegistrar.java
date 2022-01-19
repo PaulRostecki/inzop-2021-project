@@ -35,7 +35,7 @@ public class DataRegistrar
         catch ( Exception e )
         {
             LOGGER.warn( "Exception " + e.getClass().getSimpleName()
-                    + " thrown during adding new mark: " + aMark.toString() );
+                    + " thrown during adding new Mark: " + aMark.toString() );
         }
     }
 
@@ -52,7 +52,7 @@ public class DataRegistrar
         catch ( Exception e )
         {
             LOGGER.warn( "Exception " + e.getClass().getSimpleName()
-                    + " thrown during updating mark: " + aMark.toString() );
+                    + " thrown during updating Mark: " + aMark.toString() );
         }
     }
 
@@ -69,7 +69,75 @@ public class DataRegistrar
         catch ( Exception e )
         {
             LOGGER.warn( "Exception " + e.getClass().getSimpleName() +
-                    " thrown during adding new announcement: " + aAnnouncement.toString() );
+                    " thrown during adding new Announcement: " + aAnnouncement.toString() );
+        }
+    }
+
+    protected void addNewStudent( EntityManager aEntityManager, Student aStudent )
+    {
+        try
+        {
+            aEntityManager.getTransaction().begin();
+            aEntityManager.persist( aStudent );
+            aEntityManager.getTransaction().commit();
+
+            LOGGER.info( aStudent.toString() + " added to database." );
+        }
+        catch ( Exception e )
+        {
+            LOGGER.warn( "Exception " + e.getClass().getSimpleName() +
+                    " thrown during adding new Student: " + aStudent.toString() );
+        }
+    }
+
+    protected void addNewStudent( EntityManager aEntityManager, Lecturer aLecturer )
+    {
+        try
+        {
+            aEntityManager.getTransaction().begin();
+            aEntityManager.persist( aLecturer );
+            aEntityManager.getTransaction().commit();
+
+            LOGGER.info( aLecturer.toString() + " added to database." );
+        }
+        catch ( Exception e )
+        {
+            LOGGER.warn( "Exception " + e.getClass().getSimpleName() +
+                    " thrown during adding new Lecturer: " + aLecturer.toString() );
+        }
+    }
+
+    protected void addNewUniversitySubject( EntityManager aEntityManager, UniversitySubject aUniversitySubject )
+    {
+        try
+        {
+            aEntityManager.getTransaction().begin();
+            aEntityManager.persist( aUniversitySubject );
+            aEntityManager.getTransaction().commit();
+
+            LOGGER.info( aUniversitySubject.toString() + " added to database." );
+        }
+        catch ( Exception e )
+        {
+            LOGGER.warn( "Exception " + e.getClass().getSimpleName() +
+                    " thrown during adding new University Subject: " + aUniversitySubject.toString() );
+        }
+    }
+
+    protected void addNewStudyGroup( EntityManager aEntityManager, StudyGroup aStudyGroup )
+    {
+        try
+        {
+            aEntityManager.getTransaction().begin();
+            aEntityManager.persist( aStudyGroup );
+            aEntityManager.getTransaction().commit();
+
+            LOGGER.info( aStudyGroup.toString() + " added to database." );
+        }
+        catch ( Exception e )
+        {
+            LOGGER.warn( "Exception " + e.getClass().getSimpleName() +
+                    " thrown during adding new Study Group: " + aStudyGroup.toString() );
         }
     }
 
@@ -113,7 +181,7 @@ public class DataRegistrar
 
         cacheProvider.getStudents().remove( Integer.valueOf( aStudent.getIndexNumber() ) );
         List< Mark > marksToBeRemoved = cacheProvider.getMarks().stream()
-                .filter( mark -> mark.getMarkId().getStudentId() == Integer.parseInt( aStudent.getIndexNumber() ) )
+                .filter( mark -> mark.getMarkId().getStudentId() == aStudent.getIndexNumber() )
                 .collect( Collectors.toList() );
 
         cacheProvider.getMarks().removeAll( marksToBeRemoved );

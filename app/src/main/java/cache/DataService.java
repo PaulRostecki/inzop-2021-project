@@ -1,7 +1,7 @@
 package cache;
 
 import model.extensions.Announcement;
-import model.model.Mark;
+import model.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -111,6 +111,26 @@ public final class DataService
     public void addNewMarkToDatabase( Mark aMark )
     {
         dataRegistrar.addNewMark( entityManager, aMark );
+    }
+
+    public void addNewStudentToDatabase( Student aStudent )
+    {
+        dataRegistrar.addNewStudent( entityManager, aStudent );
+    }
+
+    public void addNewLecturerToDatabase( Lecturer aLecturer )
+    {
+        dataRegistrar.addNewStudent( entityManager, aLecturer );
+    }
+
+    public void addNewUniversitySubjectToDatabase( UniversitySubject aUniversitySubject )
+    {
+        dataRegistrar.addNewUniversitySubject( entityManager, aUniversitySubject );
+    }
+
+    public void addNewStudyGroupToDatabase( StudyGroup aStudyGroup )
+    {
+        dataRegistrar.addNewStudyGroup( entityManager, aStudyGroup );
     }
 
     public void updateMarkInDatabase( Mark aMark )

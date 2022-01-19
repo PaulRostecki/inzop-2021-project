@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import model.model.Lecturer;
 import model.model.Mark;
+import model.model.Student;
 import model.model.StudyGroup;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class EvaluateStudentsPanel implements PanelIf
 
         final List< Integer > studentsIDFromStudyGroup = cacheProvider.getStudents().values().stream()
                 .filter( student -> aStudyGroup.getStudents().contains( student ) )
-                .map( student -> Integer.parseInt( student.getIndexNumber() ) )
+                .map( Student::getIndexNumber )
                 .collect( Collectors.toList() );
 
         Set< Mark > studyGroupMarks = cacheProvider.getMarks().stream()
