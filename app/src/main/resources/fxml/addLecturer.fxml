@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx"
+<BorderPane fx:id="addObjectPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="cache.DataCreator"
             prefHeight="500.0" prefWidth="600.0">
@@ -43,7 +43,7 @@
                 <padding>
                     <Insets bottom="50"/>
                 </padding>
-                <Button fx:id="addLecturerButton" text="Dodaj wykładowcę"/>
+                <Button text="Dodaj wykładowcę" onAction="#addLecturer"/>
             </VBox>
         </HBox>
     </bottom>

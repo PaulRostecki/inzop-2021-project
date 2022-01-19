@@ -67,6 +67,17 @@ public class StudyGroup implements StudyGroupIf
         dayString = aDay.toString();
     }
 
+    public StudyGroup( int aGroupId, int aLecturerId, int aUniversitySubjectId, String aDay,
+                       String aStartTime )
+    {
+        groupId = aGroupId;
+        lecturerId = aLecturerId;
+        universitySubjectId = aUniversitySubjectId;
+        students = new ArrayList<>();
+        dayString = aDay;
+        startTime = aStartTime;
+    }
+
     @Override
     public int getGroupId()
     {
@@ -100,7 +111,7 @@ public class StudyGroup implements StudyGroupIf
     @Override
     public String getStartTime()
     {
-        return startTime;
+        return startTime.substring( 0, 5 );
     }
 
     @Override

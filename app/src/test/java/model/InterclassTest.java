@@ -44,7 +44,7 @@ class InterclassTest {
 
         studentOne = new Student( "Jan","Kowalski", "12345678910",
                 "Mickiewicza 10 Poznan",  LocalDate.of( 1996, 10, 16 ),
-                "555444999", "Jankowalski@gmail.com", "464444" );
+                "555444999", "Jankowalski@gmail.com", 464444 );
                 //student which also is the lecturer assigned (1)
 
         mark = new Mark( 464444, 23, 1, MarkValuesEnum.FOUR.getMarkValue() );

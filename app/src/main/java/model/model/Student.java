@@ -18,7 +18,7 @@ public class Student extends AbstractPerson
 {
     @Id
     @Column( name = "nr_albumu" )
-    private String indexNumber; // id
+    private int indexNumber; // id
 
     /**
      * Default no-arg constructor for Hibernate ORM.
@@ -29,13 +29,13 @@ public class Student extends AbstractPerson
     }
 
     public Student( String aFirstName, String aLastName, String aPESEL, String aAddress, LocalDate aDateOfBirth,
-                   String aPhoneNumber, String aEmail, String aIndexNumber )
+                   String aPhoneNumber, String aEmail, int aIndexNumber )
     {
         super( aFirstName, aLastName, aPESEL, aAddress, aDateOfBirth, aPhoneNumber, aEmail );
         indexNumber = aIndexNumber;
     }
 
-    public String getIndexNumber()
+    public int getIndexNumber()
     {
         return indexNumber;
     }

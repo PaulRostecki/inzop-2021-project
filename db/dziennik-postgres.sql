@@ -37,7 +37,7 @@ CREATE TABLE Studenci
 	pesel VARCHAR(11) NOT NULL UNIQUE CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	adres VARCHAR(50) NOT NULL,
 	data_ur DATE NOT NULL CONSTRAINT ck_student_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT UNIQUE CONSTRAINT ck_student_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
+	nr_tel VARCHAR(9) UNIQUE,
 	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE Prowadzacy
 	pesel VARCHAR(11) CONSTRAINT ck_prowadzacy_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	adres VARCHAR(50) NOT NULL,
 	data_ur DATE NOT NULL CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT UNIQUE CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
+	nr_tel VARCHAR(9) UNIQUE,
 	tytul VARCHAR(50) NOT NULL,
 	dyzur VARCHAR(150) NOT NULL,
 	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
@@ -76,7 +76,7 @@ CREATE TABLE Grupy (
 	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego) ON DELETE CASCADE,
 	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu) ON DELETE CASCADE,
 	dzien_zajec VARCHAR(30) NOT NULL CHECK (dzien_zajec SIMILAR TO '[^0-9]+'),
-	godzina_zajec TIME NOT NULL,
+	godzina_zajec VARCHAR(6) NOT NULL,
 	liczba_osob INT CHECK (liczba_osob<=30)
 );
 

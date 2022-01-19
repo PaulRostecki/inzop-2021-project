@@ -25,14 +25,14 @@ class StudentTest {
     static void setUp() {
         studentOne = new Student( "Jan","Kowalski", "12345678910",
                 "Mickiewicza 10 Poznan",  LocalDate.of( 1996, 10, 16 ),
-                "555444999", "Jankowalski@gmail.com", "464444" ); //basic student (1)
+                "555444999", "Jankowalski@gmail.com", 464444 ); //basic student (1)
         studentTwo = new Student( "Adam", "Nowak", "10987654321",
                 "Slowackiego 20 Poznan", LocalDate.of( 1992, 12, 15 ),
-                "555777999", "Adamnowak@gmail.com", "464555" );
+                "555777999", "Adamnowak@gmail.com", 464555 );
         //completely different student (2)
         studentThree = new Student( "Adam", "Nowak", "12345678910",
                 "Slowackiego 20 Poznan", LocalDate.of( 1992, 12, 15 ),
-                "555777999", "Adamnowak@gmail.com", "464555" );
+                "555777999", "Adamnowak@gmail.com", 464555 );
         //student with PESEL of s.(1) and rem. values of s.(2)
 
         setOne = new HashSet<>();

@@ -144,7 +144,7 @@ public class MainPanel implements PanelIf
         }
         final TableView< Mark > tableView = tableViewFactory.createTableViewForStudentMarks( student );
         List< Mark > studentMarks = cacheProvider.getMarks().stream()
-                .filter( mark -> mark.getMarkId().getStudentId() == Integer.parseInt( student.getIndexNumber() ) )
+                .filter( mark -> mark.getMarkId().getStudentId() == student.getIndexNumber() )
                 .collect( Collectors.toList() );
         tableView.getItems().addAll( studentMarks );
         tableView.refresh();
@@ -243,6 +243,7 @@ public class MainPanel implements PanelIf
     private void showAddStudentPanel()
     {
         Stage addStudentPanel = PanelFactory.createAddStudentPanel();
+        addStudentPanel.setUserData( ModelEnum.STUDENT );
         addStudentPanel.show();
     }
 
@@ -250,6 +251,7 @@ public class MainPanel implements PanelIf
     private void showAddLecturerPanel()
     {
         Stage addLecturerPanel = PanelFactory.createAddLecturerPanel();
+        addLecturerPanel.setUserData( ModelEnum.LECTURER );
         addLecturerPanel.show();
     }
 
@@ -257,6 +259,7 @@ public class MainPanel implements PanelIf
     private void showAddUniversitySubjectPanel()
     {
         Stage addUniversitySubjectPanel = PanelFactory.createAddUniversitySubjectPanel();
+        addUniversitySubjectPanel.setUserData( ModelEnum.UNIVERSITY_SUBJECT );
         addUniversitySubjectPanel.show();
     }
 
@@ -264,6 +267,7 @@ public class MainPanel implements PanelIf
     private void showAddStudyGroupPanel()
     {
         Stage addStudyGroupPanel = PanelFactory.createAddStudyGroupPanel();
+        addStudyGroupPanel.setUserData( ModelEnum.STUDY_GROUP );
         addStudyGroupPanel.show();
     }
 
