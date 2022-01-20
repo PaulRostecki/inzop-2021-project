@@ -5,7 +5,6 @@ import constant.PermissionTypeEnum;
 import factory.AlertFactory;
 import factory.PanelFactory;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,9 +29,6 @@ public class LoginPanel implements PanelIf
 
     @FXML
     private PasswordField passwordField;
-
-    @FXML
-    private Hyperlink loginHyperlink;
 
     private static final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
 

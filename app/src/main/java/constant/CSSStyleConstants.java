@@ -1,5 +1,12 @@
 package constant;
 
+/**
+ * Constants for CSS styling in USOS..
+ *
+ * @author created: Michał Musiałowicz on 18.12.2021
+ * @author last changed:
+ */
+@Deprecated
 public class CSSStyleConstants
 {
     private CSSStyleConstants()

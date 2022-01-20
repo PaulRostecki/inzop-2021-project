@@ -13,6 +13,8 @@ import model.model.Lecturer;
 import model.model.Mark;
 import model.model.Student;
 import model.model.StudyGroup;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,6 +30,8 @@ import java.util.stream.Collectors;
  */
 public class EvaluateStudentsPanel implements PanelIf
 {
+    private static final Logger LOGGER = LogManager.getLogger( EvaluateStudentsPanel.class );
+
     @FXML
     private BorderPane leftSidePane;
 
@@ -51,6 +55,8 @@ public class EvaluateStudentsPanel implements PanelIf
     {
         Platform.runLater( this::initLecturer );
         Platform.runLater( this::initStudyGroupsForListView );
+
+        LOGGER.info( "Evaluate Students Panel initialized." );
     }
 
     private void initLecturer()
@@ -74,6 +80,8 @@ public class EvaluateStudentsPanel implements PanelIf
                 initStudyGroupsMarksForListView( studyGroupsListView.getSelectionModel().getSelectedItem() ) );
 
         leftSidePane.setCenter( studyGroupsListView );
+
+        LOGGER.info( "ListView initialized for Study Groups.." );
     }
 
     private void initStudyGroupsMarksForListView( final StudyGroup aStudyGroup )
@@ -94,6 +102,8 @@ public class EvaluateStudentsPanel implements PanelIf
         studyGroupsMarksTableView.getItems().addAll( hashedStudyGroupMarks );
         addStudentsWithoutMarksToTableView( aStudyGroup, studentsIDFromStudyGroup, hashedStudyGroupMarks, studyGroupsMarksTableView);
         rightSidePane.setCenter( studyGroupsMarksTableView );
+
+        LOGGER.info( "ListView initialized for Marks that belong to Study Group with ID " + aStudyGroup.getGroupId() + "." );
     }
 
     /**
@@ -102,6 +112,8 @@ public class EvaluateStudentsPanel implements PanelIf
     private void addStudentsWithoutMarksToTableView( StudyGroup studyGroup, List< Integer > studentsIDFromStudyGroup,
                                                      Set< Mark > studyGroupMarks, TableView< Mark > studyGroupsMarksTableView )
     {
+        LOGGER.info( "Adding empty Marks for Student without a Mark." );
+
         List< Mark > undefinedStudyGroupMarks = new ArrayList<>();
         for( Integer indexNumber : studentsIDFromStudyGroup )
         {

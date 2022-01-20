@@ -15,9 +15,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Validator class for JavaFX Controls in USOS.
+ *
+ * @author created: Michał Musiałowicz on 20.01.2022
+ * @author last changed:
+ */
 public class InputValidator
 {
-    private CacheProvider cacheProvider = CacheProvider.getCacheProvider();
+    private final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
 
     public InputValidator()
     {
@@ -140,7 +146,7 @@ public class InputValidator
         return true;
     }
 
-    public boolean isComboBoxValueValid(ComboBox< ? > aComboBox, Object aComboBoxName )
+    public boolean isComboBoxValueValid( ComboBox< ? > aComboBox, Object aComboBoxName )
     {
         boolean isValid = aComboBox.getValue() != null;
         if( !isValid )

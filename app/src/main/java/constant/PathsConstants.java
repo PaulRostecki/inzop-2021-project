@@ -39,6 +39,7 @@ public final class PathsConstants
 
     private static final String HIBERNATE_CONF_FILE_NAME = "persistence.xml";
     private static final String ICON_FILE_NAME = "travel-journal.png";
+    private static final String BACKGROUND_IMAGE_FILE_NAME = "travel-journal512px.png";
 
 
     /**
@@ -82,6 +83,8 @@ public final class PathsConstants
             ADD_UNIVERSITY_SUBJECT_PANEL_CSS_FILE_NAME ).replace( "\\", "/" );
     public static final String ICON_PATH = ( SEP + "icons" + SEP +
             ICON_FILE_NAME ).replace( "\\", "/" );
+    public static final String BACKGROUND_IMAGE_PATH = ( SEP + "icons" + SEP +
+            BACKGROUND_IMAGE_FILE_NAME ).replace( "\\", "/" );
     public static final String HIBERNATE_CONF_PATH = ( SEP + "META-INF" + SEP +
             HIBERNATE_CONF_FILE_NAME ).replace( "\\", "/" );
 }

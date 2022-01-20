@@ -13,6 +13,7 @@ import java.util.List;
  * @author created: Michał Musiałowicz on 12.12.2021
  * @author last changed:
  */
+@Deprecated
 public class TimeTable implements TimeTableIf
 {
     private final int studentId;

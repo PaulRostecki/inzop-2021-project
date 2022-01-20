@@ -35,6 +35,7 @@
                 </Menu>
             </Menu>
             <Menu text="Akcje" fx:id="marksActions">
+                <MenuItem text="Zobacz plan zajęć" onAction="#showStudentTimeTable" fx:id="seeTimeTableAction"/>
                 <MenuItem text="Zobacz swoje oceny" onAction="#showStudentMarksOnTableView" fx:id="seeMarksAction"/>
                 <MenuItem text="Zobacz swoją średnią" onAction="#showStudentAverageMarks" fx:id="seeAverageAction"/>
                 <MenuItem text="Wystaw oceny" onAction="#evaluateStudents" fx:id="evaluateStudentAction"/>

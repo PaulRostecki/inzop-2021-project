@@ -2,6 +2,7 @@ package panel;
 
 import cache.CacheProvider;
 import constant.ModelEnum;
+import constant.PathsConstants;
 import factory.AlertFactory;
 import factory.PanelFactory;
 import factory.TableViewFactory;
@@ -9,10 +10,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
@@ -21,6 +26,7 @@ import model.extensions.Announcement;
 import model.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import util.ModelUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,22 +43,25 @@ public class MainPanel implements PanelIf
     private static final Logger LOGGER = LogManager.getLogger( MainPanel.class );
 
     @FXML
-    public MenuItem seeMarksAction;
+    private MenuItem seeTimeTableAction;
 
     @FXML
-    public MenuItem seeAverageAction;
+    private MenuItem seeMarksAction;
 
     @FXML
-    public MenuItem evaluateStudentAction;
+    private MenuItem seeAverageAction;
 
     @FXML
-    public Menu moderatorActions;
+    private MenuItem evaluateStudentAction;
 
     @FXML
-    public MenuItem sendAnnouncementAction;
+    private MenuItem sendAnnouncementAction;
 
     @FXML
-    public Menu marksActions;
+    private Menu marksActions;
+
+    @FXML
+    private Menu moderatorActions;
 
     @FXML
     private BorderPane mainPanelPane;
@@ -70,10 +79,20 @@ public class MainPanel implements PanelIf
 
     }
 
+    private void setBackgroundIcon()
+    {
+        Image image = new Image( getClass().getResource( PathsConstants.BACKGROUND_IMAGE_PATH ).toString() );
+        ImageView imageView = new ImageView( image );
+        mainPanelPane.setCenter( imageView );
+    }
+
     public void initialize()
     {
-        Platform.runLater( this::initStageData);
+        Platform.runLater( this::initStageData );
         Platform.runLater( () -> setEnabledActionsBasedOnPermissions( loggedAccount ) );
+        Platform.runLater( this::setBackgroundIcon );
+
+        LOGGER.info( "Main Panel initialized." );
     }
 
     @FXML
@@ -202,7 +221,6 @@ public class MainPanel implements PanelIf
         if( deletePanel != null )
         {
             deletePanel.show();
-
         }
     }
 
@@ -213,7 +231,6 @@ public class MainPanel implements PanelIf
         if( deletePanel != null )
         {
             deletePanel.show();
-
         }
     }
 
@@ -224,7 +241,6 @@ public class MainPanel implements PanelIf
         if( deletePanel != null )
         {
             deletePanel.show();
-
         }
     }
 
@@ -235,7 +251,6 @@ public class MainPanel implements PanelIf
         if( deletePanel != null )
         {
             deletePanel.show();
-
         }
     }
 
@@ -271,12 +286,44 @@ public class MainPanel implements PanelIf
         addStudyGroupPanel.show();
     }
 
-    private void addListenerForDoubleClickOnCell( TableView< Announcement > tableView )
+    @FXML
+    private void showStudentTimeTable()
     {
-        tableView.setOnMouseClicked( click -> {
+        Stage stage = new Stage();
+
+        BorderPane borderPane = new BorderPane();
+        HBox hBox = new HBox();
+        hBox.setAlignment( Pos.CENTER );
+        VBox vbox = new VBox();
+        vbox.setAlignment( Pos.CENTER );
+        vbox.setSpacing( 10d );
+
+        borderPane.setCenter( hBox );
+        hBox.getChildren().add( vbox );
+
+        Student student = getStudentFromAccount();
+        List< StudyGroup > studyGroups = cacheProvider.getStudyGroups().values().stream()
+                .filter( sG -> sG.getStudents().contains( student ) )
+                .sorted( ModelUtil.studyGroupComparator )
+                .collect( Collectors.toList() );
+
+        vbox.getChildren().addAll( studyGroups.stream()
+                .map( sG -> new Label( sG + " " + sG.getDayString() ) )
+                .collect( Collectors.toList() ) );
+
+        PanelIf.setIcon( stage );
+        stage.setResizable( false );
+        stage.setTitle( "Plan zajęć: " + student.getFullName() );
+        stage.setScene( new Scene( borderPane, 600, 600 ) );
+        stage.show();
+    }
+
+    private void addListenerForDoubleClickOnCell( TableView< Announcement > aTableView )
+    {
+        aTableView.setOnMouseClicked( click -> {
             if ( click.getClickCount() == 2 )
             {
-                Announcement announcement = tableView.getSelectionModel().getSelectedItem();
+                Announcement announcement = aTableView.getSelectionModel().getSelectedItem();
                 openAnnouncement( announcement );
             }
         });
@@ -340,6 +387,7 @@ public class MainPanel implements PanelIf
                 seeMarksAction.setVisible( false );
                 seeAverageAction.setVisible( false );
                 moderatorActions.setVisible( false );
+                seeTimeTableAction.setVisible( false );
                 break;
             case STUDENT:
                 evaluateStudentAction.setVisible( false );

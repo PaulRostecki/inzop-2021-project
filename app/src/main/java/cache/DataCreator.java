@@ -12,18 +12,28 @@ import model.model.Lecturer;
 import model.model.Student;
 import model.model.StudyGroup;
 import model.model.UniversitySubject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import panel.PanelIf;
 import validation.InputValidator;
 
 import java.time.LocalDate;
 
+/**
+ * Service for creating objects and adding them to cache and db.
+ *
+ * @author created: Michał Musiałowicz on 19.12.2021
+ * @author last changed:
+ */
 public class DataCreator implements PanelIf
 {
-    private CacheProvider cacheProvider = CacheProvider.getCacheProvider();
+    private static final Logger LOGGER = LogManager.getLogger( DataCreator.class );
 
-    private DataService dataService = DataService.getDataService();
+    private final CacheProvider cacheProvider = CacheProvider.getCacheProvider();
 
-    private InputValidator inputValidator = new InputValidator();
+    private final DataService dataService = DataService.getDataService();
+
+    private final InputValidator inputValidator = new InputValidator();
 
     private ModelEnum mode;
 
@@ -87,11 +97,13 @@ public class DataCreator implements PanelIf
     {
         Platform.runLater( this::setAddObjectMode );
         Platform.runLater( this::setValidationForControls );
+        LOGGER.info( "Data Creator initialized." );
     }
 
     private void setAddObjectMode()
     {
         mode = (ModelEnum) getCurrentStage( addObjectPane ).getUserData();
+        LOGGER.info( "Data Creator mode has been set (" + mode + ")." );
     }
 
     private void setValidationForControls()
@@ -116,6 +128,7 @@ public class DataCreator implements PanelIf
     private void setValidationForControlsWhenAddingStudent()
     {
         inputValidator.disallowFutureDatesForDatePicker( dateOfBirthDatePicker, 19 );
+        LOGGER.info( "Validation for controls set (MODE: " + mode + ")." );
     }
 
     private void setValidationForControlsWhenAddingLecturer()
@@ -125,6 +138,7 @@ public class DataCreator implements PanelIf
         {
             Platform.runLater( () -> inputValidator.setValidAcademicTitles( academicTitleComboBox ) );
         }
+        LOGGER.info( "Validation for controls set (MODE: " + mode + ")." );
     }
 
     private void setValidationForControlsWhenAddingUniversitySubject()
@@ -133,6 +147,7 @@ public class DataCreator implements PanelIf
         {
             Platform.runLater( () -> inputValidator.setValidEctsPoints( ectsPointsComboBox ) );
         }
+        LOGGER.info( "Validation for controls set (MODE: " + mode + ")." );
     }
 
     private void setValidationForControlsWhenAddingStudyGroup()
@@ -145,6 +160,7 @@ public class DataCreator implements PanelIf
             Platform.runLater( () -> inputValidator.setValidDays( dayComboBox ) );
             Platform.runLater( () -> inputValidator.setValidStartTimes( startTimeComboBox ) );
         }
+        LOGGER.info( "Validation for controls set (MODE: " + mode + ")." );
     }
 
     @FXML
@@ -165,6 +181,7 @@ public class DataCreator implements PanelIf
                     !inputValidator.isPhoneNumberValid( phoneNumber ) || !inputValidator.isAddressValid( address )
                         || !inputValidator.isDateOfBirthValid( dateOfBirth ) )
         {
+            LOGGER.warn( "Validation failed (MODE: " + mode + ")." );
             return;
         }
 
@@ -196,6 +213,7 @@ public class DataCreator implements PanelIf
                 || !inputValidator.isDateOfBirthValid( dateOfBirth ) || !inputValidator.isDutyValid( duty )
                     || !inputValidator.isComboBoxValueValid( academicTitleComboBox, "Tytul naukowy:" ) )
         {
+            LOGGER.warn( "Validation failed (MODE: " + mode + ")." );
             return;
         }
         Lecturer newLecturer = new Lecturer( firstName, lastName, pesel, address, dateOfBirth,
@@ -211,13 +229,14 @@ public class DataCreator implements PanelIf
     {
         final String name = nameTextField.getText();
         final String description = descriptionTextField.getText();
-        final int ectsPoints = ectsPointsComboBox.getValue();
+        final Integer ectsPoints = ectsPointsComboBox.getValue();
 
         final int id = inputValidator.getIDThatDoesntBelongToAnyUniversitySubject();
 
         if( !inputValidator.isNameValid( name )
                 || !inputValidator.isComboBoxValueValid( ectsPointsComboBox, "Ilość punktów ECTS:" ) )
         {
+            LOGGER.warn( "Validation failed (MODE: " + mode + ")." );
             return;
         }
         UniversitySubject universitySubject = new UniversitySubject( id, name, description, ectsPoints );
@@ -242,14 +261,14 @@ public class DataCreator implements PanelIf
                     || !inputValidator.isComboBoxValueValid( dayComboBox, "Dzień" )
                         || !inputValidator.isComboBoxValueValid( startTimeComboBox, "Godzina rozpoczęcia" ) )
         {
+            LOGGER.warn( "Validation failed (MODE: " + mode + ")." );
             return;
         }
+
         StudyGroup studyGroup = new StudyGroup( id, lecturer.getId(), universitySubject.getId(), day, startTime );
         CacheProvider.getCacheProvider().getStudyGroups().put( id, studyGroup );
         dataService.addNewStudyGroupToDatabase( studyGroup );
         AlertFactory.popUpInfoAlert( "Informacja", "Operacja się powiodła.",
                 "Nowa grupa została dodana do dziennika." );
     }
-
-
 }
