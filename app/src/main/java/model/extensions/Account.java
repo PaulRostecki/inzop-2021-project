@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Implementation for Account.
  *
  * @author created: Michał Musiałowicz on 12.12.2021
- * @author last changed:
+ * @author last changed: Mikołaj Mumot 0n 20.01.2022
  */
 
 @Entity
@@ -104,5 +104,39 @@ public class Account implements AccountIf
     public PermissionTypeEnum getPermissionType()
     {
         return permissionType;
+    }
+
+
+    /**
+     * We consider Accounts to be the same when they have the same email.
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( this == obj )
+        {
+            return true;
+        }
+
+        if( !( obj instanceof AccountIf) )
+        {
+            return false;
+        }
+
+        AccountIf comparedAccount = (AccountIf) obj;
+        if( comparedAccount.getEmail().equalsIgnoreCase( this.getEmail() ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 37 * getEmail().toLowerCase().hashCode();
     }
 }

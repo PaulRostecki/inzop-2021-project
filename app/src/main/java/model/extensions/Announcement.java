@@ -152,4 +152,43 @@ public class Announcement implements AnnouncementIf
             return StringUtils.EMPTY;
         }
     }
+
+    /**
+     * We consider Announcements to be the same when they have the same fields (id excluded).
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( this == obj )
+        {
+            return true;
+        }
+
+        if( !( obj instanceof AnnouncementIf) )
+        {
+            return false;
+        }
+
+        AnnouncementIf comparedAnnouncement = (AnnouncementIf) obj;
+        if( comparedAnnouncement.getTitle().equalsIgnoreCase( this.getTitle() )
+                && comparedAnnouncement.getDetails().equalsIgnoreCase( this.getDetails() )
+                && comparedAnnouncement.getLecturerId() == this.getLecturerId()
+        )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 13 * getTitle().toLowerCase().hashCode() + 23 * getDetails().toLowerCase().hashCode() +
+                41 * getLecturerId();
+    }
+
+
 }
