@@ -18,7 +18,7 @@
                     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" alignment="CENTER">
-                        <Hyperlink id="logInTextLabel" fx:id="loginHyperlink" text="Zaloguj się" onAction="#logIn"/>
+                        <Hyperlink id="logInTextLabel" text="Zaloguj się" onAction="#logIn"/>
                     </HBox>
                 </GridPane>
             </HBox>

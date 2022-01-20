@@ -175,11 +175,13 @@ public class DataRegistrar
 
     private void deleteStudentFromDatabase( EntityManager aEntityManager, Student aStudent )
     {
+        LOGGER.info( "Delete action called on Student with ID " + aStudent.getIndexNumber() + "." );
+
         aEntityManager.createNativeQuery("delete from Studenci where PESEL = :pesel")
                 .setParameter("pesel", aStudent.getPESEL() )
                 .executeUpdate();
 
-        cacheProvider.getStudents().remove( Integer.valueOf( aStudent.getIndexNumber() ) );
+        cacheProvider.getStudents().remove( aStudent.getIndexNumber() );
         List< Mark > marksToBeRemoved = cacheProvider.getMarks().stream()
                 .filter( mark -> mark.getMarkId().getStudentId() == aStudent.getIndexNumber() )
                 .collect( Collectors.toList() );
@@ -199,18 +201,35 @@ public class DataRegistrar
 
     private void deleteLecturerFromDatabase( EntityManager aEntityManager, Lecturer aLecturer )
     {
+        LOGGER.info( "Delete action called on Lecturer with ID " + aLecturer.getId() + "." );
+
         aEntityManager.remove( aLecturer );
         cacheProvider.getLecturers().remove( aLecturer.getId() );
 
         List< Account > accountsToReRemoved = cacheProvider.getAccounts().values().stream()
                 .filter( acc -> acc.getEmail().equals( aLecturer.getEmail() ) )
                 .collect( Collectors.toList() );
+
+        List< Announcement > announcementsToBeRemoved = cacheProvider.getAnnouncements().stream()
+                .filter( announcement -> announcement.getLecturerId() == aLecturer.getId() )
+                .collect( Collectors.toList() );
+
+        List< Integer > studyGroupsIDsToBeRemoved = cacheProvider.getStudyGroups().values().stream()
+                .filter( studyGroup -> studyGroup.getLecturerId() == aLecturer.getId() )
+                .map( StudyGroup::getGroupId )
+                .collect( Collectors.toList() );
+
         accountsToReRemoved.forEach( acc -> cacheProvider.getAccounts().remove( acc.getEmail() ) );
-        accountsToReRemoved.forEach( aEntityManager::remove );
+
+        announcementsToBeRemoved.forEach( acc -> cacheProvider.getAnnouncements().remove( acc ) );
+
+        studyGroupsIDsToBeRemoved.forEach( sGid -> cacheProvider.getStudyGroups().remove( sGid ) );
     }
 
     private void deleteUniversitySubjectFromDatabase( EntityManager aEntityManager, UniversitySubject aUniversitySubject )
     {
+        LOGGER.info( "Delete action called on University Subject with ID " + aUniversitySubject.getId() + "." );
+
         aEntityManager.remove( aUniversitySubject );
         cacheProvider.getUniversitySubjects().remove( aUniversitySubject.getId() );
         List< Integer > studyGroupsIDsToBeRemoved =  cacheProvider.getStudyGroups().values().stream()
@@ -222,6 +241,8 @@ public class DataRegistrar
 
     private void deleteStudyGroupFromDatabase( EntityManager aEntityManager, StudyGroup aStudyGroup )
     {
+        LOGGER.info( "Delete action called on StudyGroup with ID " + aStudyGroup.getGroupId() + "." );
+
         aEntityManager.remove( aStudyGroup );
         cacheProvider.getStudyGroups().remove( aStudyGroup.getGroupId() );
     }

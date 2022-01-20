@@ -353,6 +353,7 @@ public class PanelFactory implements PanelIf
             AlertFactory.popUpInfoAlert( "BŁĄD", "Podane konto nie ma uprawnień moderatora." );
             return null;
         }
+
         Stage deleteModelObjectPanel = new Stage();
         PanelIf.setIcon( deleteModelObjectPanel );
         deleteModelObjectPanel.setTitle( "Panel usuwania" );
@@ -364,7 +365,7 @@ public class PanelFactory implements PanelIf
             if( listView.getSelectionModel().getSelectedItem() != null && keyEvent.getCode().equals( KeyCode.DELETE ) )
             {
                 Object modelObject = listView.getSelectionModel().getSelectedItem();
-                listView.getItems().removeAll( modelObject );
+                listView.getItems().remove( modelObject );
                 dataService.deleteModelObjectFromDatabase( modelObject );
                 listView.refresh();
                 LOGGER.info( "Delete action called on object: " + modelObject.toString() );
@@ -394,9 +395,9 @@ public class PanelFactory implements PanelIf
         return deleteModelObjectPanel;
     }
 
-    private static void setStylesheetForPanel(Scene aScene, URL css )
+    private static void setStylesheetForPanel( Scene aScene, URL aCss )
     {
         aScene.getStylesheets().clear();
-        aScene.getStylesheets().add( css.toExternalForm() );
+        aScene.getStylesheets().add( aCss.toExternalForm() );
     }
 }

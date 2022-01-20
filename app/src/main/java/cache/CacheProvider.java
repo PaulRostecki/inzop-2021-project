@@ -109,6 +109,7 @@ public final class CacheProvider
         return announcements;
     }
 
+    @Deprecated
     public Map< Integer, Integer > getTimetables()
     {
         return timetables;

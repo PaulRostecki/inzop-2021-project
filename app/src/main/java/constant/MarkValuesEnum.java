@@ -6,6 +6,7 @@ package constant;
  * @author created: Michał Musiałowicz on 04.12.2021
  * @author last changed:
  */
+@Deprecated
 public enum MarkValuesEnum
 {
     TWO( 2.0F ),

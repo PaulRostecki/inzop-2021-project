@@ -1,6 +1,12 @@
 package validation;
 
-public class RegexProvider
+/**
+ * Provider for Regex Patterns used in USOS.
+ *
+ * @author created: Michał Musiałowicz on 19.01.2022
+ * @author last changed:
+ */
+public final class RegexProvider
 {
     private RegexProvider()
     {

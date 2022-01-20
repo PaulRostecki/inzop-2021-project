@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
 import model.model.Mark;
 import model.model.Student;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.stream.Collectors;
  */
 public class AverageMarksPanel implements PanelIf
 {
+    private static final Logger LOGGER = LogManager.getLogger( AverageMarksPanel.class );
+
     @FXML
     private HBox centerPane;
 
@@ -49,6 +53,8 @@ public class AverageMarksPanel implements PanelIf
     {
         Platform.runLater( this::initializeStudent );
         Platform.runLater( this::createChart );
+
+        LOGGER.info( "Average Marks Panel initialized." );
     }
 
     private void initializeStudent()
@@ -61,6 +67,7 @@ public class AverageMarksPanel implements PanelIf
         Float average = getAverageMarks();
         if( average == 0 )
         {
+            LOGGER.warn( "Average Marks Chart creation abandoned due to " + student.getFullName() + " not having any marks." );
             centerPane.getChildren().removeAll();
             centerPane.getChildren().add( new Label( "Student " + student.getFullName() + " nie posiada żadnych ocen." ) );
             return;
@@ -85,6 +92,8 @@ public class AverageMarksPanel implements PanelIf
 
         centerPane.getChildren().removeAll();
         centerPane.getChildren().add( barChart );
+
+        LOGGER.info( "Average Marks Chart created for " + student.getFullName() + "." );
     }
 
     private Float getAverageMarks()
@@ -106,6 +115,7 @@ public class AverageMarksPanel implements PanelIf
     // modified algorithm from https://stackoverflow.com/questions/28047818/limit-width-size-of-bar-chart.
     private void setColumnWidth( CategoryAxis xAxis, BarChart barChart )
     {
+        LOGGER.info( "Adjusting width for Avergage Marks Chart." );
         double barWidth;
         do
         {
