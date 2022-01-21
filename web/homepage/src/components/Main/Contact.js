@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
-  const handleSubmit = () => {
-    window.location.reload();
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_nsgi6pd",
+        "template_0mohjbg",
+        form.current,
+        "user_DjPYQTe1z2KVRnaOwCxGO"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   return (
-    <section className="contact" id="contact" onSubmit={handleSubmit}>
+    <section className="contact" id="contact">
       <h2>Kontakt</h2>
-      <form action="" method="get" className="form-style">
+      <form ref={form} className="form-style" onSubmit={sendEmail}>
         <label htmlFor="name">
           <span>Imię i nazwisko:</span>
           <input type="text" name="name" id="name" required />
@@ -19,7 +38,7 @@ const Contact = () => {
         </label>
         <label htmlFor="text">
           <span>Treść wiadomości:</span>
-          <textarea></textarea>
+          <textarea name="message"></textarea>
         </label>
         <input
           type="submit"
