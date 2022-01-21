@@ -28,7 +28,8 @@ public class DatabaseTest {
     @BeforeAll
     static void setUp() {
         try {
-            Ini ini = new Ini(new File(DatabaseTest.class.getResource("/config.ini").getFile()));
+            Ini ini = new Ini( new File( new File( ( System.getProperty( "user.dir" ) ) ).getParent()
+                    + "\\db\\dbconfig.ini") );
 
             String url =
                     "jdbc:" + ini.get("PostgreSQL", "driver") + "://"
