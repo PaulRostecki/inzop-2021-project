@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="addObjectPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cache.DataCreator"
+            prefHeight="400.0" prefWidth="600.0">
+    <center>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Prowadzący:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Przedmiot:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Dzień:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Godzina rozpoczęcia" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                    <ComboBox fx:id="lecturerComboBox" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <ComboBox fx:id="universitySubjectComboBox" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <ComboBox fx:id="dayComboBox" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="startTimeComboBox" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets bottom="50"/>
+                </padding>
+                <Button text="Dodaj grupę zajęciową" onAction="#addStudyGroup"/>
+            </VBox>
+        </HBox>
+    </bottom>
+</BorderPane>

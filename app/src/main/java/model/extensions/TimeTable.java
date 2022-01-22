@@ -1,6 +1,8 @@
 package model.extensions;
 
-import model.StudyGroup;
+import cache.CacheProvider;
+import model.model.Student;
+import model.model.StudyGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * @author created: Michał Musiałowicz on 12.12.2021
  * @author last changed:
  */
+@Deprecated
 public class TimeTable implements TimeTableIf
 {
     private final int studentId;
@@ -33,5 +36,11 @@ public class TimeTable implements TimeTableIf
     public List< StudyGroup > getStudyGroups()
     {
         return studyGroups;
+    }
+
+    @Override
+    public Student getStudent()
+    {
+        return CacheProvider.getCacheProvider().getStudents().get( studentId );
     }
 }

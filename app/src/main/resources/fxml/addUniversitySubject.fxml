@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="addObjectPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cache.DataCreator"
+            prefHeight="400.0" prefWidth="600.0">
+    <center>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Nazwa:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Opis:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Ilość punktów ECTS:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                    <TextField fx:id="nameTextField" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <TextField fx:id="descriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <ComboBox fx:id="ectsPointsComboBox" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets bottom="50"/>
+                </padding>
+                <Button text="Dodaj przedmiot" onAction="#addUniversitySubject"/>
+            </VBox>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -13,15 +13,15 @@ import javafx.stage.Stage;
  */
 public interface PanelIf
 {
-    default void setIcon( Stage panel )
+    static void setIcon( Stage aPanel )
     {
-        String urlToIcon = getClass().getResource( PathsConstants.ICON_PATH ).toString();
+        String urlToIcon = PanelIf.class.getResource( PathsConstants.ICON_PATH ).toString();
         Image image = new Image( urlToIcon );
-        panel.getIcons().add( image );
+        aPanel.getIcons().add( image );
     }
 
-    default Stage getCurrentStage( Node node )
+    default Stage getCurrentStage( Node aNode )
     {
-        return (Stage) node.getScene().getWindow();
+        return (Stage) aNode.getScene().getWindow();
     }
 }

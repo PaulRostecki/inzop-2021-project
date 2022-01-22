@@ -1,0 +1,6 @@
+#chartLabel
+{
+    -fx-font-weight: bold;
+    -fx-underline: true;
+    -fx-font-style: italic;
+}

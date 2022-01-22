@@ -1,16 +1,17 @@
 package factory;
 
+import cache.CacheProvider;
+import cache.DataService;
 import constant.ModelEnum;
+import converter.USOSFloatStringConverter;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Lecturer;
-import model.Student;
-import model.StudyGroup;
-import model.UniversitySubject;
+import javafx.scene.control.cell.TextFieldTableCell;
 import model.extensions.Announcement;
+import model.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,8 @@ import org.apache.logging.log4j.Logger;
 public class TableViewFactory
 {
     private static final Logger LOGGER = LogManager.getLogger( TableViewFactory.class );
+
+    private final DataService dataService = DataService.getDataService();
 
     public TableViewFactory()
     {
@@ -115,7 +118,6 @@ public class TableViewFactory
 
     private TableView< StudyGroup > createTableViewForStudyGroups()
     {
-
         LOGGER.info( "Creating TableView for Study Groups." );
         final TableView< StudyGroup > tableView = new TableView<>();
         configureTableView( tableView );
@@ -131,7 +133,7 @@ public class TableViewFactory
         columns [ 5 ] = new TableColumn<>( "Liczba studentów" );
 
         columns [ 0 ].setCellValueFactory( new PropertyValueFactory<>( "universitySubjectName" ) );
-        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "dayInPolish" ) );
+        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "dayString" ) );
         columns [ 2 ].setCellValueFactory( new PropertyValueFactory<>( "startTime" ) );
         columns [ 3 ].setCellValueFactory( new PropertyValueFactory<>( "lecturerFirstName" ) );
         columns [ 4 ].setCellValueFactory( new PropertyValueFactory<>( "lecturerLastName" ) );
@@ -148,7 +150,7 @@ public class TableViewFactory
         final TableView< UniversitySubject > tableView = new TableView<>();
         configureTableView( tableView );
 
-        final TableColumn< UniversitySubject, String > parentColumn = new TableColumn<>( "Grupy zajęciowe" );
+        final TableColumn< UniversitySubject, String > parentColumn = new TableColumn<>( "Przedmioty" );
         final TableColumn< UniversitySubject, String >[] columns = new TableColumn[ 3 ];
 
         columns [ 0 ] = new TableColumn<>( "Nazwa przedmiotu");
@@ -193,11 +195,66 @@ public class TableViewFactory
         return tableView;
     }
 
+    public TableView< Mark > createTableViewForStudentMarks( Student aStudent )
+    {
+        LOGGER.info( "Creating TableView for Marks for " + aStudent.getIndexNumber() + "." );
+        final TableView< Mark > tableView = new TableView<>();
+        configureTableView( tableView );
+
+        final TableColumn< Mark, String > parentColumn = new TableColumn<>( "Oceny: " + aStudent.getFullName() );
+        final TableColumn< Mark, String >[] columns = new TableColumn[ 2 ];
+
+        columns [ 0 ] = new TableColumn<>( "Przedmiot");
+        columns [ 1 ] = new TableColumn<>( "Ocena" );
+
+        columns [ 0 ].setCellValueFactory( new PropertyValueFactory<>( "universitySubjectName" ) );
+        columns [ 1 ].setCellValueFactory( new PropertyValueFactory<>( "markValue" ) );
+
+        parentColumn.getColumns().addAll( columns );
+        tableView.getColumns().add( parentColumn );
+        return tableView;
+    }
+
+    public TableView< Mark > createTableViewForStudyGroupMarks( StudyGroup aStudyGroup )
+    {
+        LOGGER.info( "Creating TableView for Marks for " + aStudyGroup.getUniversitySubjectName()
+                + " (gr." + aStudyGroup.getGroupId() + ")." );
+        final TableView< Mark > tableView = new TableView<>();
+        configureTableView( tableView );
+
+        final TableColumn< Mark, String > parentColumn = new TableColumn<>( "Wykaz ocen studentów" );
+
+        final TableColumn< Mark, String > studentColumn = new TableColumn<>( "Student");;
+        final TableColumn< Mark, Float > markValueColumn = new TableColumn<>( "Ocena" );
+
+        studentColumn.setCellValueFactory( new PropertyValueFactory<>( "studentFullName" ) );
+        markValueColumn.setCellValueFactory( new PropertyValueFactory<>( "markValue" ) );
+
+        configureMarksEditingForTableView( tableView, markValueColumn );
+        parentColumn.getColumns().addAll( studentColumn, markValueColumn );
+        tableView.getColumns().add( parentColumn );
+        return tableView;
+    }
+
     private void configureTableView( TableView< ? > aTableView )
     {
         LOGGER.info( "Configuring TableView properties." );
         aTableView.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
         aTableView.setPlaceholder( new Label( StringUtils.EMPTY ) );
         aTableView.getSelectionModel().setSelectionMode( SelectionMode.SINGLE );
+    }
+
+    private void configureMarksEditingForTableView( TableView< Mark > aTableView, TableColumn< Mark, Float > aMarkValueColumn )
+    {
+        aTableView.setEditable( true );
+        aMarkValueColumn.setCellFactory( TextFieldTableCell.forTableColumn( new USOSFloatStringConverter() ) );
+        aMarkValueColumn.setOnEditCommit( cell -> {
+            Mark mark = cell.getTableView().getItems().get( cell.getTablePosition().getRow() );
+            CacheProvider.getCacheProvider().getMarks().remove( mark );
+            mark.setMarkValue( cell.getNewValue() );
+            dataService.updateMarkInDatabase( mark );
+            CacheProvider.getCacheProvider().getMarks().add( mark );
+        } );
+        LOGGER.info( "Editing Mark's Value Column Cell is now enabled." );
     }
 }

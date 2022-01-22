@@ -18,24 +18,30 @@
             </Menu>
             <Menu text="Komunikaty">
                 <MenuItem text="Wyświetl komunikaty" onAction="#showAnnouncementsOnTableView"/>
-                <MenuItem fx:id="sendAnnouncementMenuItem" text="Nadaj komunikat" onAction="#sendAnnouncement" />
+                <MenuItem fx:id="sendAnnouncementAction" text="Nadaj komunikat" onAction="#sendAnnouncement" />
             </Menu>
-            <Menu text="Administracja">
+            <Menu text="Administracja" fx:id="moderatorActions">
                 <Menu text="Dodaj">
-                    <MenuItem text="Studenta"/>
-                    <MenuItem text="Prowadzącego"/>
-                    <MenuItem text="Przedmiot"/>
-                    <MenuItem text="Grupę zajęciową"/>
+                    <MenuItem text="Studenta" onAction="#showAddStudentPanel"/>
+                    <MenuItem text="Prowadzącego" onAction="#showAddLecturerPanel"/>
+                    <MenuItem text="Przedmiot" onAction="#showAddUniversitySubjectPanel"/>
+                    <MenuItem text="Grupę zajęciową" onAction="#showAddStudyGroupPanel"/>
                 </Menu>
                 <Menu text="Usuń">
-                    <MenuItem text="Studenta"/>
-                    <MenuItem text="Prowadzącego"/>
-                    <MenuItem text="Przedmiot"/>
-                    <MenuItem text="Grupę zajęciową"/>
+                    <MenuItem text="Studenta" onAction="#deleteStudents"/>
+                    <MenuItem text="Prowadzącego" onAction="#deleteLecturers"/>
+                    <MenuItem text="Przedmiot" onAction="#deleteUniversitySubjects"/>
+                    <MenuItem text="Grupę zajęciową" onAction="#deleteStudyGroups"/>
                 </Menu>
             </Menu>
-            <Menu text="Akcje">
-                <MenuItem text="Zobacz swoje oceny"/>
+            <Menu text="Akcje" fx:id="marksActions">
+                <MenuItem text="Zobacz plan zajęć" onAction="#showStudentTimeTable" fx:id="seeTimeTableAction"/>
+                <MenuItem text="Zobacz swoje oceny" onAction="#showStudentMarksOnTableView" fx:id="seeMarksAction"/>
+                <MenuItem text="Zobacz swoją średnią" onAction="#showStudentAverageMarks" fx:id="seeAverageAction"/>
+                <MenuItem text="Wystaw oceny" onAction="#evaluateStudents" fx:id="evaluateStudentAction"/>
+            </Menu>
+            <Menu text="Konto" onAction="#logout">
+                <MenuItem text="Wyloguj się" onAction="#logout"/>
             </Menu>
         </MenuBar>
     </top>

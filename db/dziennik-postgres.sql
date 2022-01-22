@@ -32,70 +32,73 @@ DROP TABLE IF EXISTS Przedmioty;
 CREATE TABLE Studenci
 (
 	nr_albumu INT CONSTRAINT pk_student PRIMARY KEY,
-	imie VARCHAR(30) NOT NULL,
-	nazwisko VARCHAR(30) NOT NULL,
-	pesel VARCHAR(11) CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	adres VARCHAR(50),
-	data_ur DATE CONSTRAINT ck_student_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT CONSTRAINT ck_student_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
-	mail VARCHAR(50)
+	imie VARCHAR(30) NOT NULL CHECK (imie SIMILAR TO '[^0-9]+'),
+	nazwisko VARCHAR(30) NOT NULL CHECK (nazwisko SIMILAR TO '[^0-9]+'),
+	pesel VARCHAR(11) NOT NULL UNIQUE CONSTRAINT ck_student_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	adres VARCHAR(50) NOT NULL,
+	data_ur DATE NOT NULL CONSTRAINT ck_student_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
+	nr_tel VARCHAR(9) UNIQUE,
+	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
 
 
 CREATE TABLE Prowadzacy
 (
 	id_prowadzacego INT CONSTRAINT pk_prowadzacy PRIMARY KEY,
-	imie VARCHAR(30) NOT NULL,
-	nazwisko VARCHAR(30) NOT NULL,
+	imie VARCHAR(30) NOT NULL CHECK (imie SIMILAR TO '[^0-9]+'),
+	nazwisko VARCHAR(30) NOT NULL CHECK (nazwisko SIMILAR TO '[^0-9]+'),
 	pesel VARCHAR(11) CONSTRAINT ck_prowadzacy_pesel CHECK (pesel SIMILAR TO '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	adres VARCHAR(50),
-	data_ur DATE CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
-	nr_tel INT CONSTRAINT ck_prowadzacy_nr_tel CHECK (nr_tel between 100000000 AND 999999999),
-	tytul VARCHAR(50),
-	dyzur VARCHAR(150),
-	mail VARCHAR(50)
+	adres VARCHAR(50) NOT NULL,
+	data_ur DATE NOT NULL CONSTRAINT ck_prowadzacy_data_ur CHECK (data_ur between '1900-01-01' AND '2021-01-01'),
+	nr_tel VARCHAR(9) UNIQUE,
+	tytul VARCHAR(50) NOT NULL,
+	dyzur VARCHAR(150) NOT NULL,
+	mail VARCHAR(50) UNIQUE NOT NULL CHECK (mail SIMILAR TO '%@%.%' AND LENGTH(mail)>6)
 );
 
 CREATE TABLE Przedmioty (
 	id_przedmiotu INT PRIMARY KEY,
-	nazwa VARCHAR(50),
-	opis VARCHAR(250),
-	ects INT
+	nazwa VARCHAR(50) NOT NULL,
+	opis VARCHAR(250) NOT NULL,
+	ects INT CHECK (ects>0)
 );
 
 CREATE TABLE Oceny (
-	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu),
-	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
-	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
-	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5))
+	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu) ON DELETE CASCADE,
+	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu) ON DELETE CASCADE,
+	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego) ON DELETE CASCADE,
+	wartosc FLOAT CONSTRAINT ck_wartosc CHECK (wartosc IN (2, 3, 3.5, 4, 4.5, 5)),
+	CONSTRAINT pk_student_ocena PRIMARY KEY (nr_albumu_studenta,id_przedmiotu)
 );
 
 CREATE TABLE Grupy (
 	id_grupy INT PRIMARY KEY,
-	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
-	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu),
-	dzien_zajec VARCHAR(30),
-	godzina_zajec TIME
+	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego) ON DELETE CASCADE,
+	id_przedmiotu INT REFERENCES Przedmioty(id_przedmiotu) ON DELETE CASCADE,
+	dzien_zajec VARCHAR(30) NOT NULL CHECK (dzien_zajec SIMILAR TO '[^0-9]+'),
+	godzina_zajec VARCHAR(6) NOT NULL,
+	liczba_osob INT CHECK (liczba_osob<=30)
 );
 
 
 CREATE TABLE Student_grupa
 (
-	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu),
-	id_grupy INT REFERENCES Grupy(id_grupy),
+	nr_albumu_studenta INT REFERENCES Studenci(nr_albumu) ON DELETE CASCADE,
+	id_grupy INT REFERENCES Grupy(id_grupy) ON DELETE CASCADE,
 	CONSTRAINT pk_student_grupa PRIMARY KEY(nr_albumu_studenta, id_grupy)
 );
 
 CREATE TABLE Prowadzacy_grupa
 (
-	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
-	id_grupy INT REFERENCES Grupy(id_grupy),
+	id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego) ON DELETE CASCADE,
+	id_grupy INT REFERENCES Grupy(id_grupy) ON DELETE CASCADE,
 	CONSTRAINT pk_prowadzacy_grupa PRIMARY KEY(id_prowadzacego, id_grupy)
 );
 
 CREATE TABLE Komunikaty
 (
-    id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego),
+	id_komunikatu INT PRIMARY KEY,
+    id_prowadzacego INT REFERENCES Prowadzacy(id_prowadzacego) ON DELETE CASCADE,
     tytul VARCHAR(50),
     tresc VARCHAR(250)
 );
@@ -106,7 +109,6 @@ CREATE TABLE Konto_użytkownika
     haslo VARCHAR(30),
     typ_uprawnien VARCHAR(10) CONSTRAINT ck_typ_uprawnien CHECK (typ_uprawnien IN ('student', 'lecturer', 'moderator'))
 );
-
 
 --SELECT * FROM Studenci
 --SELECT * FROM Prowadzacy

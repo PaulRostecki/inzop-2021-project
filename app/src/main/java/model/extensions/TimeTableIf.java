@@ -1,6 +1,7 @@
 package model.extensions;
 
-import model.StudyGroup;
+import model.model.Student;
+import model.model.StudyGroup;
 
 import java.util.List;
 
@@ -10,9 +11,12 @@ import java.util.List;
  * @author created: Michał Musiałowicz on 12.12.2021
  * @author last changed:
  */
+@Deprecated
 public interface TimeTableIf
 {
     int getStudentId();
 
     List< StudyGroup > getStudyGroups();
+
+    Student getStudent();
 }
