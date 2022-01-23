@@ -79,6 +79,7 @@ public class EvaluateStudentsPanel implements PanelIf
         studyGroupsListView.setOnMouseClicked( item ->
                 initStudyGroupsMarksForListView( studyGroupsListView.getSelectionModel().getSelectedItem() ) );
 
+        studyGroupsListView.getSelectionModel().clearSelection();
         leftSidePane.setCenter( studyGroupsListView );
 
         LOGGER.info( "ListView initialized for Study Groups.." );
@@ -95,6 +96,7 @@ public class EvaluateStudentsPanel implements PanelIf
 
         Set< Mark > studyGroupMarks = cacheProvider.getMarks().stream()
                 .filter( mark -> studentsIDFromStudyGroup.contains( mark.getMarkId().getStudentId() ) )
+                .filter( mark -> mark.getMarkId().getUniversitySubjectId() == aStudyGroup.getUniversitySubjectId() )
                 .collect( Collectors.toSet() );
         HashSet< Mark > hashedStudyGroupMarks = new HashSet<>( studyGroupMarks );
 
