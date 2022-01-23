@@ -5,4 +5,3 @@ id_prowadzacego,imie,nazwisko,pesel,adres,data_ur,nr_tel,tytul,dyzur,mail
 4,Janusz,Migda,57012079553,Uniwersytetu Poznańskiego 4 61-614 Poznań,20.01.1957,618295404,prof.,Poniedziałek 10:00-11:00/Wtorek 12:00-13:00,migda@amu.edu.pl
 5,Katarzyna,Taczała,79072118221,Uniwersytetu Poznańskiego 4 61-614 Poznań,21.07.1979,618295419,prof.,Poniedziałek 12:00-13:00/Wtorek 12:00-13:00,katarzyna.taczala@amu.edu.pl
 6,Michał,Rzeczkowski,85042513214,Uniwersytetu Poznańskiego 4 61-614 Poznań,25.04.1985,618295496,dr.,Wtorek 12:00–14:00,rzeczkow@amu.edu.pl
-
