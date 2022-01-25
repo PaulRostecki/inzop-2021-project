@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Validator class for JavaFX Controls in USOS.
  *
- * @author created: Michał Musiałowicz on 20.01.2022
+ * @author created: Michał Nowak on 20.01.2022
  * @author last changed:
  */
 public class InputValidator
@@ -128,7 +128,7 @@ public class InputValidator
         if( !isValid )
         {
             AlertFactory.popUpInfoAlert( "Błąd", "Nie można dodać nowego obiektu.",
-                    "Nie wprowadzono daty urodzenia." );
+                    "Niepoprawny format adresu." );
             return false;
         }
         return true;
