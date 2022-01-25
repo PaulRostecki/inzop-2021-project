@@ -3,7 +3,7 @@ package validation;
 /**
  * Provider for Regex Patterns used in USOS.
  *
- * @author created: Michał Musiałowicz on 19.01.2022
+ * @author created: Michał Nowak on 19.01.2022
  * @author last changed:
  */
 public final class RegexProvider
@@ -23,5 +23,5 @@ public final class RegexProvider
 
     public static String ADDRESS_REGEX = "[A-Za-z0-9 ]{5}.*";
 
-    public static String DUTY_REGEX = "[A-Za-z0-9 ]+";
+    public static String DUTY_REGEX = "[A-Za-z0-9: ]+";
 }
