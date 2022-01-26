@@ -95,16 +95,6 @@ function Header(props) {
                   </li>
                   <li className="sub-item">
                     <Link
-                      to="Spring"
-                      spy={true}
-                      smooth={true}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Spring
-                    </Link>
-                  </li>
-                  <li className="sub-item">
-                    <Link
                       to="JUnit"
                       spy={true}
                       smooth={true}
@@ -181,12 +171,12 @@ function Header(props) {
                   </li>
                   <li className="sub-item">
                     <Link
-                      to="MSSQL"
+                      to="Postgres"
                       spy={true}
                       smooth={true}
                       style={{ cursor: "pointer" }}
                     >
-                     MSSQL
+                     Postgres
                     </Link>
                   </li>
                 </ul>

@@ -61,10 +61,13 @@ header {
 .menu {
   position: fixed;
   height: 100%;
+  top: 0;
+  padding-top: 100px;
   left: -350px;
   width: 350px;
   background: rgb(246, 246, 246);
   z-index: 999;
+  overflow-y: scroll;
   
   .item,
   .sub-item {
