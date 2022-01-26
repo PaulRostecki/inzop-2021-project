@@ -15,7 +15,7 @@ function App() {
       <div className="container">
         <Header
           headerTitle="eDzienniczek"
-          headerLink="https://www.google.com"
+          headerLink="https://edzienniczek.netlify.app/"
           headerLinkText="Strona projektu"
         />
         <main className="front-page" id="front-page">
@@ -26,7 +26,7 @@ function App() {
             sectionText="Naszym głównym założeniem w projekcie było utworzenie wygodnej i intuicyjnej aplikacji, przypominającą znane nam już dotychczas dzienniki elektroniczne, stosowane w szkołach (np. MobiDziennik) oraz uniwerstytetach (np. USOS)."
           />
           <AboutSection
-          Id="model"
+            Id="model"
             sectionTitle="Zastosowany model projektu"
             sectionText={[
               "Zastosowany przez nas model projektowy - ",
@@ -40,19 +40,19 @@ function App() {
             <h2> {["< ", "Zastosowane technologie", " / >"]}</h2>
             <h3>Aplikacja desktopowa</h3>
             <TechnologySection
-            Id="Java"
+              Id="Java"
               technologyTitle="Java"
               technologyText="To najpopularniejszy język programowania i najczęściej wybierana platforma programistyczna. Obniża koszty, skraca czas programowania, pobudza innowacyjność i usprawnia usługi aplikacj."
               technologyLink="https://docs.oracle.com/en/java/"
             />
             <TechnologySection
-            Id="JavaFx"
+              Id="JavaFx"
               technologyTitle="JavaFx"
               technologyText="To platforma aplikacji klienckich nowe generacji typu open source dla komputerów stacjonarnych, moblinych i systemów wbudowanych, zbudowana w języku Java."
               technologyLink="https://openjfx.io/"
             />
             <TechnologySection
-            Id="Maven"
+              Id="Maven"
               technologyTitle="Maven"
               technologyText="Następca już prawie wymarłego ANT a. Maven potrafi zrobić wszystko z naszym projektem podczas jego budowania. Jedyne co musimy zrobić to zastosować się do konwencji nazewnictwa
                 katalogów w projekcie jaką wymaga Maven. Jeśli to zrobimy - sam
@@ -61,7 +61,7 @@ function App() {
               technologyLink="https://maven.apache.org/guides/"
             />
             <TechnologySection
-            Id="Hibernate"
+              Id="Hibernate"
               technologyTitle="Hibernate"
               technologyText="Framework stanowiący jedną z najpopularniejszych implementacji
                 Java Persistence API (JPA). Umożliwia on dokonania mapowania
@@ -71,22 +71,14 @@ function App() {
               technologyLink="https://hibernate.org/orm/documentation/5.6/"
             />
             <TechnologySection
-            Id="Spring"
-              technologyTitle="Spring"
-              technologyText="Narzędzie, które znacznie skraca proces tworzenia aplikacji.
-                Stanowi szereg usprawnień, których implementacja w Javie
-                zajęłaby wieki."
-              technologyLink="https://docs.spring.io/spring-framework/docs/current/reference/html/"
-            />
-            <TechnologySection
-            Id="JUnit"
+              Id="JUnit"
               technologyTitle="JUnit"
               technologyText="Narzędzie służące do tworzenia powtarzalnych testów
                 jednostkowych oprogramowania pisanego w języku Java."
               technologyLink="https://junit.org/junit5/docs/current/user-guide/"
             />
             <TechnologySection
-            Id="Log4j2"
+              Id="Log4j2"
               technologyTitle="Log4j2"
               technologyText="Biblioteka języka programowania Java służąca do tworzenia logów
                 podczas działania aplikacji."
@@ -95,21 +87,21 @@ function App() {
             <h3>Strona internetowa</h3>
 
             <TechnologySection
-            Id="HTML5"
+              Id="HTML5"
               technologyTitle="HTML5"
               technologyText="Język znaczników stosowany do tworzenia dokumentów
                 hipertekstowych."
               technologyLink="https://developer.mozilla.org/pl/docs/Web/HTML"
             />
             <TechnologySection
-            Id="CSS3"
+              Id="CSS3"
               technologyTitle="CSS3"
               technologyText="Kaskadowe arkusze stylów to język, który wnosi styl do stron
                 internetowych poprzez interakcję z elementami HTML."
               technologyLink="https://developer.mozilla.org/pl/docs/Web/CSS"
             />
             <TechnologySection
-            Id="JavaScript"
+              Id="JavaScript"
               technologyTitle="JavaScript"
               technologyText="Język programowania, który umożliwia wdrożenie na stronie
                 internetowej skoplikowanych elementów, dzięki którym strona ta
@@ -120,7 +112,7 @@ function App() {
               technologyLink="https://developer.mozilla.org/pl/docs/Web/JavaScript"
             />
             <TechnologySection
-            Id="React"
+              Id="React"
               technologyTitle="React"
               technologyText="JavaScriptowa biblioteka służąca do tworzenia interfejsów
                 użytkownika."
@@ -128,7 +120,7 @@ function App() {
             />
             <h3>Bazy danych</h3>
             <TechnologySection
-            Id="T-SQL"
+              Id="T-SQL"
               technologyTitle="T-SQL"
               technologyText="Rozszerzenie języka SQL. T-SQL jest językiem proceduralnym.
                 Możemy za jego pomocą stosować typowe elementy programowania jak
@@ -137,14 +129,14 @@ function App() {
               technologyLink="https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15"
             />
             <TechnologySection
-            Id="MSSQL"
-              technologyTitle="MSSQL"
+              Id="Postgres"
+              technologyTitle="Postgres"
               technologyText="System zarządzania bazą danych."
               technologyLink="https://docs.microsoft.com/en-us/sql/?view=sql-server-ver15"
             />
             <h3>Inne</h3>
             <TechnologySection
-            Id="Git"
+              Id="Git"
               technologyTitle="Git"
               technologyText="Jest rozproszonym systemem kontroli wersji ułatwiającym pracę
                 nad tworzeniem aplikacji, stron internetowych i innych narzędzi
@@ -154,7 +146,7 @@ function App() {
               technologyLink="https://git-scm.com/doc"
             />
             <TechnologySection
-            Id="GitHub"
+              Id="GitHub"
               technologyTitle="GitHub"
               technologyText="To usługa hostingu umożliwiająca zarządzanie repozytoriami Git.
                 Przy jego pomocy jesteśmy w stanie udostępnić swój kod w jednym
@@ -162,7 +154,13 @@ function App() {
               technologyLink="https://docs.github.com/en"
             />
             <TechnologySection
-            Id="Taiga"
+              Id="Docker"
+              technologyTitle="Docker"
+              technologyText="Otwarte oprogramowanie służące do realizacji wirtualizacji na poziomie systemu operacyjnego (tzw. „konteneryzacji”), działające jako „platforma dla programistów i administratorów do tworzenia, wdrażania i uruchamiania aplikacji rozproszonych”"
+              technologyLink="https://www.docker.com/"
+            />
+            <TechnologySection
+              Id="Taiga"
               technologyTitle="Taiga"
               technologyText="To darmowy system zarządzania projektami typu open source dla startupów, programistów i projektantów."
               technologyLink="https://docs.taiga.io/"

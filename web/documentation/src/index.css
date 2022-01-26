@@ -64,10 +64,13 @@ header .logo img {
 .menu {
   position: fixed;
   height: 100%;
+  top: 0;
+  padding-top: 100px;
   left: -350px;
   width: 350px;
   background: #f6f6f6;
   z-index: 999;
+  overflow-y: scroll;
 }
 
 .menu .item,
