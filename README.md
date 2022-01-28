@@ -14,6 +14,7 @@ Additionally, there is a [website](https://edzienniczek.netlify.app/) written in
 
 # Technologies
 Desktop app, which is the main part of the project, was written in **Java**. It also uses **PostgreSQL** database, which is deployed using **Docker**, to store the data. Our website was written in **React**. Some of the scripts have been written in **Python** and **Bash** as well.
+
 As this project was meant to be an introduction to working in real development teams, we also used [Taiga](https://www.taiga.io/), which is an open-source alternative to Jira, to organize our work.
 
 # Team
